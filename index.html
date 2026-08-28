@@ -1,0 +1,3529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROYECT NIGHT X | Vive la Noche</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan: #00f0ff;
+      --cyan-dark: #00c4d4;
+      --cyan-glow: rgba(0, 240, 255, 0.4);
+      --purple: #a855f7;
+      --magenta: #ec4899;
+      --pink: #ff2d95;
+      --lime: #39ff14;
+      --orange: #ff6b00;
+      --blue: #4d7cff;
+      --bg-dark: #050508;
+      --text: #ffffff;
+      --text-muted: #b0b0c0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    /* Disco ambient color wash */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 45% at 12% 12%, rgba(236,72,153,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 40% at 88% 22%, rgba(168,85,247,0.20) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 45% at 50% 88%, rgba(0,240,255,0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 30% at 72% 58%, rgba(255,45,149,0.14) 0%, transparent 50%),
+        radial-gradient(ellipse 35% 28% at 22% 72%, rgba(57,255,20,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 25% at 40% 40%, rgba(255,107,0,0.06) 0%, transparent 50%);
+      animation: discoWash 18s ease-in-out infinite alternate;
+    }
+    @keyframes discoWash {
+      0% { opacity: 0.7; filter: hue-rotate(0deg); }
+      50% { opacity: 1; filter: hue-rotate(15deg); }
+      100% { opacity: 0.85; filter: hue-rotate(-10deg); }
+    }
+    header, section, footer { position: relative; z-index: 1; }
+
+    .features .feature:nth-child(2) .feature-icon { color: var(--cyan); text-shadow: 0 0 16px var(--cyan-glow); }
+    .features .feature:nth-child(3) .feature-icon { color: var(--pink); text-shadow: 0 0 16px rgba(255,45,149,0.5); }
+    .features .feature:nth-child(4) .feature-icon { color: var(--lime); text-shadow: 0 0 16px rgba(57,255,20,0.45); }
+    .features .feature:nth-child(5) .feature-icon { color: var(--purple); text-shadow: 0 0 16px rgba(168,85,247,0.5); }
+
+
+    /* ========== HEADER ========== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 70%, transparent 100%);
+      backdrop-filter: blur(4px);
+    }
+
+    .logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--pink) 40%, var(--purple) 70%, var(--lime) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 8px rgba(0,240,255,0.5));
+    }
+
+    .logo span {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      margin-top: -2px;
+    }
+
+    nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.25s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--cyan);
+    }
+
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      box-shadow: 0 0 8px var(--cyan), 0 0 14px rgba(236,72,153,0.35);
+    }
+
+    .btn-reserva {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.4rem;
+      border: 1.5px solid var(--cyan);
+      border-radius: 4px;
+      color: var(--cyan);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+      background: transparent;
+    }
+
+    .btn-reserva:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 20px var(--cyan-glow);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 58vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5.5rem 3rem 2.5rem;
+      background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,8,0.42) 100%),
+        linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 45%),
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(0,80,200,0.15) 0%, transparent 55%),
+        url('hero-bg.jpg');
+      background-size: cover;
+      background-position: center 45%;
+      background-repeat: no-repeat;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      z-index: 2;
+    }
+
+    .tagline {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--pink);
+      text-shadow: 0 0 12px rgba(255,45,149,0.35);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.6rem, 6.2vw, 4.6rem);
+      font-weight: 700;
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-title .noir {
+      color: #fff;
+      text-shadow: 0 0 30px rgba(255,255,255,0.45), 0 2px 20px rgba(0,0,0,0.8);
+    }
+
+    .hero-title .nights {
+      display: block;
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--pink) 35%, var(--purple) 65%, var(--lime) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 18px rgba(236,72,153,0.55)) drop-shadow(0 0 14px rgba(0,240,255,0.45)) drop-shadow(0 2px 12px rgba(0,0,0,0.7));
+      font-style: italic;
+      letter-spacing: -1px;
+      animation: neonShift 6s ease-in-out infinite alternate;
+    }
+    @keyframes neonShift {
+      0% { background-position: 0% center; }
+      100% { background-position: 100% center; }
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 380px;
+      margin: 0.9rem 0 1.4rem;
+      line-height: 1.6;
+    }
+
+    .hero-desc strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.6rem;
+      background: linear-gradient(135deg, var(--cyan) 0%, #22d3ee 50%, var(--pink) 100%);
+      color: #000;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: #fff;
+      box-shadow: 0 0 25px var(--cyan-glow);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.6rem;
+      background: transparent;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0,240,255,0.08);
+    }
+
+    /* ========== FEATURES ========== */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 2.5rem 3rem 3rem;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.95));
+    }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border: 1.5px solid var(--cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--cyan);
+      font-size: 1.1rem;
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    .feature:nth-of-type(2) .feature-icon { border-color: var(--purple); color: var(--purple); }
+    .feature:nth-of-type(3) .feature-icon { border-color: #22d3ee; color: #22d3ee; }
+    .feature:nth-of-type(4) .feature-icon { border-color: var(--magenta); color: var(--magenta); }
+    .feature:hover .feature-icon {
+      box-shadow: 0 0 16px currentColor;
+    }
+
+    .feature h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+      color: #fff;
+    }
+
+    .feature p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ========== COUNTDOWN ========== */
+    .countdown-section {
+      background: #030308;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,240,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.8rem;
+      opacity: 0.9;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 90px;
+    }
+
+    .countdown-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(0,240,255,0.5), 0 0 60px rgba(0,240,255,0.2);
+      letter-spacing: 2px;
+    }
+
+    .countdown-separator {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: rgba(0,240,255,0.5);
+      margin-top: 0.15em;
+      font-weight: 300;
+    }
+
+    .countdown-unit {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-top: 0.6rem;
+      opacity: 0.85;
+    }
+
+    .countdown-date {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1px;
+    }
+
+    .countdown-line {
+      width: 180px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      margin: 1.8rem auto 0;
+      opacity: 0.4;
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    /* ========== TICKET / ENTRADA ========== */
+    .ticket-section {
+      background: #050508;
+      padding: 5rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    /* Full-bleed photo behind ticket section */
+    .ticket-section .section-photo-bg {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      inset: 0 auto 0 auto;
+      height: 100%;
+    }
+
+    .ticket-info {
+      max-width: 480px;
+    }
+
+    .ticket-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.2rem;
+    }
+
+    .ticket-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1.5px;
+      background: var(--cyan);
+    }
+
+    .ticket-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .ticket-title .line1 {
+      color: #fff;
+      display: block;
+    }
+
+    .ticket-title .line2 {
+      color: var(--cyan);
+      display: block;
+    }
+
+    .ticket-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+
+    .ticket-checks {
+      list-style: none;
+    }
+
+    .ticket-checks li {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0.7rem;
+    }
+
+    .ticket-checks li::before {
+      content: '✓';
+      color: var(--cyan);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .ticket-card {
+      background: linear-gradient(160deg, rgba(0,40,50,0.9) 0%, rgba(0,20,30,0.95) 100%);
+      border: 1px solid rgba(0,240,255,0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,240,255,0.08);
+      overflow: hidden;
+    }
+
+    .ticket-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,0.5), transparent);
+    }
+
+    .ticket-card-header {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .ticket-card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.4rem;
+    }
+
+    .ticket-card-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.12);
+    }
+
+    .ticket-card-meta div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .ticket-card-meta span {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ticket-card-meta strong {
+      font-size: 0.95rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .ticket-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ticket-price .amount {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--cyan) 0%, #22d3ee 40%, var(--pink) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 16px rgba(0,240,255,0.45));
+      animation: gradientMove 4s ease infinite;
+      line-height: 1;
+    }
+
+    .ticket-price .currency {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+    }
+
+    .btn-ticket {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background: var(--cyan);
+      color: #000;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-ticket:hover {
+      background: #fff;
+      box-shadow: 0 0 30px var(--cyan-glow);
+      transform: translateY(-2px);
+    }
+
+    .ticket-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 1rem;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #030305;
+      padding: 1.8rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .socials {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .socials a {
+      color: var(--cyan);
+      font-size: 1.25rem;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+
+    .socials a:hover {
+      opacity: 0.7;
+    }
+
+    .footer-slogan {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, var(--cyan), #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-style: italic;
+    }
+
+    .newsletter {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .newsletter span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .newsletter-form input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      padding: 0.55rem 1rem;
+      color: #fff;
+      font-size: 0.85rem;
+      width: 200px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-form input::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--cyan);
+    }
+
+    .newsletter-form button {
+      background: var(--cyan);
+      border: none;
+      border-radius: 4px;
+      width: 42px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #000;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .newsletter-form button:hover {
+      background: #fff;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .ticket-section {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 4rem 2rem;
+      }
+      header {
+        padding: 1rem 1.5rem;
+      }
+      .hero {
+        min-height: 52vh;
+        padding: 4.5rem 1.5rem 2rem;
+      }
+      footer {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .features {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .hero-title {
+        font-size: clamp(2.2rem, 9vw, 3rem);
+      }
+      .countdown-item {
+        min-width: 70px;
+      }
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+      .newsletter {
+        flex-direction: column;
+      }
+    }
+
+    /* ========== IMMERSIVE EFFECTS ========== */
+    .countdown-section {
+      perspective: 800px;
+    }
+    .countdown-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .countdown-section .countdown-label,
+    .countdown-section .countdown,
+    .countdown-section .countdown-line,
+    .countdown-section .countdown-date {
+      position: relative;
+      z-index: 2;
+    }
+    .countdown-value {
+      transition: transform 0.15s ease, text-shadow 0.3s;
+    }
+    .ticket-section {
+      position: relative;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+    .map-section {
+      perspective: 1400px;
+    }
+    .ticket-bg-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ticket-info, .ticket-card {
+      position: relative;
+      z-index: 2;
+    }
+    .ticket-card {
+      transition: transform 0.25s ease, box-shadow 0.3s;
+    }
+    .ticket-card .glow-orb,
+    .ticket-card .scan-line,
+    .ticket-card .fine-lines {
+      display: none !important;
+    }
+    .ticket-card::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    @keyframes borderRotate {
+      to { --border-angle: 360deg; }
+    }
+
+    /* Support for @property if available */
+    @property --border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    /* Fine scanning line */
+    .ticket-card .scan-line { display: none !important;
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,0.8), transparent);
+      box-shadow: 0 0 12px rgba(0,240,255,0.6);
+      top: 0;
+      opacity: 0.6;
+      animation: none !important;
+      pointer-events: none;
+      z-index: 5;
+    }
+    @keyframes scanMove {
+      0%   { top: 5%; opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.7; }
+      100% { top: 95%; opacity: 0; }
+    }
+
+    /* Corner accents */
+    .ticket-card .corner {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+      z-index: 4;
+    }
+    .ticket-card .corner::before,
+    .ticket-card .corner::after {
+      content: '';
+      position: absolute;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+    }
+    .ticket-card .corner-tl { top: 10px; left: 10px; }
+    .ticket-card .corner-tl::before { width: 12px; height: 1.5px; top: 0; left: 0; }
+    .ticket-card .corner-tl::after  { width: 1.5px; height: 12px; top: 0; left: 0; }
+
+    .ticket-card .corner-tr { top: 10px; right: 10px; }
+    .ticket-card .corner-tr::before { width: 12px; height: 1.5px; top: 0; right: 0; }
+    .ticket-card .corner-tr::after  { width: 1.5px; height: 12px; top: 0; right: 0; }
+
+    .ticket-card .corner-bl { bottom: 10px; left: 10px; }
+    .ticket-card .corner-bl::before { width: 12px; height: 1.5px; bottom: 0; left: 0; }
+    .ticket-card .corner-bl::after  { width: 1.5px; height: 12px; bottom: 0; left: 0; }
+
+    .ticket-card .corner-br { bottom: 10px; right: 10px; }
+    .ticket-card .corner-br::before { width: 12px; height: 1.5px; bottom: 0; right: 0; }
+    .ticket-card .corner-br::after  { width: 1.5px; height: 12px; bottom: 0; right: 0; }
+
+    /* Subtle floating animation */
+    .ticket-card {
+      animation: none;
+    }
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Override hover transform to combine with float */
+    .ticket-card:hover {
+      animation: none;
+    }
+
+    /* Horizontal fine lines decoration */
+    .ticket-card .fine-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      border-radius: 16px;
+      z-index: 0;
+      opacity: 0.15;
+    }
+    .ticket-card .fine-lines span {
+      position: absolute;
+      left: -10%;
+      width: 120%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,0.8), transparent);
+    }
+    .ticket-card .fine-lines span:nth-child(1) { top: 22%; animation: lineSlide 8s linear infinite; }
+    .ticket-card .fine-lines span:nth-child(2) { top: 48%; animation: lineSlide 11s linear infinite reverse; }
+    .ticket-card .fine-lines span:nth-child(3) { top: 74%; animation: lineSlide 9s linear infinite 1s; }
+
+    @keyframes lineSlide {
+      0% { transform: translateX(-30%); opacity: 0; }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.6; }
+      100% { transform: translateX(30%); opacity: 0; }
+    }
+
+
+    /* ========== MAP ========== */
+    .map-section {
+      background: #030308;
+      padding: 5rem 3rem;
+      text-align: center;
+    }
+    .map-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      letter-spacing: 1px;
+    }
+    .map-section h2 span { color: var(--cyan); }
+    .map-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .map-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0,240,255,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,240,255,0.08);
+      transition: all 0.4s;
+      position: relative;
+    }
+    .map-wrapper:hover {
+      box-shadow: 0 25px 70px rgba(0,0,0,0.6), 0 0 50px rgba(0,240,255,0.18);
+      transform: translateY(-4px);
+    }
+    .map-wrapper iframe {
+      width: 100%;
+      height: 420px;
+      border: 0;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+      transition: filter 0.4s;
+    }
+    .map-wrapper:hover iframe {
+      filter: grayscale(0%) contrast(1.1);
+    }
+    .map-info {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .map-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .map-info-item span {
+      color: var(--cyan);
+      font-size: 1.2rem;
+    }
+    @media (max-width: 768px) {
+      .map-wrapper iframe { height: 320px; }
+      .map-section { padding: 4rem 1.5rem; }
+    }
+
+
+    /* ========== NOCHE ========== */
+    .noche-section {
+      background: linear-gradient(180deg, #050508 0%, #0a0a12 50%, #050508 100%);
+      padding: 6rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .noche-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,0.3), transparent);
+    }
+    .noche-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+    .noche-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+    .noche-title span { color: var(--cyan); }
+    .noche-desc {
+      max-width: 580px;
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .noche-desc strong { color: #fff; }
+    .noche-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .noche-item {
+      background: rgba(0,240,255,0.03);
+      border: 1px solid rgba(0,240,255,0.12);
+      border-radius: 12px;
+      padding: 1.8rem 1.4rem;
+      transition: all 0.35s;
+      text-align: left;
+    }
+    .noche-item:hover {
+      background: rgba(0,240,255,0.07);
+      border-color: rgba(0,240,255,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 25px rgba(0,240,255,0.1);
+    }
+    .noche-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      color: var(--cyan);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .noche-item h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .noche-item p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ========== CONTACTO ========== */
+    .contacto-section {
+      background: #030308;
+      padding: 5.5rem 2rem;
+      text-align: center;
+    }
+    .contacto-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+    .contacto-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .contacto-title span { color: var(--cyan) !important; -webkit-text-fill-color: var(--cyan) !important; background: none !important; animation: none !important; }
+    .contacto-desc {
+      color: var(--text-muted);
+      margin-bottom: 2.2rem;
+      font-size: 1rem;
+    }
+    .contacto-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2rem;
+      background: rgba(0,240,255,0.08);
+      border: 1.5px solid var(--cyan);
+      border-radius: 50px;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: all 0.35s;
+      box-shadow: 0 0 25px rgba(0,240,255,0.15);
+    }
+    .contacto-phone:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 40px rgba(0,240,255,0.4);
+      transform: translateY(-3px) scale(1.03);
+    }
+    .phone-icon { font-size: 1.4rem; }
+    .contacto-note {
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .contacto-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .contacto-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .contacto-bg {
+      position: absolute;
+      inset: 0;
+      background: url('party14.jpg') center/cover no-repeat;
+      opacity: 0.18;
+      filter: saturate(1.3) contrast(1.1);
+      z-index: 0;
+    }
+    .contacto-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5,5,8,0.85) 0%, rgba(5,5,8,0.7) 50%, rgba(5,5,8,0.9) 100%);
+    }
+    .contacto-inner { position: relative; z-index: 1; }
+    .whatsapp-community {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      background: linear-gradient(135deg, rgba(37,211,102,0.12), rgba(0,240,255,0.08));
+      border: 1px solid rgba(37,211,102,0.35);
+      border-radius: 14px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      box-shadow: 0 0 30px rgba(37,211,102,0.15);
+    }
+    .whatsapp-community .wa-icon { font-size: 1.8rem; }
+    .whatsapp-community strong {
+      display: block;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+    .whatsapp-community span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .wa-badge {
+      margin-left: auto;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      box-shadow: 0 0 12px rgba(236,72,153,0.5);
+    }
+
+
+    /* ========== MAP PREMIUM ========== */
+    .map-section {
+      background: #050508;
+      padding: 5.5rem 3rem;
+      text-align: center;
+    }
+    .map-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .map-section h2 span { color: var(--cyan); }
+    .map-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2.2rem;
+    }
+    .map-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0,240,255,0.25);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 50px rgba(0,240,255,0.1);
+      transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+    .map-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(0,240,255,0.4), transparent 40%, transparent 60%, rgba(0,240,255,0.25));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.7;
+      transition: opacity 0.4s;
+    }
+    .map-wrapper:hover {
+      transform: scale(1.025);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(0,240,255,0.2);
+    }
+    .map-wrapper:hover::before { opacity: 1; }
+    .map-wrapper iframe {
+      width: 100%;
+      height: 440px;
+      border: 0;
+      display: block;
+      filter: grayscale(25%) contrast(1.08) brightness(0.92);
+      transition: filter 0.5s, transform 0.5s;
+    }
+    .map-wrapper:hover iframe {
+      filter: grayscale(0%) contrast(1.12) brightness(1);
+    }
+    .map-info {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .map-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .map-info-item span { color: var(--cyan); font-size: 1.15rem; }
+
+    @media (max-width: 900px) {
+      .noche-grid { grid-template-columns: 1fr; max-width: 400px; }
+    }
+    @media (max-width: 768px) {
+      .map-wrapper iframe { height: 320px; }
+      .noche-section, .map-section, .contacto-section { padding: 4rem 1.5rem; }
+    }
+
+
+    /* Dynamic shadows */
+    .feature, .noche-item, .ticket-card, .map-wrapper, .contacto-phone {
+      --shadow-x: 0px;
+      --shadow-y: 12px;
+    }
+    .feature {
+      box-shadow: var(--shadow-x) var(--shadow-y) 30px rgba(0,0,0,0.25);
+    }
+    .noche-item {
+      box-shadow: var(--shadow-x) var(--shadow-y) 35px rgba(0,0,0,0.3);
+    }
+    .ticket-card {
+      box-shadow: var(--shadow-x) var(--shadow-y) 50px rgba(0,0,0,0.45), 0 0 40px rgba(0,240,255,0.1);
+    }
+
+    /* Global ambient particles canvas */
+    #ambientCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.45;
+    }
+    header, section, footer {
+      position: relative;
+      z-index: 2;
+    }
+    .hero { z-index: 2; }
+
+    /* Music control */
+
+    /* ========== MUSIC PLAYER WIDGET ========== */
+    .music-player-card {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.7rem 1rem 0.7rem 0.7rem;
+      background: rgba(8,8,14,0.88);
+      border: 1px solid rgba(0,240,255,0.25);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(0,240,255,0.12), 0 0 40px rgba(236,72,153,0.08);
+      max-width: 280px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .music-player-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(236,72,153,0.4);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 28px rgba(0,240,255,0.18), 0 0 50px rgba(236,72,153,0.12);
+    }
+    .music-cover {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(0,240,255,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .music-info {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .music-track {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .music-artist {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .music-eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 16px;
+      margin-top: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .music-player-card.playing .music-eq { opacity: 1; }
+    .music-eq span {
+      width: 3px;
+      background: linear-gradient(to top, var(--cyan), var(--pink));
+      border-radius: 1px;
+      animation: eqPulse 0.8s ease-in-out infinite alternate;
+    }
+    .music-eq span:nth-child(1) { height: 40%; animation-delay: 0s; }
+    .music-eq span:nth-child(2) { height: 70%; animation-delay: 0.15s; }
+    .music-eq span:nth-child(3) { height: 100%; animation-delay: 0.3s; }
+    .music-eq span:nth-child(4) { height: 55%; animation-delay: 0.45s; }
+    .music-eq span:nth-child(5) { height: 80%; animation-delay: 0.1s; }
+    @keyframes eqPulse {
+      from { transform: scaleY(0.4); }
+      to { transform: scaleY(1); }
+    }
+    .music-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #000;
+      font-size: 0.9rem;
+      cursor: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px rgba(0,240,255,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .music-toggle:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px rgba(236,72,153,0.5);
+    }
+    .music-nav-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,240,255,0.25);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font-size: 0.7rem;
+      cursor: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .music-nav-btn:hover {
+      background: rgba(0,240,255,0.15);
+      border-color: var(--cyan);
+    }
+    .music-list-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(236,72,153,0.3);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font-size: 0.7rem;
+      cursor: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .music-list-btn:hover {
+      background: rgba(236,72,153,0.18);
+      border-color: var(--pink);
+    }
+    .music-playlist {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      width: 260px;
+      max-height: 0;
+      overflow: hidden auto;
+      background: rgba(8,8,14,0.95);
+      border: 1px solid rgba(0,240,255,0.25);
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .music-playlist.open {
+      max-height: 260px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .music-playlist-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 0.75rem;
+      cursor: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s;
+    }
+    .music-playlist-item:last-child { border-bottom: none; }
+    .music-playlist-item:hover { background: rgba(0,240,255,0.08); }
+    .music-playlist-item.active {
+      background: linear-gradient(90deg, rgba(0,240,255,0.12), rgba(236,72,153,0.08));
+    }
+    .music-playlist-item img {
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .music-playlist-item-info { min-width: 0; }
+    .music-playlist-item-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .music-playlist-item-artist {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+    @media (max-width: 640px) {
+      .music-player-card {
+        bottom: 1rem;
+        left: 0.75rem;
+        max-width: 240px;
+        padding: 0.55rem 0.7rem 0.55rem 0.55rem;
+        flex-wrap: wrap;
+      }
+      .music-cover { width: 40px; height: 40px; }
+      .music-track { font-size: 0.75rem; }
+      .music-playlist { width: 220px; }
+    }
+
+    .music-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,240,255,0.5);
+      background: rgba(5,5,8,0.85);
+      color: var(--cyan);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+      box-shadow: 0 0 20px rgba(0,240,255,0.15);
+    }
+    .music-btn:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 30px rgba(0,240,255,0.4);
+      transform: scale(1.08);
+    }
+    .music-btn.playing {
+      border-color: var(--cyan);
+      box-shadow: 0 0 25px rgba(0,240,255,0.35);
+    }
+
+
+    .ticket-card .glow-orb { display: none !important; }
+
+    /* ========== PAGO ========== */
+    
+    .section-photo-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      filter: saturate(1.4) contrast(1.05);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .section-photo-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5,5,8,0.75) 0%, rgba(5,5,8,0.55) 40%, rgba(5,5,8,0.85) 100%);
+    }
+    .ticket-section, .pago-section, .noche-section, .features, .map-section, .countdown-section, .contacto-section {
+      position: relative;
+      overflow: hidden;
+    }
+    /* Only content children — never force canvas/particles out of absolute */
+    .ticket-section > .ticket-info,
+    .ticket-section > .ticket-card,
+    .pago-section > .pago-inner,
+    .noche-section > .noche-content,
+    .features > .feature,
+    .map-section > h2,
+    .map-section > .map-subtitle,
+    .map-section > .map-wrapper,
+    .map-section > .map-info,
+    .countdown-section > .countdown-label,
+    .countdown-section > .countdown,
+    .countdown-section > .countdown-line,
+    .countdown-section > .countdown-date,
+    .contacto-section > .contacto-inner {
+      position: relative;
+      z-index: 2;
+    }
+    .section-photo-bg,
+    .ticket-bg-particles,
+    .countdown-canvas,
+    canvas {
+      position: absolute !important;
+      pointer-events: none;
+    }
+    .section-photo-bg {
+      opacity: 0.14;
+    }
+
+    .pago-section {
+      background: #050508;
+      padding: 5.5rem 2rem;
+      text-align: center;
+    }
+    .pago-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1rem;
+    }
+    .pago-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .pago-title span { color: var(--cyan) !important; -webkit-text-fill-color: var(--cyan) !important; background: none !important; animation: none !important; }
+    .pago-desc {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+    .pago-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
+    }
+    .pago-method {
+      background: rgba(0,240,255,0.04);
+      border: 1px solid rgba(0,240,255,0.12);
+      border-radius: 12px;
+      padding: 1.6rem 1.2rem;
+      transition: all 0.35s;
+    }
+    .pago-method:hover {
+      background: rgba(0,240,255,0.08);
+      border-color: rgba(0,240,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+    .pago-icon { font-size: 1.8rem; display: block; margin-bottom: 0.6rem; }
+    .pago-method h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #fff;
+    }
+    .pago-method p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .btn-pago {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.2rem;
+      background: var(--cyan);
+      color: #000;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s;
+    }
+    .btn-pago:hover {
+      background: #fff;
+      box-shadow: 0 0 35px rgba(0,240,255,0.45);
+      transform: translateY(-3px);
+    }
+    .pago-note {
+      margin-top: 1.2rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.4);
+    }
+    @media (max-width: 768px) {
+      .pago-methods { grid-template-columns: 1fr; max-width: 320px; }
+    }
+
+
+    .glow-orb, .scan-line, .fine-lines, .fine-lines span,
+    .ticket-card .glow-orb, #glowOrb { display: none !important; opacity: 0 !important; visibility: hidden !important; }
+    .ticket-card::before { display: none !important; } /* old top line that can look like beam */
+
+
+    /* KILL FLASHLIGHT / BEAM */
+    .ticket-card .glow-orb,
+    .ticket-card .scan-line,
+    .ticket-card .fine-lines,
+    #glowOrb,
+    .glow-orb {
+      display: none !important;
+      opacity: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      pointer-events: none !important;
+    }
+    .ticket-card::before {
+      content: none !important;
+      display: none !important;
+    }
+
+
+    /* ========== IMMERSIVE CURSOR (soft neon glow) ========== */
+    body { cursor: none; }
+    a, button, .btn-primary, .btn-secondary, .btn-reserva, .btn-ticket, .btn-pago, .contacto-phone, .music-toggle {
+      cursor: none;
+    }
+    .cursor-dot, .cursor-ring { display: none !important; }
+    .cursor-dot-DISABLED {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: #00f0ff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px #00f0ff, 0 0 24px rgba(0,240,255,0.6);
+      transition: width 0.2s ease, height 0.2s ease, background 0.2s, opacity 0.2s;
+      opacity: 0.9;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(0,240,255,0.45);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.25s, opacity 0.25s;
+      opacity: 0.7;
+    }
+    .cursor-dot.hover {
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      box-shadow: 0 0 18px #fff, 0 0 36px var(--cyan);
+    }
+    .cursor-ring.hover {
+      width: 44px;
+      height: 44px;
+      border-color: rgba(168,85,247,0.7);
+      opacity: 1;
+    }
+    /* Hide custom cursor on touch devices */
+    @media (hover: none) {
+      .cursor-dot, .cursor-ring { display: none !important; }
+      body, a, button { cursor: auto; }
+    }
+
+
+    /* ========== NOCHE GALLERY ========== */
+    .noche-gallery {
+      margin-top: 3.5rem;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .noche-gallery-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: galleryScroll 35s linear infinite;
+      padding: 0.5rem 0;
+    }
+    .noche-gallery-track:hover {
+      animation-play-state: paused;
+    }
+    .noche-gal-item {
+      flex-shrink: 0;
+      width: 280px;
+      height: 360px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,240,255,0.12);
+      position: relative;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .noche-gal-item:hover {
+      transform: scale(1.06) translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0,240,255,0.2);
+      z-index: 2;
+    }
+    
+    .noche-gal-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .noche-gal-item.video-item {
+      border-color: rgba(236,72,153,0.35);
+      box-shadow: 0 0 20px rgba(236,72,153,0.15);
+    }
+
+    .noche-gal-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.1) contrast(1.05);
+      transition: filter 0.4s;
+    }
+    .noche-gal-item:hover img {
+      filter: saturate(1.2) contrast(1.1);
+    }
+    .noche-gal-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    @keyframes galleryScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (max-width: 768px) {
+      .noche-gal-item { width: 200px; height: 260px; }
+    }
+
+
+    .noche-video-wrap {
+      position: relative;
+      max-width: 900px;
+      margin: 2.5rem auto 1rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0,240,255,0.25);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,240,255,0.12);
+    }
+    .noche-video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9/16;
+      max-height: 520px;
+      object-fit: cover;
+      background: #000;
+    }
+    .noche-video-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.2rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      text-align: center;
+      pointer-events: none;
+    }
+    .noche-video-overlay span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 3px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(0,240,255,0.5);
+    }
+
+
+    .noche-videos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 1000px;
+      margin: 2rem auto 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .noche-videos { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .noche-videos { grid-template-columns: 1fr; }
+    }
+    .noche-videos .noche-video-wrap {
+      margin: 0;
+      max-width: none;
+    }
+    .noche-videos .noche-video {
+      max-height: 280px;
+      aspect-ratio: 9/14;
+    }
+
+
+    .noche-lead {
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .noche-lead strong { color: var(--cyan); font-weight: 600; }
+
+  
+    /* FORCE CLEAN TICKET - no beams, no scan, no orbs */
+    .ticket-card::after,
+    .ticket-card .scan-line,
+    .ticket-card .glow-orb,
+    .ticket-card .fine-lines {
+      display: none !important;
+      content: none !important;
+      animation: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+    .ticket-card {
+      background: linear-gradient(160deg, rgba(8,12,22,0.92) 0%, rgba(5,8,16,0.96) 100%) !important;
+      border: 1px solid rgba(0,240,255,0.28) !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 30px rgba(0,240,255,0.1), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+      overflow: hidden;
+    }
+    .ticket-card:hover {
+      border-color: rgba(0,240,255,0.45) !important;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.6), 0 0 40px rgba(0,240,255,0.15), 0 0 60px rgba(236,72,153,0.08) !important;
+    }
+
+  
+    /* ========== DISCO COLOR SHIFT DETAILS ========== */
+    @keyframes neonCycle {
+      0%   { filter: hue-rotate(0deg); }
+      50%  { filter: hue-rotate(40deg); }
+      100% { filter: hue-rotate(-25deg); }
+    }
+    @keyframes borderCycle {
+      0%   { border-color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.35); }
+      33%  { border-color: var(--pink); box-shadow: 0 0 14px rgba(255,45,149,0.4); }
+      66%  { border-color: var(--purple); box-shadow: 0 0 14px rgba(168,85,247,0.4); }
+      100% { border-color: var(--lime); box-shadow: 0 0 12px rgba(57,255,20,0.35); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    @keyframes sparkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Logo continuous subtle hue shift */
+    .logo {
+      animation: neonCycle 8s ease-in-out infinite alternate;
+      background-size: 200% auto !important;
+    }
+
+    /* Tagline accent dots */
+    .tagline {
+      position: relative;
+      display: inline-block;
+    }
+    .tagline::before, .tagline::after { display: none !important; }
+    .tagline::before { display: none !important; }
+    .tagline::after { display: none !important; content: none !important; }
+
+    /* Nav hover / active more colorful */
+    nav a:hover {
+      color: var(--pink);
+      text-shadow: 0 0 10px rgba(255,45,149,0.45);
+    }
+    nav a.active {
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    nav a.active::after {
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--lime)) !important;
+      background-size: 200% auto;
+      animation: gradientMove 3s linear infinite;
+      height: 2.5px !important;
+    }
+
+    /* Header reserve button cycles border color */
+    .btn-reserva {
+      animation: borderCycle 12s ease-in-out infinite;
+      transition: background 0.25s, color 0.25s, transform 0.25s;
+    }
+    .btn-reserva:hover {
+      animation: none;
+      border-color: var(--pink);
+      background: linear-gradient(135deg, var(--cyan), var(--pink));
+      color: #000;
+      box-shadow: 0 0 22px rgba(236,72,153,0.45);
+    }
+
+    /* Primary CTA animated gradient */
+    .btn-primary {
+      background-size: 200% auto !important;
+      animation: gradientMove 4s ease infinite;
+      box-shadow: 0 0 18px rgba(0,240,255,0.35);
+    }
+    .btn-primary:hover {
+      animation: none;
+      background: #fff !important;
+    }
+
+    /* Secondary button soft border cycle */
+    .btn-secondary {
+      border: 1.5px solid var(--cyan);
+      animation: borderCycle 14s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+    .btn-secondary:hover {
+      animation: none;
+      border-color: var(--pink);
+      color: var(--pink);
+      box-shadow: 0 0 16px rgba(255,45,149,0.35);
+    }
+
+    /* Feature icons float + hue */
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      background: rgba(0,0,0,0.35);
+      animation: floatY 3.5s ease-in-out infinite;
+      font-size: 1.1rem !important;
+    }
+    .feature:nth-child(1) .feature-icon { animation-delay: 0s; }
+    .feature:nth-child(2) .feature-icon { animation-delay: 0.4s; }
+    .feature:nth-child(3) .feature-icon { animation-delay: 0.8s; }
+    .feature:nth-child(4) .feature-icon { animation-delay: 1.2s; }
+
+    /* Feature card subtle border glow cycle */
+    .feature {
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      background: rgba(0,0,0,0.25);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    /* .section-photo-bg is 1st child → features are 2..5 */
+    .features .feature {
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    }
+    .features .feature:hover {
+      transform: translateY(-3px);
+    }
+    .features .feature:nth-child(2):hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,240,255,0.22); }
+    .features .feature:nth-child(3):hover { border-color: var(--pink); box-shadow: 0 0 20px rgba(255,45,149,0.22); }
+    .features .feature:nth-child(4):hover { border-color: var(--lime); box-shadow: 0 0 20px rgba(57,255,20,0.2); }
+    .features .feature:nth-child(5):hover { border-color: var(--purple); box-shadow: 0 0 20px rgba(168,85,247,0.22); }
+
+    /* Music widget color accents */
+    .music-widget {
+      border: 1.5px solid transparent !important;
+      background:
+        linear-gradient(rgba(8,8,14,0.92), rgba(8,8,14,0.92)) padding-box,
+        linear-gradient(135deg, var(--cyan), var(--pink), var(--purple), var(--lime)) border-box !important;
+      background-size: 100% 100%, 300% 300% !important;
+      animation: gradientMove 5s linear infinite;
+    }
+    .music-eq span {
+      background: linear-gradient(to top, var(--cyan), var(--pink)) !important;
+    }
+    .music-toggle {
+      background: linear-gradient(135deg, var(--cyan), var(--pink)) !important;
+      box-shadow: 0 0 16px rgba(0,240,255,0.4);
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+
+    /* Decorative corner accents on hero */
+    .hero::after { display: none !important; content: none !important; }
+    .hero::before { display: none !important; content: none !important; }
+
+    /* Section titles color accents */
+    .noche-title span,
+    .contacto-title span,
+    .pago-title span,
+    .map-section h2 span {
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      background-clip: unset !important;
+      -webkit-text-fill-color: var(--cyan) !important;
+      color: var(--cyan) !important;
+      animation: none !important;
+      filter: none !important;
+    }
+
+    /* Ticket card neon border cycle */
+    .ticket-card {
+      border: 1.5px solid var(--cyan) !important;
+      animation: borderCycle 16s ease-in-out infinite;
+    }
+
+    /* Countdown numbers soft glow cycle */
+    .countdown-item {
+      position: relative;
+    }
+    .countdown-item span:first-child,
+    .countdown-num,
+    .countdown-item .num {
+      text-shadow: 0 0 16px rgba(0,240,255,0.5);
+      animation: neonCycle 5s ease-in-out infinite alternate;
+    }
+
+    /* Small floating particles layer (CSS only) */
+    .disco-dots {
+      display: none !important;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .disco-dots span {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      opacity: 0.35;
+      animation: floatY 4s ease-in-out infinite, sparkle 3s ease-in-out infinite;
+    }
+    .disco-dots span:nth-child(1) { left: 8%; top: 20%; background: var(--cyan); animation-delay: 0s; }
+    .disco-dots span:nth-child(2) { left: 22%; top: 65%; background: var(--pink); animation-delay: 0.5s; }
+    .disco-dots span:nth-child(3) { left: 45%; top: 30%; background: var(--purple); animation-delay: 1s; }
+    .disco-dots span:nth-child(4) { left: 70%; top: 55%; background: var(--lime); animation-delay: 1.4s; }
+    .disco-dots span:nth-child(5) { left: 88%; top: 25%; background: var(--cyan); animation-delay: 0.8s; }
+    .disco-dots span:nth-child(6) { left: 60%; top: 80%; background: var(--pink); animation-delay: 1.8s; }
+    .disco-dots span:nth-child(7) { left: 15%; top: 85%; background: var(--purple); animation-delay: 0.3s; }
+    .disco-dots span:nth-child(8) { left: 35%; top: 12%; background: var(--lime); animation-delay: 2s; }
+
+    /* Phone / contact accent */
+    .contacto-phone {
+      border: 1.5px solid transparent !important;
+      background:
+        linear-gradient(rgba(10,10,18,0.9), rgba(10,10,18,0.9)) padding-box,
+        linear-gradient(135deg, var(--cyan), var(--pink), var(--purple)) border-box !important;
+      background-size: 100% 100%, 250% 250% !important;
+      animation: gradientMove 4s linear infinite;
+    }
+
+    /* Footer slogan gradient */
+    .footer-slogan {
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--purple), var(--lime));
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientMove 6s linear infinite;
+    }
+
+  
+    /* ========== FLOW UPGRADE: COUNTDOWN / TICKET / MAP ========== */
+    .countdown-section {
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 40%, rgba(0,240,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 15% 80%, rgba(236,72,153,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 85% 20%, rgba(168,85,247,0.07) 0%, transparent 50%),
+        #030308 !important;
+      padding: 5.5rem 2rem 5rem !important;
+    }
+    .countdown-section::before {
+      width: 700px !important;
+      height: 700px !important;
+      background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(236,72,153,0.04) 40%, transparent 70%) !important;
+      animation: glowPulse 5s ease-in-out infinite;
+    }
+    .countdown-label {
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--purple));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientMove 4s linear infinite;
+      letter-spacing: 8px !important;
+      font-size: 0.8rem !important;
+      margin-bottom: 2rem !important;
+    }
+    .countdown-item {
+      background: linear-gradient(160deg, rgba(0,30,40,0.65) 0%, rgba(10,5,20,0.75) 100%);
+      border: 1px solid rgba(0,240,255,0.18);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem 0.9rem;
+      min-width: 100px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .countdown-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--pink), transparent);
+      background-size: 200% auto;
+      animation: gradientMove 3s linear infinite;
+    }
+    .countdown-item:nth-child(1) { animation: floatY 4s ease-in-out infinite; }
+    .countdown-item:nth-child(3) { animation: floatY 4.2s ease-in-out infinite 0.3s; }
+    .countdown-item:nth-child(5) { animation: floatY 3.8s ease-in-out infinite 0.6s; }
+    .countdown-item:nth-child(7) { animation: floatY 4.4s ease-in-out infinite 0.9s; }
+    .countdown-item:hover {
+      transform: translateY(-4px) scale(1.03);
+      border-color: rgba(0,240,255,0.45);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 24px rgba(0,240,255,0.15);
+    }
+    .countdown-value {
+      text-shadow: 0 0 24px rgba(0,240,255,0.55), 0 0 48px rgba(236,72,153,0.2) !important;
+      background: linear-gradient(180deg, #fff 30%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .countdown-separator {
+      background: linear-gradient(180deg, var(--cyan), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: sparkle 1.5s ease-in-out infinite;
+      margin-top: 0.35em !important;
+    }
+    .countdown-unit {
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 1 !important;
+    }
+    .countdown-line {
+      height: 2px !important;
+      width: 220px !important;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--pink), var(--purple), transparent) !important;
+      background-size: 200% auto !important;
+      animation: gradientMove 3s linear infinite;
+      opacity: 0.7 !important;
+      box-shadow: 0 0 14px rgba(0,240,255,0.35) !important;
+    }
+    .countdown-date {
+      display: inline-block;
+      margin-top: 1.8rem !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,240,255,0.25);
+      background: rgba(0,240,255,0.06);
+      color: rgba(255,255,255,0.7) !important;
+      letter-spacing: 1.5px !important;
+      font-size: 0.85rem !important;
+    }
+
+    /* --- TICKET FLOW --- */
+    .ticket-section {
+      position: relative;
+      padding: 5.5rem 3rem !important;
+      gap: 3.5rem !important;
+    }
+    .ticket-eyebrow {
+      color: transparent !important;
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .ticket-eyebrow::before {
+      background: linear-gradient(90deg, var(--cyan), var(--pink)) !important;
+      height: 2px !important;
+      box-shadow: 0 0 8px var(--cyan);
+    }
+    .ticket-eyebrow::after { display: none !important; content: none !important; }
+    .ticket-title .line1 {
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+    .ticket-title .line2 {
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--pink) 50%, var(--purple) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientMove 5s ease infinite;
+      filter: drop-shadow(0 0 12px rgba(0,240,255,0.35));
+    }
+    .ticket-checks li {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 0.65rem 0.9rem;
+      margin-bottom: 0.55rem !important;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+    .ticket-checks li:hover {
+      border-color: rgba(0,240,255,0.3);
+      background: rgba(0,240,255,0.06);
+      transform: translateX(4px);
+    }
+    .ticket-checks li:nth-child(1)::before { color: var(--cyan) !important; }
+    .ticket-checks li:nth-child(2)::before { color: var(--pink) !important; }
+    .ticket-checks li:nth-child(3)::before { color: var(--lime) !important; }
+
+    .ticket-card {
+      background:
+        linear-gradient(145deg, rgba(0,25,40,0.95) 0%, rgba(15,5,30,0.97) 50%, rgba(0,15,25,0.95) 100%) !important;
+      border: 1.5px solid transparent !important;
+      background-clip: padding-box !important;
+      border-radius: 18px !important;
+      padding: 2.2rem !important;
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(0,240,255,0.2),
+        0 0 50px rgba(0,240,255,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.08) !important;
+      animation: none !important;
+      transform-style: preserve-3d;
+      transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+    }
+    .ticket-card::before {
+      height: 3px !important;
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--purple), var(--lime), var(--cyan)) !important;
+      background-size: 300% auto !important;
+      animation: gradientMove 4s linear infinite !important;
+      opacity: 1 !important;
+    }
+    .ticket-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      pointer-events: none;
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,240,255,0.12) 0%, transparent 55%);
+      z-index: 0;
+    }
+    .ticket-card > * { position: relative; z-index: 1; }
+    .ticket-card:hover {
+      /* 3D tilt handles transform */
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(236,72,153,0.35),
+        0 0 60px rgba(0,240,255,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.1) !important;
+    }
+    .ticket-card.tilt-3d:hover {
+      transform: none; /* JS sets transform */
+    }
+    .ticket-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 2.5px !important;
+    }
+    .ticket-card-header::before { display: none !important; content: none !important; }
+    .ticket-price, .ticket-card .price, [class*="price"] {
+      /* handled below if class exists */
+    }
+    .ticket-card .ticket-price-value,
+    .ticket-price-value {
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 14px rgba(0,240,255,0.4));
+    }
+    .btn-ticket {
+      background: linear-gradient(135deg, var(--cyan) 0%, #22d3ee 40%, var(--pink) 100%) !important;
+      background-size: 200% auto !important;
+      animation: gradientMove 4s ease infinite;
+      border: none !important;
+      color: #000 !important;
+      font-weight: 700 !important;
+      box-shadow: 0 8px 28px rgba(0,240,255,0.35) !important;
+      transition: transform 0.25s, box-shadow 0.25s !important;
+    }
+    .btn-ticket:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 36px rgba(236,72,153,0.4) !important;
+      animation: none;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%) !important;
+    }
+
+    /* --- MAP FLOW --- */
+    .map-section {
+      position: relative;
+      padding: 5.5rem 2rem 5rem !important;
+      background:
+        radial-gradient(ellipse 50% 40% at 50% 0%, rgba(0,240,255,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 10% 90%, rgba(168,85,247,0.07) 0%, transparent 50%),
+        #050508 !important;
+    }
+    .map-section h2 {
+      font-family: 'Oswald', sans-serif !important;
+      letter-spacing: 0.5px;
+    }
+    .map-section h2 span { color: var(--cyan) !important; background: none !important; -webkit-text-fill-color: var(--cyan) !important; animation: none !important; }
+    .map-subtitle {
+      opacity: 0.75;
+      letter-spacing: 1px;
+    }
+    .map-wrapper {
+      border-radius: 20px !important;
+      overflow: hidden !important;
+      border: 1.5px solid transparent !important;
+      background:
+        linear-gradient(#0a0a12, #0a0a12) padding-box,
+        linear-gradient(135deg, var(--cyan), var(--pink), var(--purple), var(--lime)) border-box !important;
+      background-size: 100% 100%, 300% 300% !important;
+      animation: gradientMove 6s linear infinite;
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.55),
+        0 0 40px rgba(0,240,255,0.1) !important;
+      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+    }
+    .map-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      pointer-events: none;
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.25);
+      z-index: 2;
+    }
+    .map-wrapper:hover {
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 50px rgba(236,72,153,0.15) !important;
+    }
+    .map-wrapper.tilt-3d:hover {
+      /* JS sets transform */
+    }
+    .map-wrapper iframe {
+      filter: saturate(1.05) contrast(1.05);
+      transition: filter 0.4s ease;
+    }
+    .map-wrapper:hover iframe {
+      filter: saturate(1.15) contrast(1.08) brightness(1.05);
+    }
+    .map-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 1.8rem;
+      margin-top: 1.5rem;
+    }
+    .map-info span,
+    .map-info > div,
+    .map-info-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .map-info span:hover,
+    .map-info > div:hover,
+    .map-info-item:hover {
+      border-color: rgba(0,240,255,0.35);
+      background: rgba(0,240,255,0.08);
+    }
+
+  
+
+    /* ========== TRUE 3D: TICKET + MAP (stable) ========== */
+    .ticket-section { perspective: 1100px; }
+    .map-section { perspective: none; } /* iframe + 3D = bugs; frame only */
+
+    .ticket-card.tilt-3d {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: box-shadow 0.35s ease;
+      animation: none !important;
+      transform: rotateX(5deg) rotateY(-8deg);
+      box-shadow:
+        0 28px 55px rgba(0,0,0,0.55),
+        0 10px 20px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(0,240,255,0.22),
+        0 0 36px rgba(0,240,255,0.1) !important;
+    }
+    .ticket-card.tilt-3d .tilt-shine {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 6;
+      opacity: 0.65;
+      mix-blend-mode: soft-light;
+    }
+    .ticket-card.tilt-3d .btn-ticket {
+      transform: translateZ(24px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 0 16px rgba(0,240,255,0.28) !important;
+    }
+    .ticket-card.tilt-3d .ticket-card-title,
+    .ticket-card.tilt-3d .ticket-price {
+      transform: translateZ(16px);
+    }
+
+    /* Map: 3D frame WITHOUT rotating the iframe (fixes bugs) */
+    .map-3d-frame {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      transform: perspective(1200px) rotateX(4deg);
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: drop-shadow(0 25px 40px rgba(0,0,0,0.5));
+    }
+    .map-3d-frame:hover {
+      transform: perspective(1200px) rotateX(2deg) translateY(-4px) scale(1.01);
+      filter: drop-shadow(0 32px 50px rgba(0,0,0,0.55)) drop-shadow(0 0 30px rgba(0,240,255,0.12));
+    }
+    .map-wrapper.tilt-3d {
+      transform: none !important;
+      animation: none !important;
+      will-change: auto;
+    }
+    .map-wrapper.tilt-3d iframe {
+      transform: none !important;
+      pointer-events: auto;
+    }
+
+    @media (hover: none), (max-width: 900px) {
+      .ticket-card.tilt-3d {
+        transform: none !important;
+        will-change: auto;
+      }
+      .ticket-card.tilt-3d .btn-ticket,
+      .ticket-card.tilt-3d .ticket-card-title,
+      .ticket-card.tilt-3d .ticket-price {
+        transform: none !important;
+      }
+      .map-3d-frame {
+        transform: none !important;
+        filter: drop-shadow(0 16px 28px rgba(0,0,0,0.45));
+      }
+      .map-3d-frame:hover { transform: none !important; }
+    }
+
+    /* Performance: tone down endless animations */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Mobile polish */
+    @media (max-width: 768px) {
+      .disco-dots, .cursor-dot, .cursor-ring,
+      .countdown-canvas, .ticket-bg-particles,
+      #ambientCanvas { display: none !important; }
+      body { cursor: auto !important; }
+      .hero {
+        min-height: 48vh !important;
+        padding: 4.2rem 1.25rem 1.5rem !important;
+      }
+      .hero-title { font-size: clamp(2rem, 10vw, 2.8rem) !important; }
+      .features {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.75rem !important;
+        padding: 1.25rem 1rem 1.5rem !important;
+      }
+      .feature {
+        padding: 0.75rem !important;
+      }
+      .feature h3 { font-size: 0.85rem; }
+      .feature p { font-size: 0.75rem; line-height: 1.35; }
+      .ticket-section {
+        grid-template-columns: 1fr !important;
+        padding: 2.5rem 1.25rem !important;
+        gap: 2rem !important;
+      }
+      .countdown-section { padding: 3rem 1rem !important; }
+      .countdown-item {
+        min-width: 64px !important;
+        padding: 0.7rem 0.5rem !important;
+      }
+      .countdown-value { font-size: clamp(1.6rem, 8vw, 2.2rem) !important; }
+      .map-section { padding: 3rem 1rem !important; }
+      .map-wrapper iframe { height: 280px !important; }
+      .noche-videos {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.6rem !important;
+      }
+      .music-widget {
+        left: 0.6rem !important;
+        right: auto !important;
+        bottom: 0.6rem !important;
+        transform: scale(0.92);
+        transform-origin: bottom left;
+      }
+      header { padding: 0.85rem 1rem !important; }
+      .btn-reserva { padding: 0.5rem 0.85rem !important; font-size: 0.7rem !important; }
+      .logo { font-size: 1.15rem !important; }
+      nav { display: none !important; }
+      .contacto-section, .pago-section { padding: 3rem 1.25rem !important; }
+    }
+    @media (max-width: 480px) {
+      .features { grid-template-columns: 1fr !important; }
+      .noche-videos { grid-template-columns: 1fr !important; }
+      .hero-buttons { flex-direction: column; align-items: stretch; }
+      .hero-buttons a { justify-content: center; text-align: center; }
+    }
+
+  
+    /* User request: no floating dots / rings / decorative neon crumbs */
+    .cursor-dot, .cursor-ring { display: none !important; }
+    body { cursor: auto !important; }
+    .disco-dots, .disco-dots span { display: none !important; }
+    .hero::before, .hero::after { display: none !important; content: none !important; }
+    .tagline::before, .tagline::after { display: none !important; content: none !important; }
+    .ticket-eyebrow::after, .ticket-card-header::before { display: none !important; content: none !important; }
+  </style>
+</head>
+<body>
+  <div class="disco-dots" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <canvas id="ambientCanvas"></canvas>
+    <!-- MUSIC PLAYER -->
+  <div class="music-player-card" id="musicCard">
+    <img src="projectx-cover.jpg" alt="Portada" class="music-cover" id="musicCover">
+    <div class="music-info" id="musicInfoToggle">
+      <div class="music-track" id="musicTrack">Project X</div>
+      <div class="music-artist" id="musicArtist">Yeah Yeah Yeahs</div>
+      <div class="music-eq"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <button class="music-nav-btn" id="musicPrev" title="Anterior">⏮</button>
+    <button class="music-toggle" id="musicBtn" title="Play / Pause">▶</button>
+    <button class="music-nav-btn" id="musicNext" title="Siguiente">⏭</button>
+    <button class="music-list-btn" id="musicListBtn" title="Biblioteca de canciones">☰</button>
+
+    <div class="music-playlist" id="musicPlaylist"></div>
+  </div>
+  <audio id="bgMusic" preload="auto"></audio>
+
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      PROYECT
+      <span>NIGHT X</span>
+    </div>
+        <nav>
+      <a href="#inicio" class="active">INICIO</a>
+      <a href="#noche">NOCHE</a>
+      <a href="#contacto">CONTACTO</a>
+      <a href="mi-ticket.html">MI TICKET</a>
+    </nav>
+    <a href="comprar.html" class="btn-reserva">COMPRAR ENTRADA →</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <p class="tagline">VIVE LA NOCHE</p>
+      <h1 class="hero-title">
+        <span class="noir">PROYECT</span>
+        <span class="nights">NIGHT X</span>
+      </h1>
+      <p class="hero-desc">
+        FINCA · PISCINA · DJ · AMIGOS.<br>
+        <strong>ESTA ES TU NOCHE.</strong>
+      </p>
+      <div class="hero-buttons">
+        <a href="#entrada" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          RESERVA YA
+        </a>
+        <a href="#noche" class="btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          VER NOCHE
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="section-photo-bg" style="background-image:url('party6.jpg')"></div>
+    <div class="feature">
+      <div class="feature-icon">♪</div>
+      <div>
+        <h3>DJ</h3>
+        <p>Beats que no paran hasta el amanecer.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🍸</div>
+      <div>
+        <h3>BARRA</h3>
+        <p>Bebidas, cócteles y la vibra completa.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🌊</div>
+      <div>
+        <h3>PISCINA</h3>
+        <p>Noche + agua + luces. La experiencia.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">✨</div>
+      <div>
+        <h3>ENERGÍA</h3>
+        <p>Gente, confetti y momentos que se quedan.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- NOCHE -->
+  <section class="noche-section" id="noche">
+    <div class="section-photo-bg" style="background-image:url('party15.jpg')"></div>
+    <div class="noche-content anim anim-up">
+      <p class="noche-eyebrow">LA EXPERIENCIA</p>
+      <h2 class="noche-title">Esta noche<br><span>no será normal.</span></h2>
+      <p class="noche-desc">
+        Olvídate de las fiestas de siempre. <strong>PROYECT NIGHT X</strong> es música que no para, 
+        gente que vibra, luces que te envuelven y momentos que se quedan grabados. 
+        Finca abierta con piscina, DJ, barra y una energía que solo se vive una vez.
+      </p>
+      <div class="noche-grid">
+        <div class="noche-item anim anim-up delay-1">
+          <span class="noche-num">01</span>
+          <h3>Beats toda la noche</h3>
+          <p>DJ toda la noche. El set que no te deja quieto hasta el amanecer.</p>
+        </div>
+        <div class="noche-item anim anim-up delay-2">
+          <span class="noche-num">02</span>
+          <h3>Finca + Piscina</h3>
+          <p>Espacio abierto, piscina de noche y una finca que se transforma en otro mundo.</p>
+        </div>
+        <div class="noche-item anim anim-up delay-3">
+          <span class="noche-num">03</span>
+          <h3>Recuerdos eternos</h3>
+          <p>Fotos épicas, gente nueva y esa sensación de “esto fue histórico”.</p>
+        </div>
+      </div>
+    
+      
+      <div class="noche-videos anim anim-up delay-1">
+        <div class="noche-video-wrap">
+          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+            <source src="party-video.mp4" type="video/mp4">
+          </video>
+          <div class="noche-video-overlay"><span>ENERGÍA</span></div>
+        </div>
+        <div class="noche-video-wrap">
+          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+            <source src="party-pool1.mp4" type="video/mp4">
+          </video>
+          <div class="noche-video-overlay"><span>PISCINA</span></div>
+        </div>
+        <div class="noche-video-wrap">
+          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+            <source src="party-video2.mp4" type="video/mp4">
+          </video>
+          <div class="noche-video-overlay"><span>VIBE</span></div>
+        </div>
+        <div class="noche-video-wrap">
+          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+            <source src="party-video4.mp4" type="video/mp4">
+          </video>
+          <div class="noche-video-overlay"><span>CONFETTI</span></div>
+        </div>
+        <div class="noche-video-wrap">
+          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+            <source src="party-crowd1-opt.mp4" type="video/mp4">
+          </video>
+          <div class="noche-video-overlay"><span>CROWD</span></div>
+        </div>
+        <div class="noche-video-wrap">
+          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+            <source src="party-pool2-opt.mp4" type="video/mp4">
+          </video>
+          <div class="noche-video-overlay"><span>NOCHE</span></div>
+        </div>
+      </div>
+
+      <!-- Mixed media gallery: photos + short vibe clips -->
+      <div class="noche-gallery anim anim-up delay-2">
+        <div class="noche-gallery-track">
+          <div class="noche-gal-item"><img src="party1.jpg" alt="PROYECT NIGHT X" loading="lazy"></div>
+          <div class="noche-gal-item video-item">
+            <video muted loop playsinline preload="none" data-autoplay><source src="party-pool1.mp4" type="video/mp4"></video>
+          </div>
+          <div class="noche-gal-item"><img src="party14.jpg" alt="Piscina summer night" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party6.jpg" alt="Piscina de noche" loading="lazy"></div>
+          <div class="noche-gal-item video-item">
+            <video muted loop playsinline preload="none" data-autoplay><source src="party-pool-jump.mp4" type="video/mp4"></video>
+          </div>
+          <div class="noche-gal-item"><img src="party15.jpg" alt="Foam party" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party2.jpg" alt="PROYECT NIGHT X" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party16.jpg" alt="Foam night" loading="lazy"></div>
+          <div class="noche-gal-item video-item">
+            <video muted loop playsinline preload="none" data-autoplay><source src="party-crowd1-opt.mp4" type="video/mp4"></video>
+          </div>
+          <div class="noche-gal-item"><img src="party13.jpg" alt="Pool party" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party3.jpg" alt="PROYECT NIGHT X" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party17.jpg" alt="Pool crowd" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party7.jpg" alt="Noche en la finca" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party18.jpg" alt="Fluorescent" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party8.jpg" alt="Piscina" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party9.jpg" alt="Brindis" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party4.jpg" alt="PROYECT NIGHT X" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party12.jpg" alt="Ambiente" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party5.jpg" alt="PROYECT NIGHT X" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party10.jpg" alt="Fiesta" loading="lazy"></div>
+          <!-- seamless loop -->
+          <div class="noche-gal-item"><img src="party1.jpg" alt="" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party14.jpg" alt="" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party6.jpg" alt="" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party11.jpg" alt="" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party3.jpg" alt="" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party7.jpg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section" id="eventos">
+    <div class="section-photo-bg" style="background-image:url('party14.jpg')"></div>
+    <canvas class="countdown-canvas" id="countdownCanvas"></canvas>
+    <p class="countdown-label">FALTAN</p>
+    <div class="countdown">
+      <div class="countdown-item">
+        <span class="countdown-value" id="days">00</span>
+        <span class="countdown-unit">Días</span>
+      </div>
+      <span class="countdown-separator">:</span>
+      <div class="countdown-item">
+        <span class="countdown-value" id="hours">00</span>
+        <span class="countdown-unit">Horas</span>
+      </div>
+      <span class="countdown-separator">:</span>
+      <div class="countdown-item">
+        <span class="countdown-value" id="minutes">00</span>
+        <span class="countdown-unit">Minutos</span>
+      </div>
+      <span class="countdown-separator">:</span>
+      <div class="countdown-item">
+        <span class="countdown-value" id="seconds">00</span>
+        <span class="countdown-unit">Segundos</span>
+      </div>
+    </div>
+    <div class="countdown-line"></div>
+    <p class="countdown-date">26 de septiembre de 2026</p>
+  </section>
+
+  <!-- TICKET / ENTRADA -->
+  <section class="ticket-section" id="entrada">
+    <div class="section-photo-bg" style="background-image:url('party13.jpg')"></div>
+    <canvas class="ticket-bg-particles" id="ticketCanvas"></canvas>
+    <div class="ticket-info">
+      <div class="ticket-eyebrow">Entrada</div>
+      <h2 class="ticket-title">
+        <span class="line1">Un precio.</span>
+        <span class="line2">Un lugar.</span>
+      </h2>
+      <p class="ticket-desc">
+        Tu entrada te da acceso a la fiesta del 26 de septiembre en Finca Parcela La JULIA (La Dorada, Caldas): piscina de noche, DJ, luces y la vibra completa. Así de simple.
+      </p>
+      <ul class="ticket-checks">
+        <li>Acceso al evento del 26 de septiembre</li>
+        <li>Ubicación: Finca Parcela La JULIA, La Dorada, Caldas</li>
+        <li>Precio único: $50.000 COP</li>
+      </ul>
+    </div>
+
+    <div class="ticket-card tilt-3d" id="ticketCard">
+        <div class="tilt-shine" aria-hidden="true"></div>
+                  <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+      <div class="ticket-card-header">Entrada · Válida un día</div>
+      <h3 class="ticket-card-title">La Fiesta</h3>
+      <div class="ticket-card-meta">
+        <div>
+          <span>Fecha</span>
+          <strong>26 SEP 2026</strong>
+        </div>
+        <div style="text-align:right">
+          <span>Lugar</span>
+          <strong>Finca Parcela La JULIA</strong>
+        </div>
+      </div>
+      <div class="ticket-price">
+        <span class="amount">$50.000</span>
+        <span class="currency">COP</span>
+      </div>
+      <a href="comprar.html" class="btn-ticket">COMPRAR ENTRADA →</a>
+      <p class="ticket-note">Pago por Nequi / Bancolombia / Daviplata — validación manual</p>
+    </div>
+  </section>
+
+
+  <!-- MAP -->
+  <section class="map-section" id="ubicacion">
+    <div class="section-photo-bg" style="background-image:url('party18.jpg')"></div>
+    <h2 class="anim anim-up">¿Dónde es la <span>fiesta</span>?</h2>
+    <p class="map-subtitle anim anim-up delay-1">
+      Finca Parcela La JULIA · La Dorada, Caldas
+    </p>
+    <div class="map-3d-frame">
+      <div class="map-wrapper anim anim-scale delay-2">
+        <iframe
+          src="https://www.google.com/maps?q=Finca+Parcela+La+JULIA,+La+Dorada,+Caldas,+Colombia&amp;output=embed&amp;z=16"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Finca Parcela La JULIA - La Dorada, Caldas">
+        </iframe>
+      </div>
+    </div>
+    <div class="map-info anim anim-up delay-3">
+      <div class="map-info-item">
+        <span>📍</span> Finca Parcela La JULIA, La Dorada, Caldas
+      </div>
+      <div class="map-info-item">
+        <span>📅</span> 26 de septiembre de 2026
+      </div>
+      <div class="map-info-item">
+        <span>🌙</span> Evento nocturno
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- PAGO -->
+  <section class="pago-section" id="pago">
+    <div class="section-photo-bg" style="background-image:url('party17.jpg')"></div>
+    <div class="pago-inner anim anim-up">
+      <p class="pago-eyebrow">PAGO SEGURO</p>
+      <h2 class="pago-title">Pasarela de <span>pagos</span></h2>
+      <p class="pago-desc">Reserva tu entrada de forma segura. El pago se habilitará próximamente.</p>
+      <div class="pago-methods">
+        <div class="pago-method anim anim-up delay-1">
+          <span class="pago-icon">💳</span>
+          <h3>Tarjeta</h3>
+          <p>Visa, Mastercard, Débito</p>
+        </div>
+        <div class="pago-method anim anim-up delay-2">
+          <span class="pago-icon">📱</span>
+          <h3>Nequi / Dalata</h3>
+          <p>Transferencia instantánea</p>
+        </div>
+        <div class="pago-method anim anim-up delay-3">
+          <span class="pago-icon">🏦</span>
+          <h3>Transferencia</h3>
+          <p>Bancolombia y otros bancos</p>
+        </div>
+      </div>
+      <a href="https://wa.me/573145140075?text=Quiero%20reservar%20mi%20entrada%20PROYECT%20NIGHT%20X" class="btn-pago" target="_blank" rel="noopener">
+        RESERVAR POR WHATSAPP →
+      </a>
+      <p class="pago-note">Por ahora las reservas se confirman por WhatsApp. La pasarela online se activará pronto.</p>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto-section" id="contacto">
+    <div class="contacto-bg"></div>
+    <div class="contacto-inner anim anim-up">
+      <p class="contacto-eyebrow">CONTACTO</p>
+      <h2 class="contacto-title">¿Listo para<br><span>la noche?</span></h2>
+      <p class="contacto-desc">Escríbenos o llámanos para reservar tu lugar o resolver cualquier duda. Ubicación y confirmaciones por WhatsApp.</p>
+      <a href="https://wa.me/573145140075?text=Hola%20quiero%20info%20de%20PROYECT%20NIGHT%20X" class="contacto-phone" target="_blank" rel="noopener">
+        <span class="phone-icon">📱</span>
+        <span class="phone-number">+57 314 514 0075</span>
+      </a>
+      <p class="contacto-note">WhatsApp disponible · Respuesta rápida · Ubicación al confirmar</p>
+
+      <div class="whatsapp-community">
+        <div class="wa-icon">💬</div>
+        <div>
+          <strong>Comunidad de WhatsApp</strong>
+          <span>Próximamente — únete al grupo oficial de PROYECT NIGHT X</span>
+        </div>
+        <span class="wa-badge">SOON</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-slogan">LA NOCHE ES NUESTRA</div>
+    <div class="newsletter">
+      <span>ENTÉRATE DE RESERVA YA</span>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias! Te avisaremos de los próximos eventos.');">
+        <input type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">➤</button>
+      </form>
+    </div>
+  </footer>
+
+  <script>
+    // Countdown to September 26, 2026 00:00 (Colombia time approx)
+    const targetDate = new Date('2026-09-26T00:00:00-05:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===== IMMERSIVE: COUNTDOWN PARTICLES (matrix-like) =====
+    (function() {
+      const canvas = document.getElementById('countdownCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [];
+      const mouse = { x: null, y: null };
+
+      function resize() {
+        w = canvas.width = canvas.offsetWidth;
+        h = canvas.height = canvas.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (let i = 0; i < 28; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: Math.random() * 2 + 0.5,
+          speedX: (Math.random() - 0.5) * 0.4,
+          speedY: (Math.random() - 0.5) * 0.4,
+          opacity: Math.random() * 0.5 + 0.1
+        });
+      }
+
+      const section = document.getElementById('eventos');
+      section.addEventListener('mousemove', e => {
+        const rect = section.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      section.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+      function draw() {
+        if (canvas._visible === false) { requestAnimationFrame(draw); return; }
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          if (p.x < 0 || p.x > w) p.speedX *= -1;
+          if (p.y < 0 || p.y > h) p.speedY *= -1;
+
+          // Attraction to mouse
+          if (mouse.x !== null) {
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 180) {
+              p.x -= dx * 0.01;
+              p.y -= dy * 0.01;
+            }
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 240, 255, ${p.opacity})`;
+          ctx.fill();
+
+          // connections disabled for performance
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ===== IMMERSIVE: TICKET 3D TILT + GLOW =====
+    (function() {
+      const card = document.getElementById('ticketCard');
+      const orb = null;
+      if (!card) return;
+
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -12;
+        const rotateY = ((x - centerX) / centerX) * 12;
+
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+
+        if (false && orb) {
+          orb.style.left = (x - 90) + 'px';
+          orb.style.top = (y - 90) + 'px';
+          orb.style.opacity = '1';
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) scale(1)';
+        if (false && orb) orb.style.opacity = '0';
+      });
+    })();
+
+    // ===== IMMERSIVE: TICKET BACKGROUND PARTICLES =====
+    (function() {
+      const canvas = document.getElementById('ticketCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, dots = [];
+
+      function resize() {
+        w = canvas.width = canvas.offsetWidth;
+        h = canvas.height = canvas.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (let i = 0; i < 18; i++) {
+        dots.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.8 + 0.4,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          o: Math.random() * 0.35 + 0.05
+        });
+      }
+
+      function draw() {
+        if (canvas._visible === false) { requestAnimationFrame(draw); return; }
+        ctx.clearRect(0, 0, w, h);
+        dots.forEach(d => {
+          d.x += d.vx;
+          d.y += d.vy;
+          if (d.x < 0 || d.x > w) d.vx *= -1;
+          if (d.y < 0 || d.y > h) d.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 240, 255, ${d.o})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+
+    // ===== AMBIENT PARTICLES (global) =====
+    (function() {
+      const canvas = document.getElementById('ambientCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [];
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (let i = 0; i < 50; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.6 + 0.3,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          o: Math.random() * 0.35 + 0.05
+        });
+      }
+
+      function draw() {
+        if (canvas._visible === false) { requestAnimationFrame(draw); return; }
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 240, 255, ${p.o})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ===== DYNAMIC SHADOWS (follow mouse lightly) =====
+    (function() {
+      const targets = document.querySelectorAll('.feature, .noche-item, .ticket-card, .map-wrapper');
+      document.addEventListener('mousemove', e => {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / cx;
+        const dy = (e.clientY - cy) / cy;
+        targets.forEach(el => {
+          const x = Math.round(dx * -14);
+          const y = Math.round(12 + dy * 10);
+          el.style.setProperty('--shadow-x', x + 'px');
+          el.style.setProperty('--shadow-y', y + 'px');
+        });
+      });
+    })();
+
+    // ===== MUSIC PLAYER + BIBLIOTECA DE CANCIONES =====
+    (function() {
+      // Para agregar más canciones, solo añade otro objeto a esta lista
+      // (sube el mp3 y la portada a la misma carpeta que index.html)
+      const playlist = [
+        { title: 'Project X', artist: 'Yeah Yeah Yeahs', src: 'projectx.mp3', cover: 'projectx-cover.jpg' }
+      ];
+
+      const btn = document.getElementById('musicBtn');
+      const prevBtn = document.getElementById('musicPrev');
+      const nextBtn = document.getElementById('musicNext');
+      const listBtn = document.getElementById('musicListBtn');
+      const audio = document.getElementById('bgMusic');
+      const card = document.getElementById('musicCard');
+      const cover = document.getElementById('musicCover');
+      const trackEl = document.getElementById('musicTrack');
+      const artistEl = document.getElementById('musicArtist');
+      const playlistEl = document.getElementById('musicPlaylist');
+      if (!btn || !audio) return;
+
+      audio.volume = 0.32;
+      let current = 0;
+      let wasPlaying = false;
+
+      function renderPlaylist() {
+        playlistEl.innerHTML = '';
+        playlist.forEach((track, i) => {
+          const item = document.createElement('div');
+          item.className = 'music-playlist-item' + (i === current ? ' active' : '');
+          item.innerHTML = `
+            <img src="${track.cover}" alt="${track.title}">
+            <div class="music-playlist-item-info">
+              <div class="music-playlist-item-title">${track.title}</div>
+              <div class="music-playlist-item-artist">${track.artist}</div>
+            </div>`;
+          item.addEventListener('click', () => loadTrack(i, true));
+          playlistEl.appendChild(item);
+        });
+      }
+
+      function loadTrack(index, autoplay) {
+        current = (index + playlist.length) % playlist.length;
+        const track = playlist[current];
+        audio.src = track.src;
+        cover.src = track.cover;
+        cover.alt = track.title + ' - ' + track.artist;
+        trackEl.textContent = track.title;
+        artistEl.textContent = track.artist;
+        renderPlaylist();
+        if (autoplay) {
+          audio.play().then(() => {
+            btn.textContent = '❚❚';
+            card.classList.add('playing');
+          }).catch(() => {});
+        }
+      }
+
+      function togglePlay() {
+        if (audio.paused) {
+          audio.play().then(() => {
+            btn.textContent = '❚❚';
+            card.classList.add('playing');
+          }).catch(() => {
+            alert('Haz clic de nuevo o permite el audio en el navegador.');
+          });
+        } else {
+          audio.pause();
+          btn.textContent = '▶';
+          card.classList.remove('playing');
+        }
+      }
+
+      audio.addEventListener('ended', () => loadTrack(current + 1, true));
+
+      btn.addEventListener('click', togglePlay);
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); loadTrack(current - 1, !audio.paused); });
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); loadTrack(current + 1, !audio.paused); });
+      listBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        playlistEl.classList.toggle('open');
+      });
+      document.addEventListener('click', (e) => {
+        if (!card.contains(e.target)) playlistEl.classList.remove('open');
+      });
+
+      loadTrack(0, false);
+    })();
+
+    // ===== ACTIVE NAV =====
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+
+    function setActiveNav() {
+      let current = 'inicio';
+      const scrollY = window.scrollY + 120;
+      sections.forEach(section => {
+        if (section.offsetTop <= scrollY) {
+          current = section.getAttribute('id');
+        }
+      });
+      // Map sections to nav items
+      const map = {
+        'inicio': 'inicio',
+        'noche': 'noche',
+        'eventos': 'noche',
+        'entrada': 'inicio',
+        'pago': 'contacto',
+        'ubicacion': 'contacto',
+        'contacto': 'contacto'
+      };
+      const activeId = map[current] || current;
+      navLinks.forEach(a => {
+        a.classList.remove('active');
+        const href = a.getAttribute('href') || '';
+        if (href === '#' + activeId) a.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', setActiveNav);
+    navLinks.forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        a.classList.add('active');
+      });
+    });
+    setActiveNav();
+
+    // ===== IMMERSIVE CUSTOM CURSOR =====
+    (function() {
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (!dot || !ring) return;
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      let mouseX = 0, mouseY = 0;
+      let ringX = 0, ringY = 0;
+
+      document.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      const hoverTargets = 'a, button, .btn-primary, .btn-secondary, .btn-reserva, .btn-ticket, .btn-pago, .contacto-phone, .ticket-card, .feature, .noche-item, .pago-method, .music-toggle, .music-nav-btn, .music-list-btn, .music-playlist-item';
+      document.querySelectorAll(hoverTargets).forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          dot.classList.add('hover');
+          ring.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          dot.classList.remove('hover');
+          ring.classList.remove('hover');
+        });
+      });
+    })();
+
+  
+    // (video observer replaced by limited concurrent player)
+    
+
+  
+
+    // ===== 3D TILT: ticket only (map uses CSS frame — no iframe bugs) =====
+    (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
+      if (window.matchMedia('(max-width: 900px)').matches) return;
+      const el = document.querySelector('.ticket-card.tilt-3d');
+      if (!el) return;
+      let rect = null, raf = 0, targetX = 0, targetY = 0, curX = 0, curY = 0;
+      const maxTilt = 11;
+      function measure() { rect = el.getBoundingClientRect(); }
+      measure();
+      window.addEventListener('resize', measure, { passive: true });
+      function tick() {
+        curX += (targetX - curX) * 0.12;
+        curY += (targetY - curY) * 0.12;
+        el.style.transform = 'rotateX(' + curX.toFixed(2) + 'deg) rotateY(' + curY.toFixed(2) + 'deg) translateZ(8px)';
+        raf = requestAnimationFrame(tick);
+      }
+      el.addEventListener('mouseenter', () => { measure(); if (!raf) raf = requestAnimationFrame(tick); });
+      el.addEventListener('mousemove', (e) => {
+        if (!rect) measure();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        targetY = (x - 0.5) * maxTilt * 2;
+        targetX = (0.5 - y) * maxTilt * 1.3;
+        const shine = el.querySelector('.tilt-shine');
+        if (shine) {
+          shine.style.background = 'radial-gradient(circle at ' + (x*100) + '% ' + (y*100) + '%, rgba(255,255,255,0.2) 0%, transparent 55%)';
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        targetX = 5; targetY = -8;
+        setTimeout(() => {
+          if (Math.abs(curX - 5) < 0.3 && Math.abs(curY + 8) < 0.3) {
+            cancelAnimationFrame(raf); raf = 0;
+            el.style.transform = 'rotateX(5deg) rotateY(-8deg)';
+          }
+        }, 600);
+      });
+    })();
+
+    // Limit concurrent videos (performance)
+    (function() {
+      const videos = Array.from(document.querySelectorAll('video[data-autoplay]'));
+      let playing = new Set();
+      const MAX = 3;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const v = entry.target;
+          if (entry.isIntersecting) {
+            if (playing.size >= MAX) {
+              const first = playing.values().next().value;
+              if (first && first !== v) { first.pause(); playing.delete(first); }
+            }
+            v.muted = true;
+            v.play().then(() => playing.add(v)).catch(()=>{});
+          } else {
+            v.pause();
+            playing.delete(v);
+          }
+        });
+      }, { rootMargin: '40px', threshold: 0.2 });
+      videos.forEach(v => io.observe(v));
+    })();
+
+  
+    // Pause particle canvases when off-screen (perf)
+    (function() {
+      const cans = [document.getElementById('countdownCanvas'), document.getElementById('ticketCanvas')];
+      cans.forEach(c => {
+        if (!c) return;
+        c._visible = true;
+        const io = new IntersectionObserver(([e]) => {
+          c._visible = e.isIntersecting;
+          if (!e.isIntersecting) {
+            const ctx = c.getContext('2d');
+            if (ctx) ctx.clearRect(0,0,c.width,c.height);
+          }
+        }, { threshold: 0.05 });
+        io.observe(c);
+      });
+      // Monkey-patch: skip draw work when not visible by wrapping rAF users is hard;
+      // simpler: set attribute
+    })();
+
+  </script>
+
+</body>
+</html>

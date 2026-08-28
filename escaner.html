@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escáner de Entrada | Proyecto Night X</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+<style>
+  :root { --cyan: #00f0ff; --pink: #ff2d95; --bg: #08080e; --text-muted: #9a9aab; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #fff; min-height: 100vh; padding: 1.5rem 1rem 3rem; text-align: center; }
+  .wrap { max-width: 420px; margin: 0 auto; }
+  h1 { font-size: 1.3rem; margin-bottom: 1rem; }
+  .login-card { max-width: 320px; margin: 4rem auto; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; }
+  input { width: 100%; padding: 0.8rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.3); color: #fff; font-size: 0.95rem; margin-top: 0.8rem; box-sizing: border-box; }
+  button { padding: 0.8rem 1.2rem; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; width: 100%; margin-top: 0.8rem; background: linear-gradient(135deg, var(--cyan), var(--pink)); color: #000; }
+  #reader { border-radius: 14px; overflow: hidden; margin-top: 1rem; }
+  .resultado { margin-top: 1.2rem; padding: 1.2rem; border-radius: 14px; font-size: 1.05rem; font-weight: 700; display: none; }
+  .resultado.valido { background: rgba(0,255,150,0.15); border: 2px solid #00ff96; color: #00ff96; display: block; }
+  .resultado.invalido { background: rgba(255,45,95,0.15); border: 2px solid #ff2d5f; color: #ff2d5f; display: block; }
+  .nombre-ticket { font-size: 1.3rem; margin-top: 0.4rem; color: #fff; }
+  #err { color: #ff2d5f; font-size: 0.8rem; margin-top: 0.6rem; }
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-card">
+  <h1>Escáner de Entrada</h1>
+  <input type="password" id="claveInput" placeholder="Clave admin">
+  <button id="btnLogin">Entrar</button>
+  <div id="err"></div>
+</div>
+
+<div class="wrap" id="scanScreen" style="display:none;">
+  <h1>🎟️ Escanea el ticket</h1>
+  <div id="reader" style="width:100%;"></div>
+  <div class="resultado" id="resultado"></div>
+</div>
+
+<script>
+  const SUPABASE_URL = "https://vkduxheifqmomtazolku.supabase.co";
+  let ADMIN_SECRET = sessionStorage.getItem('nx_admin_secret') || '';
+  let procesando = false;
+
+  if (ADMIN_SECRET) iniciar();
+
+  document.getElementById('btnLogin').addEventListener('click', () => {
+    ADMIN_SECRET = document.getElementById('claveInput').value;
+    sessionStorage.setItem('nx_admin_secret', ADMIN_SECRET);
+    iniciar();
+  });
+
+  function iniciar() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('scanScreen').style.display = 'block';
+
+    const html5QrCode = new Html5Qrcode("reader");
+    html5QrCode.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 240 },
+      async (decodedText) => {
+        if (procesando) return;
+        procesando = true;
+        await validar(decodedText);
+        setTimeout(() => { procesando = false; }, 2500);
+      },
+      () => {}
+    ).catch((err) => {
+      document.getElementById('err').textContent = 'No se pudo acceder a la cámara: ' + err;
+      document.getElementById('loginScreen').style.display = 'block';
+      document.getElementById('scanScreen').style.display = 'none';
+    });
+  }
+
+  async function validar(codigo) {
+    const resDiv = document.getElementById('resultado');
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/validar-ticket`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-secret': ADMIN_SECRET },
+        body: JSON.stringify({ codigo_qr: codigo, validado_por: 'puerta' })
+      });
+      if (res.status === 401) {
+        sessionStorage.removeItem('nx_admin_secret');
+        alert('Clave inválida, vuelve a ingresarla.');
+        location.reload();
+        return;
+      }
+      const data = await res.json();
+      resDiv.className = 'resultado ' + (data.valido ? 'valido' : 'invalido');
+      resDiv.innerHTML = data.mensaje + (data.nombre ? `<div class="nombre-ticket">${data.nombre}</div>` : '');
+      if (navigator.vibrate) navigator.vibrate(data.valido ? 100 : [80, 60, 80]);
+    } catch (err) {
+      resDiv.className = 'resultado invalido';
+      resDiv.textContent = '❌ Error de conexión.';
+    }
+  }
+</script>
+</body>
+</html>
