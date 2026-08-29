@@ -134,7 +134,7 @@
       box-shadow: 0 0 8px var(--cyan), 0 0 14px rgba(236,72,153,0.35);
     }
 
-    .btn-reserva {
+    .btn-comprar {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -151,7 +151,7 @@
       background: transparent;
     }
 
-    .btn-reserva:hover {
+    .btn-comprar:hover {
       background: var(--cyan);
       color: #000;
       box-shadow: 0 0 20px var(--cyan-glow);
@@ -1099,13 +1099,13 @@
       line-height: 1.55;
     }
 
-    /* ========== CONTACTO ========== */
-    .contacto-section {
+    /* ========== COMUNIDAD ========== */
+    .comunidad-section {
       background: #030308;
       padding: 5.5rem 2rem;
       text-align: center;
     }
-    .contacto-eyebrow {
+    .comunidad-eyebrow {
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 4px;
@@ -1113,58 +1113,45 @@
       color: var(--cyan);
       margin-bottom: 1rem;
     }
-    .contacto-title {
+    .comunidad-title {
       font-family: 'Oswald', sans-serif;
       font-size: clamp(2.2rem, 5vw, 3.2rem);
       font-weight: 700;
       line-height: 1.15;
+      letter-spacing: 2px;
       margin-bottom: 1rem;
     }
-    .contacto-title span { color: var(--cyan) !important; -webkit-text-fill-color: var(--cyan) !important; background: none !important; animation: none !important; }
-    .contacto-desc {
+    .comunidad-title span { color: var(--cyan) !important; -webkit-text-fill-color: var(--cyan) !important; background: none !important; animation: none !important; }
+    .comunidad-desc {
       color: var(--text-muted);
       margin-bottom: 2.2rem;
       font-size: 1rem;
     }
-    .contacto-phone {
+    .btn-comunidad {
       display: inline-flex;
       align-items: center;
-      gap: 0.8rem;
-      padding: 1rem 2rem;
-      background: rgba(0,240,255,0.08);
-      border: 1.5px solid var(--cyan);
-      border-radius: 50px;
-      color: var(--cyan);
-      text-decoration: none;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      transition: all 0.35s;
-      box-shadow: 0 0 25px rgba(0,240,255,0.15);
-    }
-    .contacto-phone:hover {
+      gap: 0.5rem;
+      padding: 1rem 2.2rem;
       background: var(--cyan);
       color: #000;
-      box-shadow: 0 0 40px rgba(0,240,255,0.4);
-      transform: translateY(-3px) scale(1.03);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s;
     }
-    .phone-icon { font-size: 1.4rem; }
-    .contacto-note {
-      margin-top: 1.2rem;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.4);
+    .btn-comunidad:hover {
+      background: #fff;
+      box-shadow: 0 0 35px rgba(0,240,255,0.45);
+      transform: translateY(-3px);
     }
-
-    .contacto-note {
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .contacto-section {
+    .comunidad-section {
       position: relative;
       overflow: hidden;
     }
-    .contacto-bg {
+    .comunidad-bg {
       position: absolute;
       inset: 0;
       background: url('party14.jpg') center/cover no-repeat;
@@ -1172,49 +1159,13 @@
       filter: saturate(1.3) contrast(1.1);
       z-index: 0;
     }
-    .contacto-bg::after {
+    .comunidad-bg::after {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(5,5,8,0.85) 0%, rgba(5,5,8,0.7) 50%, rgba(5,5,8,0.9) 100%);
     }
-    .contacto-inner { position: relative; z-index: 1; }
-    .whatsapp-community {
-      margin-top: 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.1rem 1.4rem;
-      background: linear-gradient(135deg, rgba(37,211,102,0.12), rgba(0,240,255,0.08));
-      border: 1px solid rgba(37,211,102,0.35);
-      border-radius: 14px;
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
-      box-shadow: 0 0 30px rgba(37,211,102,0.15);
-    }
-    .whatsapp-community .wa-icon { font-size: 1.8rem; }
-    .whatsapp-community strong {
-      display: block;
-      font-size: 0.95rem;
-      color: #fff;
-    }
-    .whatsapp-community span {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    .wa-badge {
-      margin-left: auto;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      box-shadow: 0 0 12px rgba(236,72,153,0.5);
-    }
+    .comunidad-inner { position: relative; z-index: 1; }
 
 
     /* ========== MAP PREMIUM ========== */
@@ -1298,12 +1249,12 @@
     }
     @media (max-width: 768px) {
       .map-wrapper iframe { height: 320px; }
-      .noche-section, .map-section, .contacto-section { padding: 4rem 1.5rem; }
+      .noche-section, .map-section, .comunidad-section { padding: 4rem 1.5rem; }
     }
 
 
     /* Dynamic shadows */
-    .feature, .noche-item, .ticket-card, .map-wrapper, .contacto-phone {
+    .feature, .noche-item, .ticket-card, .map-wrapper {
       --shadow-x: 0px;
       --shadow-y: 12px;
     }
@@ -1570,9 +1521,7 @@
 
     .ticket-card .glow-orb { display: none !important; }
 
-    /* ========== PAGO ========== */
-    
-    .section-photo-bg {
+        .section-photo-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
@@ -1588,14 +1537,13 @@
       inset: 0;
       background: linear-gradient(180deg, rgba(5,5,8,0.75) 0%, rgba(5,5,8,0.55) 40%, rgba(5,5,8,0.85) 100%);
     }
-    .ticket-section, .pago-section, .noche-section, .features, .map-section, .countdown-section, .contacto-section {
+    .ticket-section, .noche-section, .features, .map-section, .countdown-section, .comunidad-section {
       position: relative;
       overflow: hidden;
     }
     /* Only content children — never force canvas/particles out of absolute */
     .ticket-section > .ticket-info,
     .ticket-section > .ticket-card,
-    .pago-section > .pago-inner,
     .noche-section > .noche-content,
     .features > .feature,
     .map-section > h2,
@@ -1606,7 +1554,7 @@
     .countdown-section > .countdown,
     .countdown-section > .countdown-line,
     .countdown-section > .countdown-date,
-    .contacto-section > .contacto-inner {
+    .comunidad-section > .comunidad-inner {
       position: relative;
       z-index: 2;
     }
@@ -1620,92 +1568,6 @@
     .section-photo-bg {
       opacity: 0.14;
     }
-
-    .pago-section {
-      background: #050508;
-      padding: 5.5rem 2rem;
-      text-align: center;
-    }
-    .pago-eyebrow {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 1rem;
-    }
-    .pago-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-    }
-    .pago-title span { color: var(--cyan) !important; -webkit-text-fill-color: var(--cyan) !important; background: none !important; animation: none !important; }
-    .pago-desc {
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-    }
-    .pago-methods {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      max-width: 800px;
-      margin: 0 auto 2.5rem;
-    }
-    .pago-method {
-      background: rgba(0,240,255,0.04);
-      border: 1px solid rgba(0,240,255,0.12);
-      border-radius: 12px;
-      padding: 1.6rem 1.2rem;
-      transition: all 0.35s;
-    }
-    .pago-method:hover {
-      background: rgba(0,240,255,0.08);
-      border-color: rgba(0,240,255,0.35);
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-    }
-    .pago-icon { font-size: 1.8rem; display: block; margin-bottom: 0.6rem; }
-    .pago-method h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      color: #fff;
-    }
-    .pago-method p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-    .btn-pago {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2.2rem;
-      background: var(--cyan);
-      color: #000;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 50px;
-      transition: all 0.3s;
-    }
-    .btn-pago:hover {
-      background: #fff;
-      box-shadow: 0 0 35px rgba(0,240,255,0.45);
-      transform: translateY(-3px);
-    }
-    .pago-note {
-      margin-top: 1.2rem;
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.4);
-    }
-    @media (max-width: 768px) {
-      .pago-methods { grid-template-columns: 1fr; max-width: 320px; }
-    }
-
 
     .glow-orb, .scan-line, .fine-lines, .fine-lines span,
     .ticket-card .glow-orb, #glowOrb { display: none !important; opacity: 0 !important; visibility: hidden !important; }
@@ -1732,7 +1594,7 @@
 
     /* ========== IMMERSIVE CURSOR (soft neon glow) ========== */
     body { cursor: none; }
-    a, button, .btn-primary, .btn-secondary, .btn-reserva, .btn-ticket, .btn-pago, .contacto-phone, .music-toggle {
+    a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunidad, .music-toggle {
       cursor: none;
     }
     .cursor-dot, .cursor-ring { display: none !important; }
@@ -2009,11 +1871,11 @@
     }
 
     /* Header reserve button cycles border color */
-    .btn-reserva {
+    .btn-comprar {
       animation: borderCycle 12s ease-in-out infinite;
       transition: background 0.25s, color 0.25s, transform 0.25s;
     }
-    .btn-reserva:hover {
+    .btn-comprar:hover {
       animation: none;
       border-color: var(--pink);
       background: linear-gradient(135deg, var(--cyan), var(--pink));
@@ -2108,8 +1970,7 @@
 
     /* Section titles color accents */
     .noche-title span,
-    .contacto-title span,
-    .pago-title span,
+    .comunidad-title span,
     .map-section h2 span {
       background: none !important;
       -webkit-background-clip: unset !important;
@@ -2162,16 +2023,6 @@
     .disco-dots span:nth-child(6) { left: 60%; top: 80%; background: var(--pink); animation-delay: 1.8s; }
     .disco-dots span:nth-child(7) { left: 15%; top: 85%; background: var(--purple); animation-delay: 0.3s; }
     .disco-dots span:nth-child(8) { left: 35%; top: 12%; background: var(--lime); animation-delay: 2s; }
-
-    /* Phone / contact accent */
-    .contacto-phone {
-      border: 1.5px solid transparent !important;
-      background:
-        linear-gradient(rgba(10,10,18,0.9), rgba(10,10,18,0.9)) padding-box,
-        linear-gradient(135deg, var(--cyan), var(--pink), var(--purple)) border-box !important;
-      background-size: 100% 100%, 250% 250% !important;
-      animation: gradientMove 4s linear infinite;
-    }
 
     /* Footer slogan gradient */
     .footer-slogan {
@@ -2625,10 +2476,10 @@
         transform-origin: bottom left;
       }
       header { padding: 0.85rem 1rem !important; }
-      .btn-reserva { padding: 0.5rem 0.85rem !important; font-size: 0.7rem !important; }
+      .btn-comprar { padding: 0.5rem 0.85rem !important; font-size: 0.7rem !important; }
       .logo { font-size: 1.15rem !important; }
       nav { display: none !important; }
-      .contacto-section, .pago-section { padding: 3rem 1.25rem !important; }
+      .comunidad-section { padding: 3rem 1.25rem !important; }
     }
     @media (max-width: 480px) {
       .features { grid-template-columns: 1fr !important; }
@@ -2682,10 +2533,10 @@
         <nav>
       <a href="#inicio" class="active">INICIO</a>
       <a href="#noche">NOCHE</a>
-      <a href="#contacto">CONTACTO</a>
-      <a href="mi-ticket.html">MI TICKET</a>
+      <a href="#ubicacion">UBICACIÓN</a>
+      <a href="#comunidad">COMUNIDAD</a>
     </nav>
-    <a href="comprar.html" class="btn-reserva">COMPRAR ENTRADA →</a>
+    <a href="https://wa.me/573145140075" class="btn-comprar" target="_blank" rel="noopener">COMPRAR ENTRADA →</a>
   </header>
 
   <!-- HERO -->
@@ -2701,9 +2552,9 @@
         <strong>ESTA ES TU NOCHE.</strong>
       </p>
       <div class="hero-buttons">
-        <a href="#entrada" class="btn-primary">
+        <a href="https://wa.me/573145140075" class="btn-primary" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          RESERVA YA
+          COMPRAR ENTRADA
         </a>
         <a href="#noche" class="btn-secondary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
@@ -2930,8 +2781,7 @@
         <span class="amount">$50.000</span>
         <span class="currency">COP</span>
       </div>
-      <a href="comprar.html" class="btn-ticket">COMPRAR ENTRADA →</a>
-      <p class="ticket-note">Pago por Nequi / Bancolombia / Daviplata — validación manual</p>
+      <a href="https://wa.me/573145140075" class="btn-ticket" target="_blank" rel="noopener">COMPRAR ENTRADA →</a>
     </div>
   </section>
 
@@ -2969,58 +2819,16 @@
 
 
 
-  <!-- PAGO -->
-  <section class="pago-section" id="pago">
-    <div class="section-photo-bg" style="background-image:url('party17.jpg')"></div>
-    <div class="pago-inner anim anim-up">
-      <p class="pago-eyebrow">PAGO SEGURO</p>
-      <h2 class="pago-title">Pasarela de <span>pagos</span></h2>
-      <p class="pago-desc">Reserva tu entrada de forma segura. El pago se habilitará próximamente.</p>
-      <div class="pago-methods">
-        <div class="pago-method anim anim-up delay-1">
-          <span class="pago-icon">💳</span>
-          <h3>Tarjeta</h3>
-          <p>Visa, Mastercard, Débito</p>
-        </div>
-        <div class="pago-method anim anim-up delay-2">
-          <span class="pago-icon">📱</span>
-          <h3>Nequi / Dalata</h3>
-          <p>Transferencia instantánea</p>
-        </div>
-        <div class="pago-method anim anim-up delay-3">
-          <span class="pago-icon">🏦</span>
-          <h3>Transferencia</h3>
-          <p>Bancolombia y otros bancos</p>
-        </div>
-      </div>
-      <a href="https://wa.me/573145140075?text=Quiero%20reservar%20mi%20entrada%20PROYECT%20NIGHT%20X" class="btn-pago" target="_blank" rel="noopener">
-        RESERVAR POR WHATSAPP →
+  <!-- COMUNIDAD -->
+  <section class="comunidad-section" id="comunidad">
+    <div class="comunidad-bg"></div>
+    <div class="comunidad-inner anim anim-up">
+      <p class="comunidad-eyebrow">COMUNIDAD</p>
+      <h2 class="comunidad-title">PROYECTO <span>X</span></h2>
+      <p class="comunidad-desc">Fecha, hora y ubicación se avisan primero en la comunidad.</p>
+      <a href="https://chat.whatsapp.com/LpS7e7bCkpaD53yu0gvmPk" class="btn-comunidad" target="_blank" rel="noopener">
+        UNIRME A WHATSAPP →
       </a>
-      <p class="pago-note">Por ahora las reservas se confirman por WhatsApp. La pasarela online se activará pronto.</p>
-    </div>
-  </section>
-
-  <!-- CONTACTO -->
-  <section class="contacto-section" id="contacto">
-    <div class="contacto-bg"></div>
-    <div class="contacto-inner anim anim-up">
-      <p class="contacto-eyebrow">CONTACTO</p>
-      <h2 class="contacto-title">¿Listo para<br><span>la noche?</span></h2>
-      <p class="contacto-desc">Escríbenos o llámanos para reservar tu lugar o resolver cualquier duda. Ubicación y confirmaciones por WhatsApp.</p>
-      <a href="https://wa.me/573145140075?text=Hola%20quiero%20info%20de%20PROYECT%20NIGHT%20X" class="contacto-phone" target="_blank" rel="noopener">
-        <span class="phone-icon">📱</span>
-        <span class="phone-number">+57 314 514 0075</span>
-      </a>
-      <p class="contacto-note">WhatsApp disponible · Respuesta rápida · Ubicación al confirmar</p>
-
-      <div class="whatsapp-community">
-        <div class="wa-icon">💬</div>
-        <div>
-          <strong>Comunidad de WhatsApp</strong>
-          <span>Próximamente — únete al grupo oficial de PROYECT NIGHT X</span>
-        </div>
-        <span class="wa-badge">SOON</span>
-      </div>
     </div>
   </section>
 
@@ -3028,7 +2836,7 @@
   <footer>
     <div class="footer-slogan">LA NOCHE ES NUESTRA</div>
     <div class="newsletter">
-      <span>ENTÉRATE DE RESERVA YA</span>
+      <span>ENTÉRATE DE LA PRÓXIMA FECHA</span>
       <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias! Te avisaremos de los próximos eventos.');">
         <input type="email" placeholder="Tu correo electrónico" required>
         <button type="submit">➤</button>
@@ -3374,9 +3182,8 @@
         'noche': 'noche',
         'eventos': 'noche',
         'entrada': 'inicio',
-        'pago': 'contacto',
-        'ubicacion': 'contacto',
-        'contacto': 'contacto'
+        'ubicacion': 'ubicacion',
+        'comunidad': 'comunidad'
       };
       const activeId = map[current] || current;
       navLinks.forEach(a => {
@@ -3420,7 +3227,7 @@
       }
       animateRing();
 
-      const hoverTargets = 'a, button, .btn-primary, .btn-secondary, .btn-reserva, .btn-ticket, .btn-pago, .contacto-phone, .ticket-card, .feature, .noche-item, .pago-method, .music-toggle, .music-nav-btn, .music-list-btn, .music-playlist-item';
+      const hoverTargets = 'a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunidad, .ticket-card, .feature, .noche-item, .music-toggle, .music-nav-btn, .music-list-btn, .music-playlist-item';
       document.querySelectorAll(hoverTargets).forEach(el => {
         el.addEventListener('mouseenter', () => {
           dot.classList.add('hover');
