@@ -1303,6 +1303,16 @@
       border-color: rgba(236,72,153,0.4);
       box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 28px rgba(0,240,255,0.18), 0 0 50px rgba(236,72,153,0.12);
     }
+    /* Arrastrable tipo burbuja */
+    .music-player-card { touch-action: none; }
+    .music-player-card.dragging {
+      transition: none;
+      transform: none;
+      opacity: 0.94;
+      border-color: rgba(236,72,153,0.55);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.6), 0 0 34px rgba(0,240,255,0.25), 0 0 60px rgba(236,72,153,0.18);
+    }
+    .music-player-card.dragging .music-playlist { opacity: 0; pointer-events: none; }
     .music-cover {
       width: 48px;
       height: 48px;
@@ -3164,6 +3174,76 @@
       });
 
       loadTrack(0, false);
+
+      // ===== ARRASTRE TIPO BURBUJA =====
+      // Permite mover el reproductor por la pantalla (arriba/abajo/lados).
+      // Los clics en los botones siguen funcionando: solo se considera
+      // arrastre cuando el puntero se desplaza mas de UMBRAL px.
+      const MARGEN = 8;
+      const UMBRAL = 5;
+      let arrastrando = false, movido = false, suprimirClic = false, dx = 0, dy = 0;
+
+      function fijarPos(x, y) {
+        const w = card.offsetWidth, h = card.offsetHeight;
+        x = Math.min(Math.max(x, MARGEN), window.innerWidth - w - MARGEN);
+        y = Math.min(Math.max(y, MARGEN), window.innerHeight - h - MARGEN);
+        card.style.left = x + 'px';
+        card.style.top = y + 'px';
+        card.style.right = 'auto';
+        card.style.bottom = 'auto';
+      }
+
+      card.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('button') || e.target.closest('.music-playlist')) return;
+        const r = card.getBoundingClientRect();
+        dx = e.clientX - r.left;
+        dy = e.clientY - r.top;
+        arrastrando = true;
+        movido = false;
+        card.setPointerCapture(e.pointerId);
+      });
+
+      card.addEventListener('pointermove', (e) => {
+        if (!arrastrando) return;
+        const x = e.clientX - dx, y = e.clientY - dy;
+        if (!movido) {
+          const r = card.getBoundingClientRect();
+          if (Math.abs(x - r.left) < UMBRAL && Math.abs(y - r.top) < UMBRAL) return;
+          movido = true;
+          card.classList.add('dragging');
+          playlistEl.classList.remove('open');
+        }
+        e.preventDefault();
+        fijarPos(x, y);
+      });
+
+      function finArrastre(e) {
+        if (!arrastrando) return;
+        arrastrando = false;
+        card.classList.remove('dragging');
+        // Suprime solo el clic que dispara este mismo arrastre; se limpia
+        // enseguida para no bloquear los clics siguientes en los botones.
+        if (movido) {
+          suprimirClic = true;
+          setTimeout(() => { suprimirClic = false; }, 0);
+        }
+        movido = false;
+        if (card.hasPointerCapture && card.hasPointerCapture(e.pointerId)) {
+          card.releasePointerCapture(e.pointerId);
+        }
+      }
+      card.addEventListener('pointerup', finArrastre);
+      card.addEventListener('pointercancel', finArrastre);
+
+      // Si se arrastro, cancela el clic para no abrir/cerrar la lista sin querer
+      card.addEventListener('click', (e) => {
+        if (suprimirClic) { e.stopPropagation(); e.preventDefault(); }
+      }, true);
+
+      // Al cambiar el tamano de la ventana, devuelve la burbuja a la vista
+      window.addEventListener('resize', () => {
+        if (card.style.left) fijarPos(parseFloat(card.style.left), parseFloat(card.style.top));
+      });
     })();
 
     // ===== ACTIVE NAV =====
