@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PROJECT X | Vive la Noche</title>
+  <link rel="preload" as="image" href="hero-bg.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Fuentes sin bloquear el pintado: si Google Fonts va lento o falla,
+       la pagina se ve igual con la tipografia de respaldo del sistema -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
   <style>
     :root {
       --cyan: #00f0ff;
@@ -2534,7 +2538,7 @@
 
     <div class="music-playlist" id="musicPlaylist"></div>
   </div>
-  <audio id="bgMusic" preload="auto"></audio>
+  <audio id="bgMusic" preload="none"></audio>
 
 
   <!-- HEADER -->
@@ -2640,37 +2644,37 @@
       
       <div class="noche-videos anim anim-up delay-1">
         <div class="noche-video-wrap">
-          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+          <video class="noche-video" muted loop playsinline preload="none" poster="poster-party-video.jpg" data-autoplay>
             <source src="party-video.mp4" type="video/mp4">
           </video>
           <div class="noche-video-overlay"><span>ENERGÍA</span></div>
         </div>
         <div class="noche-video-wrap">
-          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+          <video class="noche-video" muted loop playsinline preload="none" poster="poster-party-pool1.jpg" data-autoplay>
             <source src="party-pool1.mp4" type="video/mp4">
           </video>
           <div class="noche-video-overlay"><span>PISCINA</span></div>
         </div>
         <div class="noche-video-wrap">
-          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+          <video class="noche-video" muted loop playsinline preload="none" poster="poster-party-video2.jpg" data-autoplay>
             <source src="party-video2.mp4" type="video/mp4">
           </video>
           <div class="noche-video-overlay"><span>VIBE</span></div>
         </div>
         <div class="noche-video-wrap">
-          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+          <video class="noche-video" muted loop playsinline preload="none" poster="poster-party-video4.jpg" data-autoplay>
             <source src="party-video4.mp4" type="video/mp4">
           </video>
           <div class="noche-video-overlay"><span>CONFETTI</span></div>
         </div>
         <div class="noche-video-wrap">
-          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+          <video class="noche-video" muted loop playsinline preload="none" poster="poster-party-crowd1-opt.jpg" data-autoplay>
             <source src="party-crowd1-opt.mp4" type="video/mp4">
           </video>
           <div class="noche-video-overlay"><span>CROWD</span></div>
         </div>
         <div class="noche-video-wrap">
-          <video class="noche-video" muted loop playsinline preload="none" data-autoplay>
+          <video class="noche-video" muted loop playsinline preload="none" poster="poster-party-pool2-opt.jpg" data-autoplay>
             <source src="party-pool2-opt.mp4" type="video/mp4">
           </video>
           <div class="noche-video-overlay"><span>NOCHE</span></div>
@@ -2680,20 +2684,20 @@
       <!-- Mixed media gallery: photos + short vibe clips -->
       <div class="noche-gallery anim anim-up delay-2">
         <div class="noche-gallery-track">
-          <div class="noche-gal-item"><img src="party1.jpg" alt="PROJECT X" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party1.jpg" alt="PROJECT X" fetchpriority="high"></div>
           <div class="noche-gal-item video-item">
-            <video muted loop playsinline preload="none" data-autoplay><source src="party-pool1.mp4" type="video/mp4"></video>
+            <video muted loop playsinline preload="none" poster="poster-party-pool1.jpg" data-autoplay><source src="party-pool1.mp4" type="video/mp4"></video>
           </div>
-          <div class="noche-gal-item"><img src="party14.jpg" alt="Piscina summer night" loading="lazy"></div>
-          <div class="noche-gal-item"><img src="party6.jpg" alt="Piscina de noche" loading="lazy"></div>
+          <div class="noche-gal-item"><img src="party14.jpg" alt="Piscina summer night" fetchpriority="high"></div>
+          <div class="noche-gal-item"><img src="party6.jpg" alt="Piscina de noche" fetchpriority="high"></div>
           <div class="noche-gal-item video-item">
-            <video muted loop playsinline preload="none" data-autoplay><source src="party-pool-jump.mp4" type="video/mp4"></video>
+            <video muted loop playsinline preload="none" poster="poster-party-pool-jump.jpg" data-autoplay><source src="party-pool-jump.mp4" type="video/mp4"></video>
           </div>
           <div class="noche-gal-item"><img src="party15.jpg" alt="Foam party" loading="lazy"></div>
           <div class="noche-gal-item"><img src="party2.jpg" alt="PROJECT X" loading="lazy"></div>
           <div class="noche-gal-item"><img src="party16.jpg" alt="Foam night" loading="lazy"></div>
           <div class="noche-gal-item video-item">
-            <video muted loop playsinline preload="none" data-autoplay><source src="party-crowd1-opt.mp4" type="video/mp4"></video>
+            <video muted loop playsinline preload="none" poster="poster-party-crowd1-opt.jpg" data-autoplay><source src="party-crowd1-opt.mp4" type="video/mp4"></video>
           </div>
           <div class="noche-gal-item"><img src="party13.jpg" alt="Pool party" loading="lazy"></div>
           <div class="noche-gal-item"><img src="party3.jpg" alt="PROJECT X" loading="lazy"></div>
@@ -2760,11 +2764,11 @@
         <span class="line2">Un lugar.</span>
       </h2>
       <p class="ticket-desc">
-        Tu entrada te da acceso a la fiesta del 26 de septiembre en Finca Parcela La JULIA (La Dorada, Caldas): piscina de noche, DJ, luces y la vibra completa. Así de simple.
+        Tu entrada te da acceso a la fiesta del 26 de septiembre en La Dorada, Caldas: piscina de noche, DJ, luces y la vibra completa. Así de simple.
       </p>
       <ul class="ticket-checks">
         <li>Acceso al evento del 26 de septiembre</li>
-        <li>Ubicación: Finca Parcela La JULIA, La Dorada, Caldas</li>
+        <li>Ubicación: 9736+3HM, La Dorada, Caldas</li>
         <li>Precio único: $50.000 COP</li>
       </ul>
     </div>
@@ -2784,7 +2788,7 @@
         </div>
         <div style="text-align:right">
           <span>Lugar</span>
-          <strong>Finca Parcela La JULIA</strong>
+          <strong>9736+3HM</strong>
         </div>
       </div>
       <div class="ticket-price">
@@ -2801,22 +2805,22 @@
     <div class="section-photo-bg" style="background-image:url('party18.jpg')"></div>
     <h2 class="anim anim-up">¿Dónde es la <span>fiesta</span>?</h2>
     <p class="map-subtitle anim anim-up delay-1">
-      Finca Parcela La JULIA · La Dorada, Caldas
+      9736+3HM · La Dorada, Caldas
     </p>
     <div class="map-3d-frame">
       <div class="map-wrapper anim anim-scale delay-2">
         <iframe
-          src="https://www.google.com/maps?q=Finca+Parcela+La+JULIA,+La+Dorada,+Caldas,+Colombia&amp;output=embed&amp;z=16"
+          src="https://www.google.com/maps?q=9736%2B3HM+La+Dorada,+Caldas,+Colombia&amp;output=embed&amp;z=17"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Finca Parcela La JULIA - La Dorada, Caldas">
+          title="9736+3HM - La Dorada, Caldas">
         </iframe>
       </div>
     </div>
     <div class="map-info anim anim-up delay-3">
       <div class="map-info-item">
-        <span>📍</span> Finca Parcela La JULIA, La Dorada, Caldas
+        <span>📍</span> 9736+3HM, La Dorada, Caldas
       </div>
       <div class="map-info-item">
         <span>📅</span> 26 de septiembre de 2026
