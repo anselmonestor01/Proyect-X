@@ -217,7 +217,7 @@ nav a.active::after {
   text-shadow: 0 0 30px rgba(255,255,255,0.45), 0 2px 20px rgba(0,0,0,0.8);
 }
 
-.hero-title .nights {
+.hero-title .hero-x {
   display: block;
   background: linear-gradient(90deg, var(--cyan) 0%, var(--pink) 35%, var(--purple) 65%, var(--lime) 100%);
   background-size: 200% auto;

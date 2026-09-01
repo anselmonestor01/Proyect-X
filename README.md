@@ -96,7 +96,7 @@ Baseline* a 432 px con `faststart` — el perfil más compatible con móviles y
 navegadores antiguos. Si reemplazas alguno, aplícale el mismo tratamiento
 (instrucciones en `docs/ARQUITECTURA.md`) o volverá a tardar en cargar.
 
-**Archivo sin usar:** `assets/img/noir-nights-bg.jpg` no se referencia desde
+**Archivo sin usar:** `assets/img/noir-bg.jpg` no se referencia desde
 ningún sitio. Se conserva por si hace falta; puede borrarse sin efecto.
 
 ---
