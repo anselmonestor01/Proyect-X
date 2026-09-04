@@ -6,10 +6,9 @@
 // ===== MUSIC PLAYER + BIBLIOTECA DE CANCIONES =====
 (function() {
   // Para agregar más canciones, solo añade otro objeto a esta lista
-  // (sube el mp3 y la portada a la misma carpeta que index.html)
+  // (sube el mp3 a assets/audio/)
   const playlist = [
     { title: 'Project X', artist: 'Yeah Yeah Yeahs', src: 'assets/audio/projectx.mp3', cover: 'assets/audio/projectx-cover.jpg' },
-    { title: 'Bogotá', artist: 'Nico Parga', src: 'assets/audio/bogota-nico-parga.mp3', cover: 'assets/audio/projectx-cover.jpg' },
     { title: 'Right Round', artist: 'Flo Rida feat. Ke$ha', src: 'assets/audio/right-round-flo-rida.mp3', cover: 'assets/audio/projectx-cover.jpg' }
   ];
 
@@ -90,7 +89,26 @@
     if (!card.contains(e.target)) playlistEl.classList.remove('open');
   });
 
-  loadTrack(0, false);
+  // ===== ARRANQUE AUTOMATICO =====
+  // Se intenta sonar nada mas cargar la pagina. Los navegadores bloquean el
+  // audio automatico con sonido (Chrome, Safari y Firefox lo hacen), asi que
+  // si lo rechazan dejamos armado un respaldo: la musica arranca sola en
+  // cuanto el usuario haga cualquier gesto (tocar, clic, scroll o tecla).
+  loadTrack(0, true);
+
+  function arrancarConGesto() {
+    if (!audio.paused) return quitarOyentes();
+    audio.play().then(() => {
+      btn.textContent = '❚❚';
+      card.classList.add('playing');
+      quitarOyentes();
+    }).catch(() => {});
+  }
+  const GESTOS = ['pointerdown', 'touchstart', 'keydown', 'scroll', 'wheel'];
+  function quitarOyentes() {
+    GESTOS.forEach(g => window.removeEventListener(g, arrancarConGesto));
+  }
+  GESTOS.forEach(g => window.addEventListener(g, arrancarConGesto, { passive: true }));
 
   // ===== ARRASTRE TIPO BURBUJA =====
   // Permite mover el reproductor por la pantalla (arriba/abajo/lados).

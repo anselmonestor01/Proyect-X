@@ -301,6 +301,45 @@ nav a.active::after {
   background: rgba(0,240,255,0.08);
 }
 
+/* Los bloques que dependen de la fase (preventa / cover normal) se ocultan
+   con el atributo `hidden` desde js/countdown.js. Sin este !important, las
+   reglas de abajo que fijan `display` ganarian y se verian igualmente. */
+[hidden] { display: none !important; }
+
+/* ========== INFO PRINCIPAL DEL EVENTO ========== */
+/* Franja de datos concretos justo debajo del hero: lugar, precios,
+   transporte y confirmacion. Sin relleno de marketing. */
+.info-evento {
+  background: #08080e;
+  border-top: 1px solid rgba(0,240,255,0.14);
+  border-bottom: 1px solid rgba(0,240,255,0.14);
+  padding: 1.6rem 3rem;
+}
+.info-lista {
+  list-style: none;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 2.5rem;
+}
+.info-lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.82);
+}
+.info-lista strong { color: var(--cyan); font-weight: 700; }
+.info-ico { flex-shrink: 0; font-size: 1rem; line-height: 1.35; }
+
+@media (max-width: 900px) {
+  .info-lista { grid-template-columns: 1fr; gap: 0.55rem; }
+  .info-evento { padding: 1.3rem 1.5rem; }
+  .info-lista li { font-size: 0.85rem; }
+}
+
 /* ========== FEATURES ========== */
 .features {
   display: grid;
@@ -654,6 +693,60 @@ nav a.active::after {
   font-size: 0.75rem;
   color: rgba(255,255,255,0.35);
   margin-top: 1rem;
+}
+
+/* Boton secundario: confirmar datos por WhatsApp (contorno, no compite
+   con el CTA principal de compra) */
+.btn-confirmar {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-top: 0.7rem;
+  background: rgba(37,211,102,0.10);
+  border: 1.5px solid rgba(37,211,102,0.55);
+  color: #4ade80;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 50px;
+  transition: all 0.25s;
+}
+.btn-confirmar:hover {
+  background: #25d366;
+  border-color: #25d366;
+  color: #04220f;
+  box-shadow: 0 0 26px rgba(37,211,102,0.4);
+  transform: translateY(-2px);
+}
+
+/* Notas cortas dentro de la tarjeta de entrada */
+.ticket-nota {
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.55);
+  margin-top: 0.85rem;
+}
+.ticket-nota strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+/* Transporte incluido: dato de venta, se destaca sobre las notas normales */
+.ticket-transporte {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(0,240,255,0.07);
+  border: 1px solid rgba(0,240,255,0.22);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
 }
 
 /* ========== FOOTER ========== */

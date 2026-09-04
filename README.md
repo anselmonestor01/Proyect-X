@@ -3,9 +3,12 @@
 Página web del evento **PROJECT X**.
 
 - **Fecha:** 26 de septiembre de 2026
-- **Lugar:** 9736+3HM, La Dorada, Caldas
-- **Entrada:** $50.000 COP
+- **Lugar:** Finca La Julia — Vía Guarinocito, La Dorada, Caldas
+- **Preventa:** $40.000 COP hasta el 20 de septiembre
+- **Cover normal:** $50.000 COP desde el 21 de septiembre (el cambio es automático)
+- **Transporte:** incluido para personas de La Dorada
 - **Compra:** el botón «COMPRAR ENTRADA» abre WhatsApp directamente (`https://wa.me/573145140075`)
+- **Confirmación:** botón «CONFIRMAR POR WHATSAPP» con nombre completo y cédula
 - **Comunidad:** [grupo oficial de WhatsApp](https://chat.whatsapp.com/LpS7e7bCkpaD53yu0gvmPk)
 
 ---
@@ -77,10 +80,24 @@ El selector y los controles se generan solos a partir de ese array.
 **El atributo `poster` no es opcional.** Sin él, el vídeo se ve como un
 rectángulo negro hasta que termina de descargar.
 
-### Cambiar la fecha del evento
+### Cambiar fechas o precios
 
-Está en `js/countdown.js` (constante `targetDate`) y como texto en
-`index.html`. Hay que actualizar ambos.
+Todo se configura en la cabecera de `js/countdown.js`:
+
+```js
+const FIN_PREVENTA = new Date('2026-09-21T00:00:00-05:00').getTime();
+const FECHA_EVENTO = new Date('2026-09-26T00:00:00-05:00').getTime();
+const PRECIO_PREVENTA = '$40.000';
+const PRECIO_NORMAL   = '$50.000';
+```
+
+El precio y el contador cambian solos al pasar la fecha; no hay que tocar
+nada ese día. En el HTML, los sitios que muestran el precio llevan
+`data-precio`, y los bloques que solo aplican a una etapa llevan
+`data-fase="preventa"` o `data-fase="normal"`.
+
+Las fechas escritas como texto (por ejemplo «20 de septiembre») sí hay que
+actualizarlas a mano en `index.html` y en `js/countdown.js`.
 
 ---
 

@@ -76,6 +76,18 @@
     </div>
   </section>
 
+  <!-- INFO PRINCIPAL DEL EVENTO -->
+  <section class="info-evento">
+    <ul class="info-lista">
+      <li><span class="info-ico">📍</span> Finca La Julia — Vía Guarinocito, La Dorada, Caldas</li>
+      <li data-fase="preventa"><span class="info-ico">🎟️</span> Preventa <strong data-precio>$40.000</strong> COP hasta el 20 de septiembre</li>
+      <li data-fase="preventa"><span class="info-ico">🎟️</span> Cover normal $50.000 COP desde el 21 de septiembre</li>
+      <li data-fase="normal"><span class="info-ico">🎟️</span> Cover normal <strong data-precio>$50.000</strong> COP</li>
+      <li><span class="info-ico">🚌</span> Transporte incluido para personas de La Dorada</li>
+      <li><span class="info-ico">📲</span> Confirmación por WhatsApp con nombre completo y cédula</li>
+    </ul>
+  </section>
+
   <!-- FEATURES -->
   <section class="features">
     <div class="section-photo-bg" style="background-image:url('assets/img/party6.jpg')"></div>
@@ -225,7 +237,7 @@
   <section class="countdown-section" id="eventos">
     <div class="section-photo-bg" style="background-image:url('assets/img/party14.jpg')"></div>
     <canvas class="countdown-canvas" id="countdownCanvas"></canvas>
-    <p class="countdown-label">FALTAN</p>
+    <p class="countdown-label" id="countdownLabel">LA PREVENTA TERMINA EN</p>
     <div class="countdown">
       <div class="countdown-item">
         <span class="countdown-value" id="days">00</span>
@@ -248,7 +260,7 @@
       </div>
     </div>
     <div class="countdown-line"></div>
-    <p class="countdown-date">26 de septiembre de 2026</p>
+    <p class="countdown-date" id="countdownDate">Preventa hasta el 20 de septiembre · Evento el 26 de septiembre de 2026</p>
   </section>
 
   <!-- TICKET / ENTRADA -->
@@ -262,12 +274,14 @@
         <span class="line2">Un lugar.</span>
       </h2>
       <p class="ticket-desc">
-        Tu entrada te da acceso a la fiesta del 26 de septiembre en La Dorada, Caldas: piscina de noche, DJ, luces y la vibra completa. Así de simple.
+        Tu entrada te da acceso a la fiesta del 26 de septiembre en Finca La Julia, vía Guarinocito: piscina de noche, DJ, luces y la vibra completa. Así de simple.
       </p>
       <ul class="ticket-checks">
         <li>Acceso al evento del 26 de septiembre</li>
-        <li>Ubicación: 9736+3HM, La Dorada, Caldas</li>
-        <li>Precio único: $50.000 COP</li>
+        <li>Finca La Julia — Vía Guarinocito, La Dorada, Caldas</li>
+        <li>Transporte incluido para personas de La Dorada</li>
+        <li data-fase="preventa">Preventa: <span data-precio>$40.000</span> COP hasta el 20 de septiembre</li>
+        <li data-fase="normal">Cover normal: <span data-precio>$50.000</span> COP</li>
       </ul>
     </div>
 
@@ -277,7 +291,8 @@
       <div class="corner corner-tr"></div>
       <div class="corner corner-bl"></div>
       <div class="corner corner-br"></div>
-      <div class="ticket-card-header">Entrada · Válida un día</div>
+      <div class="ticket-card-header" data-fase="preventa">Preventa · Hasta el 20 de septiembre</div>
+      <div class="ticket-card-header" data-fase="normal">Entrada · Válida un día</div>
       <h3 class="ticket-card-title">La Fiesta</h3>
       <div class="ticket-card-meta">
         <div>
@@ -286,14 +301,18 @@
         </div>
         <div style="text-align:right">
           <span>Lugar</span>
-          <strong>9736+3HM</strong>
+          <strong>Finca La Julia</strong>
         </div>
       </div>
       <div class="ticket-price">
-        <span class="amount">$50.000</span>
+        <span class="amount" data-precio>$40.000</span>
         <span class="currency">COP</span>
       </div>
-      <a href="https://wa.me/573145140075" class="btn-ticket" target="_blank" rel="noopener">COMPRAR ENTRADA →</a>
+      <p class="ticket-nota" data-fase="preventa">Después del 20 de septiembre el cover sube a $50.000 COP</p>
+      <p class="ticket-transporte">🚌 Transporte incluido para personas de La Dorada</p>
+      <a href="https://wa.me/573145140075?text=Hola%2C%20quiero%20comprar%20mi%20entrada%20para%20PROJECT%20X%20(26%20de%20septiembre)." class="btn-ticket" target="_blank" rel="noopener">COMPRAR ENTRADA →</a>
+      <a href="https://wa.me/573145140075?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20PROJECT%20X%20(26%20de%20septiembre).%0A%0ANombre%20completo%3A%20%0AC%C3%A9dula%3A%20%0AConfirmo%20asistencia%3A%20S%C3%AD" class="btn-confirmar" target="_blank" rel="noopener">CONFIRMAR POR WHATSAPP →</a>
+      <p class="ticket-nota">Confirma tu <strong>nombre completo</strong> y <strong>cédula</strong> por WhatsApp para quedar en el listado de asistentes.</p>
     </div>
   </section>
 
@@ -303,22 +322,22 @@
     <div class="section-photo-bg" style="background-image:url('assets/img/party18.jpg')"></div>
     <h2 class="anim anim-up">¿Dónde es la <span>fiesta</span>?</h2>
     <p class="map-subtitle anim anim-up delay-1">
-      9736+3HM · La Dorada, Caldas
+      Finca La Julia · Vía Guarinocito, La Dorada, Caldas
     </p>
     <div class="map-3d-frame">
       <div class="map-wrapper anim anim-scale delay-2">
         <iframe
-          src="https://www.google.com/maps?q=9736%2B3HM+La+Dorada,+Caldas,+Colombia&amp;output=embed&amp;z=17"
+          src="https://www.google.com/maps?q=9736%2B3HM+La+Dorada,+Caldas,+Colombia&amp;output=embed&amp;z=16"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="9736+3HM - La Dorada, Caldas">
+          title="Finca La Julia - Vía Guarinocito, La Dorada, Caldas">
         </iframe>
       </div>
     </div>
     <div class="map-info anim anim-up delay-3">
       <div class="map-info-item">
-        <span>📍</span> 9736+3HM, La Dorada, Caldas
+        <span>📍</span> Finca La Julia — Vía Guarinocito, La Dorada, Caldas
       </div>
       <div class="map-info-item">
         <span>📅</span> 26 de septiembre de 2026

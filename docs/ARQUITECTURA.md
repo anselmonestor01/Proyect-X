@@ -69,9 +69,28 @@ en una función anónima autoejecutada, así que **no comparten variables** y el
 orden entre ellos no es crítico.
 
 ### `countdown.js`
-Cuenta regresiva. La fecha objetivo es la constante `targetDate`
-(`2026-09-26T00:00:00-05:00`). Actualiza cada segundo los `id` `days`, `hours`,
-`minutes`, `seconds`. Si la fecha ya pasó, muestra `00`.
+Contador **y** cambio automático de precio. Todo se configura en la cabecera
+del archivo (`FIN_PREVENTA`, `FECHA_EVENTO`, `PRECIO_PREVENTA`, `PRECIO_NORMAL`).
+
+Cada segundo comprueba en qué etapa estamos y actualiza la página:
+
+| | Durante la preventa | Desde el 21 de septiembre |
+|---|---|---|
+| Contador apunta a | fin de la preventa | fecha del evento |
+| Etiqueta | «LA PREVENTA TERMINA EN» | «FALTAN» |
+| Precio mostrado | $40.000 | $50.000 |
+
+En el HTML se apoya en dos atributos:
+
+- `data-precio` — el texto del elemento se sustituye por el precio vigente.
+- `data-fase="preventa"` / `data-fase="normal"` — el bloque solo se ve en esa
+  etapa; se oculta con el atributo `hidden`.
+
+> **Cuidado:** `css/styles.css` incluye `[hidden] { display: none !important; }`
+> cerca del principio. Es necesario: varias reglas del proyecto fijan `display`
+> (por ejemplo `.info-lista li { display: flex }`) y ganarían al `display:none`
+> del atributo, dejando visibles bloques que deberían estar ocultos. No la
+> quites.
 
 ### `music-player.js`
 Reproductor flotante. Tres responsabilidades:
@@ -97,6 +116,13 @@ Detalles del arrastre que conviene no romper:
   a la vista al cambiar el tamaño de la ventana.
 - El `<audio>` usa `preload="none"` a propósito: son ~5 MB que no deben
   descargarse al abrir la página.
+
+**Arranque automático.** La música intenta sonar nada más cargar. Los
+navegadores bloquean el audio automático con sonido, así que hay un respaldo:
+si lo rechazan, queda armado un oyente que la arranca en cuanto el usuario
+hace cualquier gesto (tocar, clic, scroll o tecla). En la práctica suena casi
+siempre; solo se retrasa hasta el primer movimiento del visitante. No existe
+forma de saltarse ese bloqueo, es una política del navegador.
 
 ### `visual-effects.js`
 Efectos decorativos, todos con degradación elegante (si no encuentran su
