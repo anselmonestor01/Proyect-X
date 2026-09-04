@@ -2788,7 +2788,7 @@ body { cursor: auto !important; }
   position: absolute;
   pointer-events: none;
   user-select: none;
-  z-index: 1;
+  z-index: 2;
   opacity: 1;
 }
 
@@ -2800,8 +2800,8 @@ body { cursor: auto !important; }
 .deco-png { filter: drop-shadow(0 12px 30px rgba(0,0,0,0.6)); }
 
 @keyframes decoFlota {
-  from { transform: translateY(0) rotate(var(--giro, 0deg)); }
-  to   { transform: translateY(-22px) rotate(var(--giro, 0deg)); }
+  from { transform: translateY(0)     rotate(var(--giro, 0deg)) scaleX(var(--voltea, 1)); }
+  to   { transform: translateY(-20px) rotate(var(--giro, 0deg)) scaleX(var(--voltea, 1)); }
 }
 .deco-flota { animation: decoFlota 6s ease-in-out infinite alternate; }
 @media (prefers-reduced-motion: reduce) { .deco-flota { animation: none; } }
@@ -2811,8 +2811,14 @@ body { cursor: auto !important; }
 .deco-features { top: 6px; right: 3%; width: 110px; --giro: 12deg; }
 
 /* Noche: el enano abajo a la izquierda, X grande de fondo a la derecha */
-.deco-noche-enano { bottom: 0; left: 1.5%; width: 190px; --giro: -6deg; }
+.deco-noche-enano { top: 4%; left: 2%; width: 230px; --giro: -7deg; }
 .deco-noche-x     { top: 12%; right: -60px; width: 320px; opacity: 0.5; }
+
+/* Enanos repartidos: van en los margenes laterales de las secciones
+   centradas, que es donde de verdad no hay ni texto ni fotos. */
+.deco-count-enano  { bottom: 6%; left: 4%;  width: 210px; --giro: 6deg;  --voltea: -1; animation-delay: -2s; }
+.deco-mapa-enano   { bottom: 8%; right: 3%; width: 200px; --giro: -8deg; animation-delay: -4s; }
+.deco-comu-enano   { bottom: 6%; left: 4%;  width: 195px; --giro: 7deg;  --voltea: -1; animation-delay: -1s; }
 
 /* Countdown: X enorme detras del contador */
 .deco-countdown-x { top: 50%; left: 50%; width: 520px; transform: translate(-50%, -50%); opacity: 0.30; }
@@ -2826,10 +2832,17 @@ body { cursor: auto !important; }
 @media (max-width: 1024px) {
   .deco-noche-x, .deco-entrada { display: none; }
   .deco-countdown-x { width: 360px; }
+  .deco-noche-enano { width: 150px; }
+  .deco-count-enano, .deco-mapa-enano, .deco-comu-enano { width: 140px; }
 }
 @media (max-width: 768px) {
   .deco-features   { width: 68px; top: 4px; right: 2%; }
-  .deco-noche-enano{ width: 108px; }
+  /* El giro ensancha la caja unos px, por eso el margen es 4% y no 1%:
+     con 1% los enanos asomaban recortados por el borde de la pantalla. */
+  .deco-noche-enano{ width: 96px; top: 2%; left: 4%; }
   .deco-comunidad  { width: 74px; top: 8%; }
+  .deco-count-enano{ width: 92px;  bottom: 3%; left: 4%; }
+  .deco-mapa-enano { width: 92px;  bottom: 4%; right: 4%; }
+  .deco-comu-enano { width: 92px;  bottom: 3%; left: 4%; }
   .deco-countdown-x{ width: 260px; opacity: 0.22; }
 }
