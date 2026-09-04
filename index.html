@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PROJECT X | Vive la Noche</title>
-  <link rel="preload" as="image" href="assets/img/hero-bg.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/img/hero-proyectox.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Fuentes sin bloquear el pintado: si Google Fonts va lento o falla,
@@ -62,10 +62,11 @@
   <section class="hero" id="inicio">
     <div class="hero-content">
       <p class="tagline">VIVE LA NOCHE</p>
-      <h1 class="hero-title">
-        <span class="noir">PROJECT</span>
-        <span class="hero-x">X</span>
-      </h1>
+      <!-- El poster ya trae el nombre en neon, asi que el h1 se mantiene
+           solo para buscadores y lectores de pantalla, sin duplicarlo. -->
+      <h1 class="hero-title solo-lectores">PROJECT X</h1>
+      <img src="assets/img/hero-proyectox.jpg" alt="PROJECT X" class="hero-poster"
+           width="1800" height="866" fetchpriority="high">
       <p class="hero-desc">
         FINCA · PISCINA · DJ · AMIGOS.<br>
         <strong>ESTA ES TU NOCHE.</strong>
@@ -98,6 +99,7 @@
   <!-- FEATURES -->
   <section class="features">
     <div class="section-photo-bg" style="background-image:url('assets/img/party6.jpg')"></div>
+    <img src="assets/img/diablillo.png" alt="" aria-hidden="true" loading="lazy" class="deco deco-png deco-flota deco-features">
     <div class="feature">
       <div class="feature-icon">♪</div>
       <div>
@@ -132,6 +134,8 @@
   <!-- NOCHE -->
   <section class="noche-section" id="noche">
     <div class="section-photo-bg" style="background-image:url('assets/img/party15.jpg')"></div>
+    <img src="assets/img/x-neon.jpg" alt="" aria-hidden="true" loading="lazy" class="deco deco-x deco-noche-x">
+    <img src="assets/img/enano.png" alt="" aria-hidden="true" loading="lazy" class="deco deco-png deco-flota deco-noche-enano">
     <div class="noche-content anim anim-up">
       <p class="noche-eyebrow">LA EXPERIENCIA</p>
       <h2 class="noche-title">Esta noche<br><span>no será normal.</span></h2>
@@ -244,6 +248,7 @@
   <section class="countdown-section" id="eventos">
     <div class="section-photo-bg" style="background-image:url('assets/img/party14.jpg')"></div>
     <canvas class="countdown-canvas" id="countdownCanvas"></canvas>
+    <img src="assets/img/x-neon.jpg" alt="" aria-hidden="true" loading="lazy" class="deco deco-x deco-countdown-x">
     <p class="countdown-label" id="countdownLabel">LA PREVENTA TERMINA EN</p>
     <div class="countdown">
       <div class="countdown-item">
@@ -274,6 +279,7 @@
   <section class="ticket-section" id="entrada">
     <div class="section-photo-bg" style="background-image:url('assets/img/party13.jpg')"></div>
     <canvas class="ticket-bg-particles" id="ticketCanvas"></canvas>
+    <img src="assets/img/diablillo.png" alt="" aria-hidden="true" loading="lazy" class="deco deco-png deco-flota deco-entrada">
     <div class="ticket-info">
       <div class="ticket-eyebrow">Entrada</div>
       <h2 class="ticket-title">
@@ -360,6 +366,7 @@
   <!-- COMUNIDAD -->
   <section class="comunidad-section" id="comunidad">
     <div class="comunidad-bg"></div>
+    <img src="assets/img/diablillo.png" alt="" aria-hidden="true" loading="lazy" class="deco deco-png deco-flota deco-comunidad">
     <div class="comunidad-inner anim anim-up">
       <p class="comunidad-eyebrow">COMUNIDAD</p>
       <h2 class="comunidad-title">PROJECT <span>X</span></h2>

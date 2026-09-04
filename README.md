@@ -113,8 +113,17 @@ Baseline* a 432 px con `faststart` — el perfil más compatible con móviles y
 navegadores antiguos. Si reemplazas alguno, aplícale el mismo tratamiento
 (instrucciones en `docs/ARQUITECTURA.md`) o volverá a tardar en cargar.
 
-**Archivo sin usar:** `assets/img/noir-bg.jpg` no se referencia desde
-ningún sitio. Se conserva por si hace falta; puede borrarse sin efecto.
+**Imágenes de marca.** El hero usa `assets/img/hero-proyectox.jpg`, el póster
+oficial. Los adornos (`diablillo.png`, `enano.png`, `x-neon.jpg`) se colocan
+con la clase `.deco` y son puramente decorativos: `aria-hidden`,
+`pointer-events: none` y `loading="lazy"`.
+
+`x-neon.jpg` es neón rojo sobre negro **sin transparencia**: se integra con
+`mix-blend-mode: screen`, que hace desaparecer el fondo negro. Si lo cambias
+por otro archivo, mantén el fondo negro puro o el truco deja de funcionar.
+
+**Archivos sin usar:** `assets/img/noir-bg.jpg` y `assets/img/hero-bg.jpg`
+(la portada anterior) ya no se referencian. Se conservan por si hacen falta.
 
 ---
 

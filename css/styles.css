@@ -2710,3 +2710,126 @@ body { cursor: auto !important; }
 @media (prefers-reduced-motion: reduce) {
   .party-orbs span { animation: none; }
 }
+
+/* ==========================================================================
+   HERO CON EL POSTER OFICIAL
+   El poster es la identidad de la marca, asi que manda en la portada.
+   Va como <img> (no como fondo) para que NUNCA se recorte el letrero
+   de neon: en movil un fondo "cover" cortaria las letras de los lados.
+   ========================================================================== */
+
+/* Texto solo para buscadores y lectores de pantalla */
+.solo-lectores {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hero {
+  min-height: auto;
+  padding: 6.5rem 2rem 3.5rem;
+  align-items: center;
+  text-align: center;
+  background-image:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,30,60,0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(168,85,247,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 75%, rgba(0,240,255,0.10) 0%, transparent 60%) !important;
+  background-color: #04040a;
+}
+.hero .hero-content {
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* El poster, con su propio resplandor de neon alrededor */
+.hero-poster {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 1100px;
+  border-radius: 18px;
+  margin: 0.4rem 0 1.6rem;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.75),
+    0 0 60px rgba(255,30,60,0.30),
+    0 0 120px rgba(255,30,60,0.14);
+  animation: posterGlow 5s ease-in-out infinite alternate;
+}
+@keyframes posterGlow {
+  from { box-shadow: 0 30px 90px rgba(0,0,0,0.75), 0 0 55px rgba(255,30,60,0.26), 0 0 110px rgba(255,30,60,0.12); }
+  to   { box-shadow: 0 30px 90px rgba(0,0,0,0.75), 0 0 80px rgba(255,30,60,0.42), 0 0 150px rgba(236,72,153,0.20); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-poster { animation: none; } }
+
+.hero .hero-desc { max-width: 520px; margin: 0 auto 1.5rem; }
+.hero .hero-buttons { justify-content: center; }
+
+@media (max-width: 768px) {
+  .hero { padding: 5rem 1.1rem 2.5rem; }
+  .hero-poster { border-radius: 12px; margin-bottom: 1.3rem; }
+}
+
+/* ==========================================================================
+   ELEMENTOS DECORATIVOS DE FIESTA (diablito, enano, X de neon)
+   Se colocan en los margenes vacios de las secciones. Son 100% decorativos:
+   aria-hidden, pointer-events:none y nunca tapan texto.
+   En movil se reducen o se ocultan los que no caben.
+   ========================================================================== */
+
+.deco {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  opacity: 1;
+}
+
+/* La X viene sobre fondo negro: 'screen' funde ese negro y deja solo el neon */
+.deco-x {
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 30px rgba(255,30,60,0.55));
+}
+.deco-png { filter: drop-shadow(0 12px 30px rgba(0,0,0,0.6)); }
+
+@keyframes decoFlota {
+  from { transform: translateY(0) rotate(var(--giro, 0deg)); }
+  to   { transform: translateY(-22px) rotate(var(--giro, 0deg)); }
+}
+.deco-flota { animation: decoFlota 6s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .deco-flota { animation: none; } }
+
+/* ---- Colocacion por seccion ---- */
+/* Features: diablito asomando arriba a la derecha */
+.deco-features { top: 6px; right: 3%; width: 110px; --giro: 12deg; }
+
+/* Noche: el enano abajo a la izquierda, X grande de fondo a la derecha */
+.deco-noche-enano { bottom: 0; left: 1.5%; width: 190px; --giro: -6deg; }
+.deco-noche-x     { top: 12%; right: -60px; width: 320px; opacity: 0.5; }
+
+/* Countdown: X enorme detras del contador */
+.deco-countdown-x { top: 50%; left: 50%; width: 520px; transform: translate(-50%, -50%); opacity: 0.30; }
+
+/* Entrada: diablito flotando a la izquierda */
+.deco-entrada { bottom: 6%; left: 2%; width: 130px; --giro: -10deg; }
+
+/* Comunidad: diablito a la derecha */
+.deco-comunidad { top: 14%; right: 4%; width: 120px; --giro: 14deg; }
+
+@media (max-width: 1024px) {
+  .deco-noche-x, .deco-entrada { display: none; }
+  .deco-countdown-x { width: 360px; }
+}
+@media (max-width: 768px) {
+  .deco-features   { width: 68px; top: 4px; right: 2%; }
+  .deco-noche-enano{ width: 108px; }
+  .deco-comunidad  { width: 74px; top: 8%; }
+  .deco-countdown-x{ width: 260px; opacity: 0.22; }
+}
