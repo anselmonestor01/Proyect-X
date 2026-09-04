@@ -2621,3 +2621,92 @@ body { cursor: auto !important; }
 .hero::before, .hero::after { display: none !important; content: none !important; }
 .tagline::before, .tagline::after { display: none !important; content: none !important; }
 .ticket-eyebrow::after, .ticket-card-header::before { display: none !important; content: none !important; }
+
+/* ==========================================================================
+   AMBIENTE DE FIESTA (capa premium)
+   Objetivo: eliminar los bloques de negro plano y dar profundidad de club.
+   Todo es decorativo: pointer-events:none y sin afectar al layout.
+   Se añade AL FINAL a proposito, para ganar a las reglas anteriores.
+   ========================================================================== */
+
+:root {
+  --red-neon: #ff1e3c;          /* rojo del letrero del poster */
+  --red-glow: rgba(255, 30, 60, 0.45);
+}
+
+/* ---- 1. Luces de club en las zonas muertas ---- */
+/* Antes eran secciones de negro plano. Ahora tienen focos de color muy
+   difuminados en los margenes, que es donde estaba el vacio. */
+.noche-section,
+.countdown-section,
+.ticket-section,
+.map-section,
+.comunidad-section {
+  background-image:
+    radial-gradient(ellipse 50% 65% at 0% 18%,   rgba(255,30,60,0.26) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 65% at 100% 72%, rgba(168,85,247,0.24) 0%, transparent 62%),
+    radial-gradient(ellipse 65% 50% at 50% 108%, rgba(0,240,255,0.16) 0%, transparent 66%),
+    radial-gradient(ellipse 30% 40% at 85% 8%,   rgba(255,45,149,0.16) 0%, transparent 60%);
+  background-repeat: no-repeat;
+}
+.noche-section { background-color: #06060c; }
+
+/* ---- 2. Rieles de neon en los bordes de la pagina ---- */
+/* Dos lineas finas que recorren el lateral y encienden el borde. */
+.party-rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.party-rail.izq { left: 0;  background: linear-gradient(180deg, transparent, var(--red-neon), var(--purple), var(--cyan), transparent); }
+.party-rail.der { right: 0; background: linear-gradient(180deg, transparent, var(--cyan), var(--pink), var(--red-neon), transparent); }
+.party-rail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  filter: blur(6px);
+  background: inherit;
+}
+@media (max-width: 768px) { .party-rail { width: 1px; opacity: 0.4; } }
+
+/* ---- 3. Orbes de luz flotantes ---- */
+/* Manchas grandes y suaves que se mueven despacio: dan sensacion de
+   luces de fiesta girando, sin cargar la pagina. */
+.party-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.party-orbs span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.42;
+  will-change: transform;
+}
+.party-orbs span:nth-child(1) { width: 380px; height: 380px; background: var(--red-neon); top: 8%;  left: -8%;  animation: orbDrift 26s ease-in-out infinite alternate; }
+.party-orbs span:nth-child(2) { width: 320px; height: 320px; background: var(--purple);   top: 45%; right: -7%; animation: orbDrift 32s ease-in-out infinite alternate-reverse; }
+.party-orbs span:nth-child(3) { width: 300px; height: 300px; background: var(--cyan);     top: 72%; left: -6%;  animation: orbDrift 29s ease-in-out infinite alternate; }
+.party-orbs span:nth-child(4) { width: 260px; height: 260px; background: var(--pink);     top: 25%; right: -5%; animation: orbDrift 35s ease-in-out infinite alternate-reverse; }
+@keyframes orbDrift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(60px, -50px, 0) scale(1.25); }
+}
+@media (max-width: 768px) {
+  .party-orbs span { filter: blur(50px); opacity: 0.32; }
+  .party-orbs span:nth-child(1) { width: 220px; height: 220px; }
+  .party-orbs span:nth-child(2) { width: 190px; height: 190px; }
+  .party-orbs span:nth-child(3) { width: 180px; height: 180px; }
+  .party-orbs span:nth-child(4) { width: 160px; height: 160px; }
+}
+
+/* Si el visitante pide menos animacion, se quedan quietos */
+@media (prefers-reduced-motion: reduce) {
+  .party-orbs span { animation: none; }
+}
