@@ -62,18 +62,30 @@
     }
   }
 
+  function marcarSonando() {
+    btn.textContent = '❚❚';
+    card.classList.add('playing');
+  }
+  function marcarParado() {
+    btn.textContent = '▶';
+    card.classList.remove('playing');
+  }
+
   function togglePlay() {
+    // Puede venir silenciado del arranque automatico: al pulsar el boton
+    // siempre queremos sonido, este ya corriendo o parado.
+    if (audio.muted) {
+      audio.muted = false;
+      if (!audio.paused) { marcarSonando(); return; }
+      // si ademas estaba parado, seguimos abajo y lo arrancamos
+    }
     if (audio.paused) {
-      audio.play().then(() => {
-        btn.textContent = '❚❚';
-        card.classList.add('playing');
-      }).catch(() => {
+      audio.play().then(marcarSonando).catch(() => {
         alert('Haz clic de nuevo o permite el audio en el navegador.');
       });
     } else {
       audio.pause();
-      btn.textContent = '▶';
-      card.classList.remove('playing');
+      marcarParado();
     }
   }
 
@@ -91,57 +103,76 @@
   });
 
   // ===== ARRANQUE AUTOMATICO =====
-  // Se intenta sonar nada mas cargar la pagina. Chrome, Safari y Firefox
-  // bloquean el audio automatico con sonido, asi que dejamos armado un
-  // respaldo: arranca sola en cuanto el visitante hace cualquier gesto.
+  // Objetivo: que suene sin que el visitante tenga que buscar el boton de play.
   //
-  // Tres detalles que hacen que esto funcione de verdad:
-  //  1. Incluimos 'click' y 'touchend'. iOS/Safari solo desbloquea con esos
-  //     dos; con 'touchstart' o 'pointerdown' se queda en silencio.
-  //  2. Escuchamos en fase de CAPTURA. Los botones del reproductor llaman a
-  //     stopPropagation(), asi que en fase de burbuja el evento nunca
-  //     llegaria a window si el primer toque cae sobre uno de ellos.
-  //  3. Los oyentes siguen armados hasta que el audio suena de verdad, por
-  //     si el primer intento lo rechaza el navegador.
+  // Los navegadores prohiben reproducir audio antes de que el usuario
+  // interactue con la pagina. Estrategia en tres pasos:
+  //
+  //   1. Intentamos sonar normal. Si el navegador lo permite, listo.
+  //   2. Si lo rechaza, probamos a arrancar EN SILENCIO. Ojo: la excepcion
+  //      de "silenciado se permite siempre" vale para <video>, no para
+  //      <audio>; en Chrome esto suele fallar tambien. Se deja porque no
+  //      cuesta nada y en los navegadores que si lo permiten la cancion
+  //      queda ya cargada, y el paso 3 le devuelve el sonido al instante.
+  //   3. Al primer gesto del visitante: quitamos el silencio y, si hiciera
+  //      falta, arrancamos. Este es el paso que funciona de verdad.
+  //
+  // Detalles que hacen que el paso 3 funcione en todos los navegadores:
+  //   - Se escucha 'click' y 'touchend': iOS/Safari solo desbloquean con esos.
+  //   - Los oyentes van en captura Y en burbuja. Los botones del reproductor
+  //     llaman a stopPropagation(), asi que en burbuja el evento no llegaria
+  //     a window si el primer toque cae sobre uno de ellos.
+  //   - El boton de play/pausa se excluye: lo gestiona togglePlay().
+
   loadTrack(0, true);
+
+  // Paso 2: si tras un instante sigue parado, lo arrancamos en silencio.
+  setTimeout(function () {
+    if (audio.paused) {
+      audio.muted = true;
+      audio.play().catch(function () { /* nada mas que hacer */ });
+    }
+  }, 400);
 
   const GESTOS = ['click', 'touchend', 'pointerup', 'pointerdown',
                   'touchstart', 'keydown', 'scroll', 'wheel'];
 
   function quitarOyentes() {
-    GESTOS.forEach(g => {
-      window.removeEventListener(g, arrancarConGesto, true);
-      window.removeEventListener(g, arrancarConGesto);
+    GESTOS.forEach(function (g) {
+      window.removeEventListener(g, activarSonido, true);
+      window.removeEventListener(g, activarSonido);
     });
   }
 
   let intentando = false;
-  function arrancarConGesto(e) {
-    if (!audio.paused && audio.currentTime > 0) return quitarOyentes();
-    // Eventos como 'scroll' o 'wheel' se disparan muchas veces seguidas.
-    // Sin este candado, cada play() aborta al anterior y no arranca nunca.
-    if (intentando) return;
-    // Si el gesto es sobre el boton de play/pausa, no hacemos nada aqui:
-    // se encarga togglePlay(). Si arrancasemos tambien nosotros, el boton
-    // veria el audio ya sonando y lo pausaria de inmediato.
+  function activarSonido(e) {
+    // El boton de play se gestiona solo.
     if (e && e.target && e.target.closest && e.target.closest('#musicBtn')) return;
-    intentando = true;
-    audio.play().then(() => {
-      intentando = false;
-      btn.textContent = '❚❚';
-      card.classList.add('playing');
+
+    // Caso normal: ya suena en silencio -> basta con devolverle el volumen.
+    if (!audio.paused) {
+      audio.muted = false;
+      marcarSonando();
       quitarOyentes();
-    }).catch(() => {
-      intentando = false; // sigue armado para el proximo gesto
+      return;
+    }
+
+    // Por si el arranque en silencio tampoco llego a ocurrir.
+    if (intentando) return;   // 'scroll' se dispara muchas veces seguidas
+    intentando = true;
+    audio.muted = false;
+    audio.play().then(function () {
+      intentando = false;
+      marcarSonando();
+      quitarOyentes();
+    }).catch(function () {
+      intentando = false;     // sigue armado para el proximo gesto
     });
   }
 
-  // En captura y en burbuja: la captura salva los toques sobre botones que
-  // llaman a stopPropagation(); la burbuja cubre eventos como 'scroll', que
-  // no recorren el arbol igual.
-  GESTOS.forEach(g => {
-    window.addEventListener(g, arrancarConGesto, { capture: true, passive: true });
-    window.addEventListener(g, arrancarConGesto, { passive: true });
+  GESTOS.forEach(function (g) {
+    window.addEventListener(g, activarSonido, { capture: true, passive: true });
+    window.addEventListener(g, activarSonido, { passive: true });
   });
 
   // ===== ARRASTRE TIPO BURBUJA =====

@@ -118,12 +118,13 @@ Detalles del arrastre que conviene no romper:
   descargarse al abrir la página.
 - El volumen es `0.7`. Estuvo en `0.32` y resultaba casi inaudible en móvil.
 
-**Arranque automático.** La música intenta sonar nada más cargar. Los
-navegadores bloquean el audio automático con sonido, así que queda armado un
-respaldo que la arranca al primer gesto del visitante. No hay forma de
-saltarse ese bloqueo: es política del navegador, no un fallo del sitio.
+**Arranque automático.** La música intenta sonar nada más cargar. Ningún
+navegador permite reproducir audio antes de que el visitante interactúe con la
+página: es política del navegador, no un fallo del sitio. Lo que sí se
+consigue es que **arranque sola con el primer gesto**, sin que nadie tenga que
+buscar el botón de play.
 
-Tres detalles hacen que el respaldo funcione de verdad. Si se tocan, la
+Cinco detalles hacen que funcione en todos los navegadores. Si se tocan, la
 música vuelve a quedarse en silencio para parte de los visitantes:
 
 1. **Se escucha `click` y `touchend`, no solo `pointerdown`.** iOS y Safari
@@ -132,15 +133,24 @@ música vuelve a quedarse en silencio para parte de los visitantes:
    reproductor llaman a `stopPropagation()`, así que en burbuja el evento no
    llegaría a `window` si el primer toque cae sobre uno de ellos.
 3. **El botón de play/pausa se excluye del respaldo.** Si no, al pulsarlo el
-   respaldo arrancaría la música y `togglePlay()` la pausaría acto seguido,
-   dejándola en silencio.
+   respaldo arrancaría la música y `togglePlay()` la pausaría acto seguido.
+4. **`togglePlay()` contempla el estado silenciado.** Si el audio viene
+   silenciado *y* parado, hay que quitar el silencio **y** llamar a `play()`;
+   solo quitar el silencio deja el icono en pausa sin que suene nada.
+5. **Candado `intentando`.** `scroll` y `wheel` se disparan muchas veces
+   seguidas y cada `play()` abortaría al anterior.
 
-Además hay un candado (`intentando`) porque `scroll` y `wheel` se disparan
-muchas veces seguidas y cada `play()` abortaría al anterior.
+> **Sobre el arranque en silencio:** el código intenta reproducir silenciado
+> como paso intermedio. La excepción de «silenciado se permite siempre» de los
+> navegadores aplica a `<video>`, **no a `<audio>`**, así que en Chrome ese
+> intento también falla. Se conserva porque no cuesta nada y en los
+> navegadores que sí lo permiten deja la canción precargada. No te fíes de él
+> como si funcionara: el paso que resuelve el problema es el gesto.
 
-`scroll` y `wheel` están en la lista, pero **no cuentan como activación de
-usuario** en la política de los navegadores: pueden funcionar o no. Los
-gestos garantizados son el clic, el toque y la tecla.
+Comprobado en navegador real con el autoplay bloqueado: suena con clic, tecla,
+rueda, toque táctil, scroll táctil, al arrastrar el reproductor y al pulsar
+cualquiera de sus botones. El único caso en que no suena es si el visitante
+no interactúa en absoluto.
 
 ### `visual-effects.js`
 Efectos decorativos, todos con degradación elegante (si no encuentran su
