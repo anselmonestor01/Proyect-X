@@ -53,9 +53,26 @@ reordenar reglas y cambiaría la cascada, rompiendo el diseño de forma sutil.
 Se mantiene en un archivo, ordenado y con índice. **Al editar: añade al final
 de la sección que corresponda, no muevas bloques de sitio.**
 
-### Convenciones
+### Paleta
 
-- Variables de color en `:root` (`--cyan`, `--pink`, `--purple`, `--lime`…).
+Solo tres colores, tomados del póster: **rojo neón, blanco y negro**. Nada de
+degradados multicolor — el sitio antes era cian/rosa/morado/verde y no
+dialogaba con la marca.
+
+| Uso | Valor |
+|---|---|
+| Acento principal | `--rojo` `#ff1e3c` |
+| Profundidad, sombras | `--rojo-hondo` `#a8001e` |
+| Titulares, neón | `--blanco-neon` `#ffffff` |
+| Fondo | `--bg-dark` `#050507` |
+
+> **Cuidado con los nombres antiguos.** Las variables `--cyan`, `--pink`,
+> `--purple` y `--lime` **siguen existiendo pero ya no son de ese color**:
+> las usan unas 160 reglas repartidas por la hoja, así que en vez de renombrarlas
+> se les cambió el valor a rojos y blanco. Es lo que permitió retiñir todo el
+> sitio de una vez. Si algún día las renombras, hay que repasar la hoja entera.
+> La redefinición vive al final del archivo, en el bloque «PALETA AGRESIVA».
+
 - Tipografías: `Oswald` para titulares, `Inter` para texto.
 - Las clases `.anim .anim-up` / `.anim-scale` activan la aparición al hacer
   scroll; las gestiona `js/navigation.js`.

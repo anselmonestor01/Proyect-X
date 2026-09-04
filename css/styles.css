@@ -28,13 +28,13 @@
    ========================================================================== */
 
 :root {
-  --cyan: #00f0ff;
+  --cyan: #ff1e3c;
   --cyan-dark: #00c4d4;
-  --cyan-glow: rgba(0, 240, 255, 0.4);
-  --purple: #a855f7;
-  --magenta: #ec4899;
+  --cyan-glow: rgba(255,30,60,0.4);
+  --purple: #a8001e;
+  --magenta: #ff1e3c;
   --pink: #ff2d95;
-  --lime: #39ff14;
+  --lime: #ffffff;
   --orange: #ff6b00;
   --blue: #4d7cff;
   --bg-dark: #050508;
@@ -65,12 +65,12 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 70% 45% at 12% 12%, rgba(236,72,153,0.22) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 40% at 88% 22%, rgba(168,85,247,0.20) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 45% at 50% 88%, rgba(0,240,255,0.16) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 30% at 72% 58%, rgba(255,45,149,0.14) 0%, transparent 50%),
-    radial-gradient(ellipse 35% 28% at 22% 72%, rgba(57,255,20,0.10) 0%, transparent 50%),
-    radial-gradient(ellipse 30% 25% at 40% 40%, rgba(255,107,0,0.06) 0%, transparent 50%);
+    radial-gradient(ellipse 70% 45% at 12% 12%, rgba(255,30,60,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 40% at 88% 22%, rgba(168,0,30,0.20) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 45% at 50% 88%, rgba(255,30,60,0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 72% 58%, rgba(255,30,60,0.14) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 28% at 22% 72%, rgba(255,255,255,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 25% at 40% 40%, rgba(255,30,60,0.06) 0%, transparent 50%);
   animation: discoWash 18s ease-in-out infinite alternate;
 }
 @keyframes discoWash {
@@ -81,9 +81,9 @@ body::before {
 header, section, footer { position: relative; z-index: 1; }
 
 .features .feature:nth-child(2) .feature-icon { color: var(--cyan); text-shadow: 0 0 16px var(--cyan-glow); }
-.features .feature:nth-child(3) .feature-icon { color: var(--pink); text-shadow: 0 0 16px rgba(255,45,149,0.5); }
-.features .feature:nth-child(4) .feature-icon { color: var(--lime); text-shadow: 0 0 16px rgba(57,255,20,0.45); }
-.features .feature:nth-child(5) .feature-icon { color: var(--purple); text-shadow: 0 0 16px rgba(168,85,247,0.5); }
+.features .feature:nth-child(3) .feature-icon { color: var(--pink); text-shadow: 0 0 16px rgba(255,30,60,0.5); }
+.features .feature:nth-child(4) .feature-icon { color: var(--lime); text-shadow: 0 0 16px rgba(255,255,255,0.45); }
+.features .feature:nth-child(5) .feature-icon { color: var(--purple); text-shadow: 0 0 16px rgba(168,0,30,0.5); }
 
 
 /* ========== HEADER ========== */
@@ -112,7 +112,7 @@ header {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-transform: uppercase;
-  filter: drop-shadow(0 0 8px rgba(0,240,255,0.5));
+  filter: drop-shadow(0 0 8px rgba(255,30,60,0.5));
 }
 
 nav {
@@ -144,7 +144,7 @@ nav a.active::after {
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, var(--cyan), var(--pink));
-  box-shadow: 0 0 8px var(--cyan), 0 0 14px rgba(236,72,153,0.35);
+  box-shadow: 0 0 8px var(--cyan), 0 0 14px rgba(255,30,60,0.35);
 }
 
 .btn-comprar {
@@ -181,7 +181,7 @@ nav a.active::after {
   background-image: 
     linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,8,0.42) 100%),
     linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 45%),
-    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(0,80,200,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(168,0,30,0.15) 0%, transparent 55%),
     url('../assets/img/hero-bg.jpg');
   background-size: cover;
   background-position: center 45%;
@@ -199,7 +199,7 @@ nav a.active::after {
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--pink);
-  text-shadow: 0 0 12px rgba(255,45,149,0.35);
+  text-shadow: 0 0 12px rgba(255,30,60,0.35);
   margin-bottom: 0.6rem;
 }
 
@@ -224,7 +224,7 @@ nav a.active::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 18px rgba(236,72,153,0.55)) drop-shadow(0 0 14px rgba(0,240,255,0.45)) drop-shadow(0 2px 12px rgba(0,0,0,0.7));
+  filter: drop-shadow(0 0 18px rgba(255,30,60,0.55)) drop-shadow(0 0 14px rgba(255,30,60,0.45)) drop-shadow(0 2px 12px rgba(0,0,0,0.7));
   font-style: italic;
   letter-spacing: -1px;
   animation: neonShift 6s ease-in-out infinite alternate;
@@ -258,7 +258,7 @@ nav a.active::after {
   align-items: center;
   gap: 0.6rem;
   padding: 0.85rem 1.6rem;
-  background: linear-gradient(135deg, var(--cyan) 0%, #22d3ee 50%, var(--pink) 100%);
+  background: linear-gradient(135deg, var(--cyan) 0%, #ff1e3c 50%, var(--pink) 100%);
   color: #000;
   font-size: 0.85rem;
   font-weight: 700;
@@ -298,7 +298,7 @@ nav a.active::after {
 .btn-secondary:hover {
   border-color: var(--cyan);
   color: var(--cyan);
-  background: rgba(0,240,255,0.08);
+  background: rgba(255,30,60,0.08);
 }
 
 /* Los bloques que dependen de la fase (preventa / cover normal) se ocultan
@@ -311,8 +311,8 @@ nav a.active::after {
    transporte y confirmacion. Sin relleno de marketing. */
 .info-evento {
   background: #08080e;
-  border-top: 1px solid rgba(0,240,255,0.14);
-  border-bottom: 1px solid rgba(0,240,255,0.14);
+  border-top: 1px solid rgba(255,30,60,0.14);
+  border-bottom: 1px solid rgba(255,30,60,0.14);
   padding: 1.6rem 3rem;
 }
 .info-lista {
@@ -370,7 +370,7 @@ nav a.active::after {
   transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 .feature:nth-of-type(2) .feature-icon { border-color: var(--purple); color: var(--purple); }
-.feature:nth-of-type(3) .feature-icon { border-color: #22d3ee; color: #22d3ee; }
+.feature:nth-of-type(3) .feature-icon { border-color: #ff1e3c; color: #ff1e3c; }
 .feature:nth-of-type(4) .feature-icon { border-color: var(--magenta); color: var(--magenta); }
 .feature:hover .feature-icon {
   box-shadow: 0 0 16px currentColor;
@@ -408,7 +408,7 @@ nav a.active::after {
   transform: translate(-50%, -50%);
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(0,240,255,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255,30,60,0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -443,14 +443,14 @@ nav a.active::after {
   font-weight: 700;
   color: #fff;
   line-height: 1;
-  text-shadow: 0 0 30px rgba(0,240,255,0.5), 0 0 60px rgba(0,240,255,0.2);
+  text-shadow: 0 0 30px rgba(255,30,60,0.5), 0 0 60px rgba(255,30,60,0.2);
   letter-spacing: 2px;
 }
 
 .countdown-separator {
   font-family: 'Oswald', sans-serif;
   font-size: clamp(2.2rem, 5vw, 3.5rem);
-  color: rgba(0,240,255,0.5);
+  color: rgba(255,30,60,0.5);
   margin-top: 0.15em;
   font-weight: 300;
 }
@@ -574,11 +574,11 @@ nav a.active::after {
 
 .ticket-card {
   background: linear-gradient(160deg, rgba(0,40,50,0.9) 0%, rgba(0,20,30,0.95) 100%);
-  border: 1px solid rgba(0,240,255,0.2);
+  border: 1px solid rgba(255,30,60,0.2);
   border-radius: 16px;
   padding: 2rem;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,240,255,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,30,60,0.08);
   overflow: hidden;
 }
 
@@ -589,7 +589,7 @@ nav a.active::after {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,240,255,0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,30,60,0.5), transparent);
 }
 
 .ticket-card-header {
@@ -648,12 +648,12 @@ nav a.active::after {
   font-family: 'Oswald', sans-serif;
   font-size: 2.8rem;
   font-weight: 700;
-  background: linear-gradient(90deg, var(--cyan) 0%, #22d3ee 40%, var(--pink) 100%);
+  background: linear-gradient(90deg, var(--cyan) 0%, #ff1e3c 40%, var(--pink) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 16px rgba(0,240,255,0.45));
+  filter: drop-shadow(0 0 16px rgba(255,30,60,0.45));
   animation: gradientMove 4s ease infinite;
   line-height: 1;
 }
@@ -704,7 +704,7 @@ nav a.active::after {
   margin-top: 0.7rem;
   background: rgba(37,211,102,0.10);
   border: 1.5px solid rgba(37,211,102,0.55);
-  color: #4ade80;
+  color: #ffffff;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -740,8 +740,8 @@ nav a.active::after {
   gap: 0.45rem;
   margin-top: 1rem;
   padding: 0.6rem 0.8rem;
-  background: rgba(0,240,255,0.07);
-  border: 1px solid rgba(0,240,255,0.22);
+  background: rgba(255,30,60,0.07);
+  border: 1px solid rgba(255,30,60,0.22);
   border-radius: 10px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -783,7 +783,7 @@ footer {
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  background: linear-gradient(90deg, var(--cyan), #a855f7);
+  background: linear-gradient(90deg, var(--cyan), #a8001e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -963,8 +963,8 @@ footer {
   left: 0;
   right: 0;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(0,240,255,0.8), transparent);
-  box-shadow: 0 0 12px rgba(0,240,255,0.6);
+  background: linear-gradient(90deg, transparent, rgba(255,30,60,0.8), transparent);
+  box-shadow: 0 0 12px rgba(255,30,60,0.6);
   top: 0;
   opacity: 0.6;
   animation: none !important;
@@ -1038,7 +1038,7 @@ footer {
   left: -10%;
   width: 120%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,240,255,0.8), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,30,60,0.8), transparent);
 }
 .ticket-card .fine-lines span:nth-child(1) { top: 22%; animation: lineSlide 8s linear infinite; }
 .ticket-card .fine-lines span:nth-child(2) { top: 48%; animation: lineSlide 11s linear infinite reverse; }
@@ -1079,13 +1079,13 @@ footer {
   margin: 0 auto;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(0,240,255,0.2);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,240,255,0.08);
+  border: 1px solid rgba(255,30,60,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,30,60,0.08);
   transition: all 0.4s;
   position: relative;
 }
 .map-wrapper:hover {
-  box-shadow: 0 25px 70px rgba(0,0,0,0.6), 0 0 50px rgba(0,240,255,0.18);
+  box-shadow: 0 25px 70px rgba(0,0,0,0.6), 0 0 50px rgba(255,30,60,0.18);
   transform: translateY(-4px);
 }
 .map-wrapper iframe {
@@ -1138,7 +1138,7 @@ footer {
   transform: translateX(-50%);
   width: 80%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,240,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,30,60,0.3), transparent);
 }
 .noche-eyebrow {
   font-size: 0.75rem;
@@ -1172,18 +1172,18 @@ footer {
   margin: 0 auto;
 }
 .noche-item {
-  background: rgba(0,240,255,0.03);
-  border: 1px solid rgba(0,240,255,0.12);
+  background: rgba(255,30,60,0.03);
+  border: 1px solid rgba(255,30,60,0.12);
   border-radius: 12px;
   padding: 1.8rem 1.4rem;
   transition: all 0.35s;
   text-align: left;
 }
 .noche-item:hover {
-  background: rgba(0,240,255,0.07);
-  border-color: rgba(0,240,255,0.3);
+  background: rgba(255,30,60,0.07);
+  border-color: rgba(255,30,60,0.3);
   transform: translateY(-6px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 25px rgba(0,240,255,0.1);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 25px rgba(255,30,60,0.1);
 }
 .noche-num {
   font-family: 'Oswald', sans-serif;
@@ -1250,7 +1250,7 @@ footer {
 }
 .btn-comunidad:hover {
   background: #fff;
-  box-shadow: 0 0 35px rgba(0,240,255,0.45);
+  box-shadow: 0 0 35px rgba(255,30,60,0.45);
   transform: translateY(-3px);
 }
 .comunidad-section {
@@ -1297,8 +1297,8 @@ footer {
   margin: 0 auto;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(0,240,255,0.25);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 50px rgba(0,240,255,0.1);
+  border: 1px solid rgba(255,30,60,0.25);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 50px rgba(255,30,60,0.1);
   transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
 }
@@ -1308,7 +1308,7 @@ footer {
   inset: 0;
   border-radius: 16px;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(0,240,255,0.4), transparent 40%, transparent 60%, rgba(0,240,255,0.25));
+  background: linear-gradient(135deg, rgba(255,30,60,0.4), transparent 40%, transparent 60%, rgba(255,30,60,0.25));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -1320,7 +1320,7 @@ footer {
 }
 .map-wrapper:hover {
   transform: scale(1.025);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(0,240,255,0.2);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(255,30,60,0.2);
 }
 .map-wrapper:hover::before { opacity: 1; }
 .map-wrapper iframe {
@@ -1371,7 +1371,7 @@ footer {
   box-shadow: var(--shadow-x) var(--shadow-y) 35px rgba(0,0,0,0.3);
 }
 .ticket-card {
-  box-shadow: var(--shadow-x) var(--shadow-y) 50px rgba(0,0,0,0.45), 0 0 40px rgba(0,240,255,0.1);
+  box-shadow: var(--shadow-x) var(--shadow-y) 50px rgba(0,0,0,0.45), 0 0 40px rgba(255,30,60,0.1);
 }
 
 /* Global ambient particles canvas */
@@ -1403,17 +1403,17 @@ header, section, footer {
   gap: 0.85rem;
   padding: 0.7rem 1rem 0.7rem 0.7rem;
   background: rgba(8,8,14,0.88);
-  border: 1px solid rgba(0,240,255,0.25);
+  border: 1px solid rgba(255,30,60,0.25);
   border-radius: 16px;
   backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(0,240,255,0.12), 0 0 40px rgba(236,72,153,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(255,30,60,0.12), 0 0 40px rgba(255,30,60,0.08);
   max-width: 280px;
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 .music-player-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(236,72,153,0.4);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 28px rgba(0,240,255,0.18), 0 0 50px rgba(236,72,153,0.12);
+  border-color: rgba(255,30,60,0.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 28px rgba(255,30,60,0.18), 0 0 50px rgba(255,30,60,0.12);
 }
 /* Arrastrable tipo burbuja */
 .music-player-card { touch-action: none; }
@@ -1421,8 +1421,8 @@ header, section, footer {
   transition: none;
   transform: none;
   opacity: 0.94;
-  border-color: rgba(236,72,153,0.55);
-  box-shadow: 0 18px 50px rgba(0,0,0,0.6), 0 0 34px rgba(0,240,255,0.25), 0 0 60px rgba(236,72,153,0.18);
+  border-color: rgba(255,30,60,0.55);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6), 0 0 34px rgba(255,30,60,0.25), 0 0 60px rgba(255,30,60,0.18);
 }
 .music-player-card.dragging .music-playlist { opacity: 0; pointer-events: none; }
 .music-cover {
@@ -1431,7 +1431,7 @@ header, section, footer {
   border-radius: 10px;
   object-fit: cover;
   flex-shrink: 0;
-  box-shadow: 0 0 12px rgba(0,240,255,0.3);
+  box-shadow: 0 0 12px rgba(255,30,60,0.3);
   border: 1px solid rgba(255,255,255,0.1);
 }
 .music-info {
@@ -1493,18 +1493,18 @@ header, section, footer {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 0 14px rgba(0,240,255,0.4);
+  box-shadow: 0 0 14px rgba(255,30,60,0.4);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .music-toggle:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(236,72,153,0.5);
+  box-shadow: 0 0 20px rgba(255,30,60,0.5);
 }
 .music-nav-btn {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  border: 1px solid rgba(0,240,255,0.25);
+  border: 1px solid rgba(255,30,60,0.25);
   background: rgba(255,255,255,0.04);
   color: #fff;
   font-size: 0.7rem;
@@ -1516,14 +1516,14 @@ header, section, footer {
   transition: background 0.2s, border-color 0.2s;
 }
 .music-nav-btn:hover {
-  background: rgba(0,240,255,0.15);
+  background: rgba(255,30,60,0.15);
   border-color: var(--cyan);
 }
 .music-list-btn {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  border: 1px solid rgba(236,72,153,0.3);
+  border: 1px solid rgba(255,30,60,0.3);
   background: rgba(255,255,255,0.04);
   color: #fff;
   font-size: 0.7rem;
@@ -1535,7 +1535,7 @@ header, section, footer {
   transition: background 0.2s, border-color 0.2s;
 }
 .music-list-btn:hover {
-  background: rgba(236,72,153,0.18);
+  background: rgba(255,30,60,0.18);
   border-color: var(--pink);
 }
 .music-playlist {
@@ -1546,7 +1546,7 @@ header, section, footer {
   max-height: 0;
   overflow: hidden auto;
   background: rgba(8,8,14,0.95);
-  border: 1px solid rgba(0,240,255,0.25);
+  border: 1px solid rgba(255,30,60,0.25);
   border-radius: 14px;
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
@@ -1569,9 +1569,9 @@ header, section, footer {
   transition: background 0.2s;
 }
 .music-playlist-item:last-child { border-bottom: none; }
-.music-playlist-item:hover { background: rgba(0,240,255,0.08); }
+.music-playlist-item:hover { background: rgba(255,30,60,0.08); }
 .music-playlist-item.active {
-  background: linear-gradient(90deg, rgba(0,240,255,0.12), rgba(236,72,153,0.08));
+  background: linear-gradient(90deg, rgba(255,30,60,0.12), rgba(255,30,60,0.08));
 }
 .music-playlist-item img {
   width: 34px;
@@ -1620,7 +1620,7 @@ header, section, footer {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1.5px solid rgba(0,240,255,0.5);
+  border: 1.5px solid rgba(255,30,60,0.5);
   background: rgba(5,5,8,0.85);
   color: var(--cyan);
   font-size: 1.2rem;
@@ -1630,17 +1630,17 @@ header, section, footer {
   justify-content: center;
   backdrop-filter: blur(8px);
   transition: all 0.3s;
-  box-shadow: 0 0 20px rgba(0,240,255,0.15);
+  box-shadow: 0 0 20px rgba(255,30,60,0.15);
 }
 .music-btn:hover {
   background: var(--cyan);
   color: #000;
-  box-shadow: 0 0 30px rgba(0,240,255,0.4);
+  box-shadow: 0 0 30px rgba(255,30,60,0.4);
   transform: scale(1.08);
 }
 .music-btn.playing {
   border-color: var(--cyan);
-  box-shadow: 0 0 25px rgba(0,240,255,0.35);
+  box-shadow: 0 0 25px rgba(255,30,60,0.35);
 }
 
 
@@ -1727,12 +1727,12 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
   position: fixed;
   width: 8px;
   height: 8px;
-  background: #00f0ff;
+  background: #ff1e3c;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 12px #00f0ff, 0 0 24px rgba(0,240,255,0.6);
+  box-shadow: 0 0 12px #ff1e3c, 0 0 24px rgba(255,30,60,0.6);
   transition: width 0.2s ease, height 0.2s ease, background 0.2s, opacity 0.2s;
   opacity: 0.9;
 }
@@ -1740,7 +1740,7 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
   position: fixed;
   width: 28px;
   height: 28px;
-  border: 1px solid rgba(0,240,255,0.45);
+  border: 1px solid rgba(255,30,60,0.45);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
@@ -1757,7 +1757,7 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
 .cursor-ring.hover {
   width: 44px;
   height: 44px;
-  border-color: rgba(168,85,247,0.7);
+  border-color: rgba(168,0,30,0.7);
   opacity: 1;
 }
 /* Hide custom cursor on touch devices */
@@ -1792,13 +1792,13 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
   height: 360px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(0,240,255,0.12);
+  border: 1px solid rgba(255,30,60,0.12);
   position: relative;
   transition: transform 0.4s, box-shadow 0.4s;
 }
 .noche-gal-item:hover {
   transform: scale(1.06) translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0,240,255,0.2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(255,30,60,0.2);
   z-index: 2;
 }
 
@@ -1809,8 +1809,8 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
   display: block;
 }
 .noche-gal-item.video-item {
-  border-color: rgba(236,72,153,0.35);
-  box-shadow: 0 0 20px rgba(236,72,153,0.15);
+  border-color: rgba(255,30,60,0.35);
+  box-shadow: 0 0 20px rgba(255,30,60,0.15);
 }
 
 .noche-gal-item img {
@@ -1846,8 +1846,8 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
   margin: 2.5rem auto 1rem;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(0,240,255,0.25);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,240,255,0.12);
+  border: 1px solid rgba(255,30,60,0.25);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,30,60,0.12);
 }
 .noche-video {
   width: 100%;
@@ -1871,7 +1871,7 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
   letter-spacing: 3px;
   color: var(--cyan);
   text-transform: uppercase;
-  text-shadow: 0 0 15px rgba(0,240,255,0.5);
+  text-shadow: 0 0 15px rgba(255,30,60,0.5);
 }
 
 
@@ -1922,13 +1922,13 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
 }
 .ticket-card {
   background: linear-gradient(160deg, rgba(8,12,22,0.92) 0%, rgba(5,8,16,0.96) 100%) !important;
-  border: 1px solid rgba(0,240,255,0.28) !important;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 30px rgba(0,240,255,0.1), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(255,30,60,0.28) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 30px rgba(255,30,60,0.1), inset 0 1px 0 rgba(255,255,255,0.05) !important;
   overflow: hidden;
 }
 .ticket-card:hover {
-  border-color: rgba(0,240,255,0.45) !important;
-  box-shadow: 0 24px 70px rgba(0,0,0,0.6), 0 0 40px rgba(0,240,255,0.15), 0 0 60px rgba(236,72,153,0.08) !important;
+  border-color: rgba(255,30,60,0.45) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.6), 0 0 40px rgba(255,30,60,0.15), 0 0 60px rgba(255,30,60,0.08) !important;
 }
 
   
@@ -1939,10 +1939,10 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
   100% { filter: hue-rotate(-25deg); }
 }
 @keyframes borderCycle {
-  0%   { border-color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.35); }
-  33%  { border-color: var(--pink); box-shadow: 0 0 14px rgba(255,45,149,0.4); }
-  66%  { border-color: var(--purple); box-shadow: 0 0 14px rgba(168,85,247,0.4); }
-  100% { border-color: var(--lime); box-shadow: 0 0 12px rgba(57,255,20,0.35); }
+  0%   { border-color: var(--cyan); box-shadow: 0 0 12px rgba(255,30,60,0.35); }
+  33%  { border-color: var(--pink); box-shadow: 0 0 14px rgba(255,30,60,0.4); }
+  66%  { border-color: var(--purple); box-shadow: 0 0 14px rgba(168,0,30,0.4); }
+  100% { border-color: var(--lime); box-shadow: 0 0 12px rgba(255,255,255,0.35); }
 }
 @keyframes glowPulse {
   0%, 100% { opacity: 0.55; transform: scale(1); }
@@ -1980,7 +1980,7 @@ a, button, .btn-primary, .btn-secondary, .btn-comprar, .btn-ticket, .btn-comunid
 /* Nav hover / active more colorful */
 nav a:hover {
   color: var(--pink);
-  text-shadow: 0 0 10px rgba(255,45,149,0.45);
+  text-shadow: 0 0 10px rgba(255,30,60,0.45);
 }
 nav a.active {
   background: linear-gradient(90deg, var(--cyan), var(--pink), var(--purple));
@@ -2005,14 +2005,14 @@ nav a.active::after {
   border-color: var(--pink);
   background: linear-gradient(135deg, var(--cyan), var(--pink));
   color: #000;
-  box-shadow: 0 0 22px rgba(236,72,153,0.45);
+  box-shadow: 0 0 22px rgba(255,30,60,0.45);
 }
 
 /* Primary CTA animated gradient */
 .btn-primary {
   background-size: 200% auto !important;
   animation: gradientMove 4s ease infinite;
-  box-shadow: 0 0 18px rgba(0,240,255,0.35);
+  box-shadow: 0 0 18px rgba(255,30,60,0.35);
 }
 .btn-primary:hover {
   animation: none;
@@ -2029,7 +2029,7 @@ nav a.active::after {
   animation: none;
   border-color: var(--pink);
   color: var(--pink);
-  box-shadow: 0 0 16px rgba(255,45,149,0.35);
+  box-shadow: 0 0 16px rgba(255,30,60,0.35);
 }
 
 /* Feature icons float + hue */
@@ -2066,10 +2066,10 @@ nav a.active::after {
 .features .feature:hover {
   transform: translateY(-3px);
 }
-.features .feature:nth-child(2):hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,240,255,0.22); }
-.features .feature:nth-child(3):hover { border-color: var(--pink); box-shadow: 0 0 20px rgba(255,45,149,0.22); }
-.features .feature:nth-child(4):hover { border-color: var(--lime); box-shadow: 0 0 20px rgba(57,255,20,0.2); }
-.features .feature:nth-child(5):hover { border-color: var(--purple); box-shadow: 0 0 20px rgba(168,85,247,0.22); }
+.features .feature:nth-child(2):hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(255,30,60,0.22); }
+.features .feature:nth-child(3):hover { border-color: var(--pink); box-shadow: 0 0 20px rgba(255,30,60,0.22); }
+.features .feature:nth-child(4):hover { border-color: var(--lime); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+.features .feature:nth-child(5):hover { border-color: var(--purple); box-shadow: 0 0 20px rgba(168,0,30,0.22); }
 
 /* Music widget color accents */
 .music-widget {
@@ -2085,7 +2085,7 @@ nav a.active::after {
 }
 .music-toggle {
   background: linear-gradient(135deg, var(--cyan), var(--pink)) !important;
-  box-shadow: 0 0 16px rgba(0,240,255,0.4);
+  box-shadow: 0 0 16px rgba(255,30,60,0.4);
   animation: glowPulse 2.5s ease-in-out infinite;
 }
 
@@ -2119,7 +2119,7 @@ nav a.active::after {
 .countdown-item span:first-child,
 .countdown-num,
 .countdown-item .num {
-  text-shadow: 0 0 16px rgba(0,240,255,0.5);
+  text-shadow: 0 0 16px rgba(255,30,60,0.5);
   animation: neonCycle 5s ease-in-out infinite alternate;
 }
 
@@ -2163,16 +2163,16 @@ nav a.active::after {
 /* ========== FLOW UPGRADE: COUNTDOWN / TICKET / MAP ========== */
 .countdown-section {
   background:
-    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(0,240,255,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 15% 80%, rgba(236,72,153,0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 40% at 85% 20%, rgba(168,85,247,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(255,30,60,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 15% 80%, rgba(255,30,60,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 85% 20%, rgba(168,0,30,0.07) 0%, transparent 50%),
     #030308 !important;
   padding: 5.5rem 2rem 5rem !important;
 }
 .countdown-section::before {
   width: 700px !important;
   height: 700px !important;
-  background: radial-gradient(circle, rgba(0,240,255,0.1) 0%, rgba(236,72,153,0.04) 40%, transparent 70%) !important;
+  background: radial-gradient(circle, rgba(255,30,60,0.1) 0%, rgba(255,30,60,0.04) 40%, transparent 70%) !important;
   animation: glowPulse 5s ease-in-out infinite;
 }
 .countdown-label {
@@ -2188,7 +2188,7 @@ nav a.active::after {
 }
 .countdown-item {
   background: linear-gradient(160deg, rgba(0,30,40,0.65) 0%, rgba(10,5,20,0.75) 100%);
-  border: 1px solid rgba(0,240,255,0.18);
+  border: 1px solid rgba(255,30,60,0.18);
   border-radius: 14px;
   padding: 1.1rem 1.3rem 0.9rem;
   min-width: 100px !important;
@@ -2212,11 +2212,11 @@ nav a.active::after {
 .countdown-item:nth-child(7) { animation: floatY 4.4s ease-in-out infinite 0.9s; }
 .countdown-item:hover {
   transform: translateY(-4px) scale(1.03);
-  border-color: rgba(0,240,255,0.45);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 24px rgba(0,240,255,0.15);
+  border-color: rgba(255,30,60,0.45);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 24px rgba(255,30,60,0.15);
 }
 .countdown-value {
-  text-shadow: 0 0 24px rgba(0,240,255,0.55), 0 0 48px rgba(236,72,153,0.2) !important;
+  text-shadow: 0 0 24px rgba(255,30,60,0.55), 0 0 48px rgba(255,30,60,0.2) !important;
   background: linear-gradient(180deg, #fff 30%, #a5f3fc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2244,15 +2244,15 @@ nav a.active::after {
   background-size: 200% auto !important;
   animation: gradientMove 3s linear infinite;
   opacity: 0.7 !important;
-  box-shadow: 0 0 14px rgba(0,240,255,0.35) !important;
+  box-shadow: 0 0 14px rgba(255,30,60,0.35) !important;
 }
 .countdown-date {
   display: inline-block;
   margin-top: 1.8rem !important;
   padding: 0.45rem 1.2rem;
   border-radius: 999px;
-  border: 1px solid rgba(0,240,255,0.25);
-  background: rgba(0,240,255,0.06);
+  border: 1px solid rgba(255,30,60,0.25);
+  background: rgba(255,30,60,0.06);
   color: rgba(255,255,255,0.7) !important;
   letter-spacing: 1.5px !important;
   font-size: 0.85rem !important;
@@ -2286,7 +2286,7 @@ nav a.active::after {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradientMove 5s ease infinite;
-  filter: drop-shadow(0 0 12px rgba(0,240,255,0.35));
+  filter: drop-shadow(0 0 12px rgba(255,30,60,0.35));
 }
 .ticket-checks li {
   background: rgba(255,255,255,0.03);
@@ -2297,8 +2297,8 @@ nav a.active::after {
   transition: border-color 0.25s, background 0.25s, transform 0.25s;
 }
 .ticket-checks li:hover {
-  border-color: rgba(0,240,255,0.3);
-  background: rgba(0,240,255,0.06);
+  border-color: rgba(255,30,60,0.3);
+  background: rgba(255,30,60,0.06);
   transform: translateX(4px);
 }
 .ticket-checks li:nth-child(1)::before { color: var(--cyan) !important; }
@@ -2314,8 +2314,8 @@ nav a.active::after {
   padding: 2.2rem !important;
   box-shadow:
     0 25px 70px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(0,240,255,0.2),
-    0 0 50px rgba(0,240,255,0.08),
+    0 0 0 1px rgba(255,30,60,0.2),
+    0 0 50px rgba(255,30,60,0.08),
     inset 0 1px 0 rgba(255,255,255,0.08) !important;
   animation: none !important;
   transform-style: preserve-3d;
@@ -2334,7 +2334,7 @@ nav a.active::after {
   inset: 0;
   border-radius: 18px;
   pointer-events: none;
-  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,240,255,0.12) 0%, transparent 55%);
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,30,60,0.12) 0%, transparent 55%);
   z-index: 0;
 }
 .ticket-card > * { position: relative; z-index: 1; }
@@ -2342,8 +2342,8 @@ nav a.active::after {
   /* 3D tilt handles transform */
   box-shadow:
     0 30px 80px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(236,72,153,0.35),
-    0 0 60px rgba(0,240,255,0.15),
+    0 0 0 1px rgba(255,30,60,0.35),
+    0 0 60px rgba(255,30,60,0.15),
     inset 0 1px 0 rgba(255,255,255,0.1) !important;
 }
 .ticket-card.tilt-3d:hover {
@@ -2365,21 +2365,21 @@ nav a.active::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 14px rgba(0,240,255,0.4));
+  filter: drop-shadow(0 0 14px rgba(255,30,60,0.4));
 }
 .btn-ticket {
-  background: linear-gradient(135deg, var(--cyan) 0%, #22d3ee 40%, var(--pink) 100%) !important;
+  background: linear-gradient(135deg, var(--cyan) 0%, #ff1e3c 40%, var(--pink) 100%) !important;
   background-size: 200% auto !important;
   animation: gradientMove 4s ease infinite;
   border: none !important;
   color: #000 !important;
   font-weight: 700 !important;
-  box-shadow: 0 8px 28px rgba(0,240,255,0.35) !important;
+  box-shadow: 0 8px 28px rgba(255,30,60,0.35) !important;
   transition: transform 0.25s, box-shadow 0.25s !important;
 }
 .btn-ticket:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 36px rgba(236,72,153,0.4) !important;
+  box-shadow: 0 12px 36px rgba(255,30,60,0.4) !important;
   animation: none;
   background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%) !important;
 }
@@ -2389,8 +2389,8 @@ nav a.active::after {
   position: relative;
   padding: 5.5rem 2rem 5rem !important;
   background:
-    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(0,240,255,0.08) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 10% 90%, rgba(168,85,247,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(255,30,60,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 10% 90%, rgba(168,0,30,0.07) 0%, transparent 50%),
     #050508 !important;
 }
 .map-section h2 {
@@ -2413,7 +2413,7 @@ nav a.active::after {
   animation: gradientMove 6s linear infinite;
   box-shadow:
     0 25px 70px rgba(0,0,0,0.55),
-    0 0 40px rgba(0,240,255,0.1) !important;
+    0 0 40px rgba(255,30,60,0.1) !important;
   position: relative;
   transition: transform 0.4s ease, box-shadow 0.4s ease !important;
 }
@@ -2429,7 +2429,7 @@ nav a.active::after {
 .map-wrapper:hover {
   box-shadow:
     0 30px 80px rgba(0,0,0,0.6),
-    0 0 50px rgba(236,72,153,0.15) !important;
+    0 0 50px rgba(255,30,60,0.15) !important;
 }
 .map-wrapper.tilt-3d:hover {
   /* JS sets transform */
@@ -2465,8 +2465,8 @@ nav a.active::after {
 .map-info span:hover,
 .map-info > div:hover,
 .map-info-item:hover {
-  border-color: rgba(0,240,255,0.35);
-  background: rgba(0,240,255,0.08);
+  border-color: rgba(255,30,60,0.35);
+  background: rgba(255,30,60,0.08);
 }
 
   
@@ -2484,8 +2484,8 @@ nav a.active::after {
   box-shadow:
     0 28px 55px rgba(0,0,0,0.55),
     0 10px 20px rgba(0,0,0,0.3),
-    0 0 0 1px rgba(0,240,255,0.22),
-    0 0 36px rgba(0,240,255,0.1) !important;
+    0 0 0 1px rgba(255,30,60,0.22),
+    0 0 36px rgba(255,30,60,0.1) !important;
 }
 .ticket-card.tilt-3d .tilt-shine {
   position: absolute;
@@ -2498,7 +2498,7 @@ nav a.active::after {
 }
 .ticket-card.tilt-3d .btn-ticket {
   transform: translateZ(24px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 0 16px rgba(0,240,255,0.28) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3), 0 0 16px rgba(255,30,60,0.28) !important;
 }
 .ticket-card.tilt-3d .ticket-card-title,
 .ticket-card.tilt-3d .ticket-price {
@@ -2517,7 +2517,7 @@ nav a.active::after {
 }
 .map-3d-frame:hover {
   transform: perspective(1200px) rotateX(2deg) translateY(-4px) scale(1.01);
-  filter: drop-shadow(0 32px 50px rgba(0,0,0,0.55)) drop-shadow(0 0 30px rgba(0,240,255,0.12));
+  filter: drop-shadow(0 32px 50px rgba(0,0,0,0.55)) drop-shadow(0 0 30px rgba(255,30,60,0.12));
 }
 .map-wrapper.tilt-3d {
   transform: none !important;
@@ -2644,9 +2644,9 @@ body { cursor: auto !important; }
 .comunidad-section {
   background-image:
     radial-gradient(ellipse 50% 65% at 0% 18%,   rgba(255,30,60,0.26) 0%, transparent 62%),
-    radial-gradient(ellipse 50% 65% at 100% 72%, rgba(168,85,247,0.24) 0%, transparent 62%),
-    radial-gradient(ellipse 65% 50% at 50% 108%, rgba(0,240,255,0.16) 0%, transparent 66%),
-    radial-gradient(ellipse 30% 40% at 85% 8%,   rgba(255,45,149,0.16) 0%, transparent 60%);
+    radial-gradient(ellipse 50% 65% at 100% 72%, rgba(168,0,30,0.24) 0%, transparent 62%),
+    radial-gradient(ellipse 65% 50% at 50% 108%, rgba(255,30,60,0.16) 0%, transparent 66%),
+    radial-gradient(ellipse 30% 40% at 85% 8%,   rgba(255,30,60,0.16) 0%, transparent 60%);
   background-repeat: no-repeat;
 }
 .noche-section { background-color: #06060c; }
@@ -2736,8 +2736,8 @@ body { cursor: auto !important; }
   text-align: center;
   background-image:
     radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,30,60,0.16) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(168,85,247,0.14) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 85% 75%, rgba(0,240,255,0.10) 0%, transparent 60%) !important;
+    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(168,0,30,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 75%, rgba(255,30,60,0.10) 0%, transparent 60%) !important;
   background-color: #04040a;
 }
 .hero .hero-content {
@@ -2765,7 +2765,7 @@ body { cursor: auto !important; }
 }
 @keyframes posterGlow {
   from { box-shadow: 0 30px 90px rgba(0,0,0,0.75), 0 0 55px rgba(255,30,60,0.26), 0 0 110px rgba(255,30,60,0.12); }
-  to   { box-shadow: 0 30px 90px rgba(0,0,0,0.75), 0 0 80px rgba(255,30,60,0.42), 0 0 150px rgba(236,72,153,0.20); }
+  to   { box-shadow: 0 30px 90px rgba(0,0,0,0.75), 0 0 80px rgba(255,30,60,0.42), 0 0 150px rgba(255,30,60,0.20); }
 }
 @media (prefers-reduced-motion: reduce) { .hero-poster { animation: none; } }
 
@@ -2845,4 +2845,95 @@ body { cursor: auto !important; }
   .deco-mapa-enano { width: 92px;  bottom: 4%; right: 4%; }
   .deco-comu-enano { width: 92px;  bottom: 3%; left: 4%; }
   .deco-countdown-x{ width: 260px; opacity: 0.22; }
+}
+
+
+/* ==========================================================================
+   PALETA AGRESIVA — NIGHT / ROJO NEON
+   Se toma del poster: neon blanco y X roja sobre negro. Nada de arcoiris.
+   Las variables antiguas conservan su nombre (--cyan, --pink...) porque las
+   usan ~160 reglas; lo que cambia es su VALOR. Asi todo el sitio se retiñe
+   sin tocar cada regla. No renombrar sin repasar la hoja entera.
+   ========================================================================== */
+:root {
+  --rojo:        #ff1e3c;   /* rojo neon del letrero */
+  --rojo-hondo:  #a8001e;   /* rojo sangre, para sombras y profundidad */
+  --blanco-neon: #ffffff;
+
+  --cyan:       #ff1e3c;
+  --cyan-dark:  #c1001f;
+  --cyan-glow:  rgba(255, 30, 60, 0.45);
+  --purple:     #a8001e;
+  --magenta:    #ff1e3c;
+  --pink:       #ff4d5f;
+  --lime:       #ffffff;
+  --orange:     #ff1e3c;
+  --blue:       #a8001e;
+  --red-neon:   #ff1e3c;
+  --red-glow:   rgba(255, 30, 60, 0.45);
+
+  --bg-dark:    #050507;
+  --text:       #ffffff;
+  --text-muted: #a9a9b2;
+}
+
+/* ---- Logo y navegacion: neon blanco con halo rojo, sin degradado ---- */
+/* Antes eran un degradado cian->rosa->morado->verde. Ahora imitan el
+   letrero del poster: letras blancas encendidas sobre negro. */
+.logo {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #fff !important;
+  color: #fff !important;
+  animation: none !important;
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.85),
+    0 0 18px rgba(255,30,60,0.75),
+    0 0 34px rgba(255,30,60,0.45);
+  filter: none !important;
+}
+
+nav a.active::after,
+nav a::after {
+  background: var(--rojo) !important;
+  background-size: auto !important;
+  animation: none !important;
+  box-shadow: 0 0 10px var(--rojo), 0 0 20px rgba(255,30,60,0.55) !important;
+}
+nav a:hover, nav a.active { color: var(--rojo); }
+
+/* El titular del hero (oculto) y los acentos: rojo plano, sin degradados */
+.hero-title .hero-x,
+.comunidad-title span,
+.noche-title span,
+.map-section h2 span,
+.ticket-title .line2 {
+  background: none !important;
+  -webkit-text-fill-color: var(--rojo) !important;
+  color: var(--rojo) !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+/* Boton de confirmar: blanco en vez de verde, para no romper la paleta */
+.btn-confirmar {
+  background: transparent;
+  border-color: rgba(255,255,255,0.55);
+  color: #fff;
+}
+.btn-confirmar:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #0a0004;
+  box-shadow: 0 0 26px rgba(255,255,255,0.35);
+}
+
+/* Luces de ambiente: solo rojo y blanco */
+.party-orbs span:nth-child(1) { background: var(--rojo); }
+.party-orbs span:nth-child(2) { background: var(--rojo-hondo); }
+.party-orbs span:nth-child(3) { background: var(--rojo); }
+.party-orbs span:nth-child(4) { background: #6b0014; }
+.party-rail.izq, .party-rail.der {
+  background: linear-gradient(180deg, transparent, var(--rojo), rgba(255,255,255,0.85), var(--rojo), transparent);
 }
