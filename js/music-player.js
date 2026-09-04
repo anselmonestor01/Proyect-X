@@ -24,7 +24,8 @@
   const playlistEl = document.getElementById('musicPlaylist');
   if (!btn || !audio) return;
 
-  audio.volume = 0.32;
+  // Volumen de fondo. A 0.32 resultaba practicamente inaudible en movil.
+  audio.volume = 0.7;
   let current = 0;
   let wasPlaying = false;
 
@@ -90,25 +91,58 @@
   });
 
   // ===== ARRANQUE AUTOMATICO =====
-  // Se intenta sonar nada mas cargar la pagina. Los navegadores bloquean el
-  // audio automatico con sonido (Chrome, Safari y Firefox lo hacen), asi que
-  // si lo rechazan dejamos armado un respaldo: la musica arranca sola en
-  // cuanto el usuario haga cualquier gesto (tocar, clic, scroll o tecla).
+  // Se intenta sonar nada mas cargar la pagina. Chrome, Safari y Firefox
+  // bloquean el audio automatico con sonido, asi que dejamos armado un
+  // respaldo: arranca sola en cuanto el visitante hace cualquier gesto.
+  //
+  // Tres detalles que hacen que esto funcione de verdad:
+  //  1. Incluimos 'click' y 'touchend'. iOS/Safari solo desbloquea con esos
+  //     dos; con 'touchstart' o 'pointerdown' se queda en silencio.
+  //  2. Escuchamos en fase de CAPTURA. Los botones del reproductor llaman a
+  //     stopPropagation(), asi que en fase de burbuja el evento nunca
+  //     llegaria a window si el primer toque cae sobre uno de ellos.
+  //  3. Los oyentes siguen armados hasta que el audio suena de verdad, por
+  //     si el primer intento lo rechaza el navegador.
   loadTrack(0, true);
 
-  function arrancarConGesto() {
-    if (!audio.paused) return quitarOyentes();
+  const GESTOS = ['click', 'touchend', 'pointerup', 'pointerdown',
+                  'touchstart', 'keydown', 'scroll', 'wheel'];
+
+  function quitarOyentes() {
+    GESTOS.forEach(g => {
+      window.removeEventListener(g, arrancarConGesto, true);
+      window.removeEventListener(g, arrancarConGesto);
+    });
+  }
+
+  let intentando = false;
+  function arrancarConGesto(e) {
+    if (!audio.paused && audio.currentTime > 0) return quitarOyentes();
+    // Eventos como 'scroll' o 'wheel' se disparan muchas veces seguidas.
+    // Sin este candado, cada play() aborta al anterior y no arranca nunca.
+    if (intentando) return;
+    // Si el gesto es sobre el boton de play/pausa, no hacemos nada aqui:
+    // se encarga togglePlay(). Si arrancasemos tambien nosotros, el boton
+    // veria el audio ya sonando y lo pausaria de inmediato.
+    if (e && e.target && e.target.closest && e.target.closest('#musicBtn')) return;
+    intentando = true;
     audio.play().then(() => {
+      intentando = false;
       btn.textContent = '❚❚';
       card.classList.add('playing');
       quitarOyentes();
-    }).catch(() => {});
+    }).catch(() => {
+      intentando = false; // sigue armado para el proximo gesto
+    });
   }
-  const GESTOS = ['pointerdown', 'touchstart', 'keydown', 'scroll', 'wheel'];
-  function quitarOyentes() {
-    GESTOS.forEach(g => window.removeEventListener(g, arrancarConGesto));
-  }
-  GESTOS.forEach(g => window.addEventListener(g, arrancarConGesto, { passive: true }));
+
+  // En captura y en burbuja: la captura salva los toques sobre botones que
+  // llaman a stopPropagation(); la burbuja cubre eventos como 'scroll', que
+  // no recorren el arbol igual.
+  GESTOS.forEach(g => {
+    window.addEventListener(g, arrancarConGesto, { capture: true, passive: true });
+    window.addEventListener(g, arrancarConGesto, { passive: true });
+  });
 
   // ===== ARRASTRE TIPO BURBUJA =====
   // Permite mover el reproductor por la pantalla (arriba/abajo/lados).

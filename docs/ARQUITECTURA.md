@@ -116,13 +116,31 @@ Detalles del arrastre que conviene no romper:
   a la vista al cambiar el tamaño de la ventana.
 - El `<audio>` usa `preload="none"` a propósito: son ~5 MB que no deben
   descargarse al abrir la página.
+- El volumen es `0.7`. Estuvo en `0.32` y resultaba casi inaudible en móvil.
 
 **Arranque automático.** La música intenta sonar nada más cargar. Los
-navegadores bloquean el audio automático con sonido, así que hay un respaldo:
-si lo rechazan, queda armado un oyente que la arranca en cuanto el usuario
-hace cualquier gesto (tocar, clic, scroll o tecla). En la práctica suena casi
-siempre; solo se retrasa hasta el primer movimiento del visitante. No existe
-forma de saltarse ese bloqueo, es una política del navegador.
+navegadores bloquean el audio automático con sonido, así que queda armado un
+respaldo que la arranca al primer gesto del visitante. No hay forma de
+saltarse ese bloqueo: es política del navegador, no un fallo del sitio.
+
+Tres detalles hacen que el respaldo funcione de verdad. Si se tocan, la
+música vuelve a quedarse en silencio para parte de los visitantes:
+
+1. **Se escucha `click` y `touchend`, no solo `pointerdown`.** iOS y Safari
+   solo desbloquean el audio con esos dos eventos.
+2. **Los oyentes van en fase de captura *y* de burbuja.** Los botones del
+   reproductor llaman a `stopPropagation()`, así que en burbuja el evento no
+   llegaría a `window` si el primer toque cae sobre uno de ellos.
+3. **El botón de play/pausa se excluye del respaldo.** Si no, al pulsarlo el
+   respaldo arrancaría la música y `togglePlay()` la pausaría acto seguido,
+   dejándola en silencio.
+
+Además hay un candado (`intentando`) porque `scroll` y `wheel` se disparan
+muchas veces seguidas y cada `play()` abortaría al anterior.
+
+`scroll` y `wheel` están en la lista, pero **no cuentan como activación de
+usuario** en la política de los navegadores: pueden funcionar o no. Los
+gestos garantizados son el clic, el toque y la tecla.
 
 ### `visual-effects.js`
 Efectos decorativos, todos con degradación elegante (si no encuentran su
