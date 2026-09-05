@@ -2975,17 +2975,24 @@ nav a:hover, nav a.active { color: var(--rojo); }
   .countdown-label { font-size: 0.66rem; letter-spacing: 3px; }
 }
 
-/* ---- Adornos en movil: legibilidad por encima de decoracion ---- */
-/* En movil el contenido ocupa el ancho completo: no quedan margenes
-   laterales libres, asi que estos adornos se montaban sobre titulares y
-   sobre el boton de la comunidad. En pantallas pequeñas se ocultan.
-   (Comprobado con una prueba de solapamiento; ver docs/ARQUITECTURA.md) */
+/* ---- Adornos en movil: se colocan en las franjas vacias ---- */
+/* En movil el contenido ocupa el ancho completo, asi que no valen las
+   posiciones de escritorio: se montaban sobre titulares y botones. En vez
+   de esconderlos, aqui se recolocan pequenos en las franjas verticales sin
+   contenido (los margenes de padding de cada seccion) y se comprueba que
+   no tapen texto. Ver docs/ARQUITECTURA.md. */
 @media (max-width: 560px) {
-  .deco-noche-enano,
-  .deco-count-enano,
-  .deco-count-agresivo,
-  .deco-comunidad,
-  .deco-comu-enano { display: none; }
+  .deco-noche-enano    { top: auto; bottom: 8px; left: 8px;  width: 72px; }
+  .deco-count-enano    { top: auto; bottom: 4px; left: 8px;  width: 46px; }
+  .deco-count-agresivo { top: auto; bottom: 4px; right: 2px; width: 46px; }
+  /* El diablillo no cabe en COMUNIDAD sin taparle el titulo */
+  .deco-comunidad      { display: none; }
+  .deco-comu-enano     { top: auto; bottom: 8px; left: 6px; width: 54px; }
+  .deco-comu-cervezas  { display: block; bottom: 8px; right: 8px; width: 66px; }
+  .deco-mapa-cerveza   { display: block; bottom: 10px; left: 8px; width: 68px; }
+  .deco-mapa-demonio   { width: 84px; bottom: 10px; right: 8px; }
+  .deco-entrada        { display: block; bottom: 8px; left: 8px; width: 70px; }
+  .deco-features       { width: 48px; }
 
   /* La X de fondo se suaviza para no restar contraste a los numeros */
   .deco-countdown-x { opacity: 0.14; }

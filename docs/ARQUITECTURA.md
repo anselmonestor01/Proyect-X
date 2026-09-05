@@ -176,10 +176,20 @@ centradas. En escritorio hay sitio de sobra; en **móvil no existe ese margen**
 —el contenido ocupa todo el ancho— así que varios se montaban sobre titulares
 y sobre el botón de la comunidad.
 
-Por eso, por debajo de 560 px se ocultan los que chocaban y solo quedan los
-que tienen espacio real: el diablito de *features*, el enano endemoniado del
-mapa y la X de fondo del contador. **La legibilidad manda sobre la
-decoración.**
+Por eso, por debajo de 560 px **no se ocultan: se recolocan**. En vez de
+las posiciones de escritorio, cada adorno se lleva pequeño (46–72 px) a una
+franja vertical sin contenido —normalmente el *padding* superior o inferior
+de la sección— pegado a un borde. Así se ven diez adornos en móvil sin tapar
+una sola línea de texto. **La legibilidad manda sobre la decoración**: el
+único que se oculta es el diablito de *comunidad*, que no cabe sin pisar el
+título.
+
+Dos detalles que hay que respetar al colocar uno nuevo en móvil:
+
+- `.deco-flota` sube el adorno 20 px en la animación. Si lo anclas arriba,
+  deja al menos 26 px de margen o el borde superior de la sección lo corta.
+- El giro (`--giro`) y el volteo (`--voltea`) agrandan la caja: unos pocos
+  píxeles de separación lateral evitan el recorte.
 
 Antes de añadir un adorno nuevo, pasa la prueba de solapamiento: recorre la
 página en 390 px y 360 px comparando el rectángulo de cada `.deco` con el de
