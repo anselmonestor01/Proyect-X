@@ -200,9 +200,20 @@ Al volver a la pestaña (`visibilitychange`) también se restaura el sonido.
 volumen es solo el de los botones físicos. El vigilante sigue sirviendo para
 el silencio y las pausas.
 
+### La finca
+
+La sección `#finca` va justo debajo de los datos del evento, casi al principio
+de la página: tres vídeos apaisados del sitio (entrada, casa y piscina). Vienen
+de grabaciones de móvil de 1280×720 y ~3 Mb/s, reducidas a **640×360, CRF 32,
+25 fps, sin pista de audio** y `+faststart`: de 46 MB en bruto a 5,5 MB. La
+receta completa está más abajo, en la sección de medios.
+
+En escritorio van en tres columnas, en dos por debajo de 900 px y en una sola
+por debajo de 560 px.
+
 ### Vídeos: todos a la vez
 
-Los nueve vídeos arrancan a la vez en cuanto la página carga y **no se pausan
+Los doce vídeos arrancan a la vez en cuanto la página carga y **no se pausan
 al salir de pantalla**. No hay límite de vídeos simultáneos (antes eran tres).
 Detalles que lo hacen funcionar:
 
@@ -214,7 +225,7 @@ Detalles que lo hacen funcionar:
   navegadores rechazan el primer `play()` si aún no hay datos suficientes.
 - Ninguno lleva pista de audio, así que no compiten con la música.
 
-El coste es rendimiento: nueve decodificaciones H.264 simultáneas cargan la
+El coste es rendimiento: doce decodificaciones H.264 simultáneas cargan la
 CPU de un móvil. Es una decisión deliberada.
 
 ### La música y el arranque automático
@@ -234,6 +245,17 @@ cuenta como interacción para ningún navegador.
 En escritorio el `<audio>` se pone en `preload="auto"` para que al primer
 gesto suene al instante en vez de empezar entonces la descarga; en móvil no,
 para no gastar datos.
+
+### Los adornos flotan siempre
+
+Todos los `.deco` flotan, en escritorio y en móvil, sin excepción. Dos detalles:
+
+- La X del contador va centrada con `translate(-50%, -50%)`. Si usara el
+  `decoFlota` general perdería el centrado —el keyframe reescribe el
+  `transform` entero—, así que tiene el suyo, `decoFlotaCentro`, que conserva
+  el translate.
+- `--giro` y `--voltea` se pasan como variables al keyframe justo por lo
+  mismo: cualquier rotación o volteo escrito aparte se perdería al animar.
 
 ### Adornos y móvil
 

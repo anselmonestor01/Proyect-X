@@ -2804,7 +2804,18 @@ body { cursor: auto !important; }
   to   { transform: translateY(-20px) rotate(var(--giro, 0deg)) scaleX(var(--voltea, 1)); }
 }
 .deco-flota { animation: decoFlota 6s ease-in-out infinite alternate; }
-@media (prefers-reduced-motion: reduce) { .deco-flota { animation: none; } }
+
+/* La X del contador va centrada con translate(-50%,-50%): si usara el
+   keyframe de arriba perderia el centrado, asi que lleva el suyo. */
+@keyframes decoFlotaCentro {
+  from { transform: translate(-50%, -50%); }
+  to   { transform: translate(-50%, calc(-50% - 18px)); }
+}
+.deco-countdown-x { animation: decoFlotaCentro 7s ease-in-out infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) {
+  .deco-flota, .deco-countdown-x { animation: none; }
+}
 
 /* ---- Colocacion por seccion ---- */
 /* Features: diablito asomando arriba a la derecha */
@@ -3002,4 +3013,88 @@ nav a:hover, nav a.active { color: var(--rojo); }
    pie en movil. Se reserva espacio para que nada quede debajo. */
 @media (max-width: 768px) {
   footer { padding-bottom: 6.5rem; }
+}
+
+
+/* ==========================================================================
+   LA FINCA — vídeos del sitio, casi al principio de la página
+   ========================================================================== */
+.finca-section {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 1.5rem 4.5rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,30,60,0.10), transparent 60%),
+    var(--bg-dark);
+  border-top: 1px solid rgba(255,30,60,0.12);
+  border-bottom: 1px solid rgba(255,30,60,0.12);
+  text-align: center;
+}
+.finca-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  letter-spacing: 6px;
+  color: var(--blanco-neon);
+  margin: 0 0 0.8rem;
+  text-shadow: 0 0 24px rgba(255,30,60,0.45);
+}
+.finca-title span { color: var(--cyan); }
+.finca-lead {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.finca-videos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 2.2rem auto 0;
+}
+.finca-video-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,30,60,0.25);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,30,60,0.12);
+}
+.finca-video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  background: #000;
+}
+.finca-video-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  pointer-events: none;
+}
+.finca-video-overlay span {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px #000, 0 0 15px rgba(255,30,60,0.6);
+}
+
+/* Adornos de la seccion: en los margenes, nunca sobre el texto */
+.deco-finca-enano   { bottom: 6%; left: 2%;  width: 150px; --giro: -6deg; animation-delay: -1.5s; }
+.deco-finca-cerveza { top: 12%;   right: 3%; width: 110px; --giro: 9deg;  animation-delay: -4s; }
+
+@media (max-width: 900px) {
+  .finca-videos { grid-template-columns: repeat(2, 1fr); }
+  .deco-finca-enano { width: 110px; }
+  .deco-finca-cerveza { width: 80px; }
+}
+@media (max-width: 560px) {
+  .finca-section { padding: 3rem 1rem 3.5rem; }
+  .finca-videos { grid-template-columns: 1fr; }
+  /* Como el resto en movil: pequenos y pegados al borde, fuera del texto */
+  .deco-finca-enano   { bottom: 8px; left: 6px;  width: 66px; }
+  .deco-finca-cerveza { top: 26px;   right: 6px; width: 52px; }
 }

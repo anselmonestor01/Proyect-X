@@ -47,8 +47,8 @@ python3 -m http.server 8000
 │
 ├── assets/
 │   ├── img/                Fotos de galería y fondos de sección (20 archivos).
-│   ├── video/              Clips de la sección NOCHE (7 archivos).
-│   ├── poster/             Primer fotograma de cada vídeo (7 archivos).
+│   ├── video/              Clips de NOCHE y de LA FINCA (10 archivos).
+│   ├── poster/             Primer fotograma de cada vídeo (10 archivos).
 │   └── audio/              Canción del reproductor + carátula (3 archivos).
 │
 └── docs/
