@@ -295,7 +295,9 @@
 (function() {
   const videos = Array.from(document.querySelectorAll('video[data-autoplay]'));
   let playing = new Set();
-  const MAX = 3;
+  // En movil, tres videos decodificando a la vez ahogan el hilo de audio y la
+  // musica se entrecorta. Ahi va de uno en uno.
+  const MAX = window.matchMedia('(max-width: 768px)').matches ? 1 : 3;
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const v = entry.target;

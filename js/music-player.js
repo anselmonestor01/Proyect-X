@@ -25,9 +25,14 @@
   if (!btn || !audio) return;
 
   // Volumen de fondo. A 0.32 resultaba practicamente inaudible en movil.
-  audio.volume = 0.7;
+  const VOLUMEN = 0.7;
+  audio.volume = VOLUMEN;
   let current = 0;
   let wasPlaying = false;
+  // El vigilante de abajo solo actua si la musica ya sonaba y el visitante
+  // no fue quien la paro.
+  let desbloqueado = false;
+  let pausadoPorUsuario = false;
 
   function renderPlaylist() {
     playlistEl.innerHTML = '';
@@ -55,16 +60,15 @@
     artistEl.textContent = track.artist;
     renderPlaylist();
     if (autoplay) {
-      audio.play().then(() => {
-        btn.textContent = '❚❚';
-        card.classList.add('playing');
-      }).catch(() => {});
+      audio.play().then(marcarSonando).catch(() => {});
     }
   }
 
   function marcarSonando() {
     btn.textContent = '❚❚';
     card.classList.add('playing');
+    desbloqueado = true;
+    anunciarPista();
   }
   function marcarParado() {
     btn.textContent = '▶';
@@ -80,10 +84,12 @@
       // si ademas estaba parado, seguimos abajo y lo arrancamos
     }
     if (audio.paused) {
+      pausadoPorUsuario = false;
       audio.play().then(marcarSonando).catch(() => {
         alert('Haz clic de nuevo o permite el audio en el navegador.');
       });
     } else {
+      pausadoPorUsuario = true;
       audio.pause();
       marcarParado();
     }
@@ -173,6 +179,60 @@
   GESTOS.forEach(function (g) {
     window.addEventListener(g, activarSonido, { capture: true, passive: true });
     window.addEventListener(g, activarSonido, { passive: true });
+  });
+
+  // ===== POR QUE SE BAJABA EL VOLUMEN EN MOVIL =====
+  // La pagina nunca toca 'volume' despues de ponerlo a 0.7: quien lo baja
+  // es el telefono. En Android e iOS el sistema quita el "foco de audio" a
+  // la pestana cuando llega una notificacion, un mensaje, una llamada o
+  // cuando otra app suena; entonces la musica se agacha (ducking) o se
+  // pausa, y al terminar la interrupcion NO se restaura sola.
+  //
+  // Dos medidas:
+  //   1. Media Session: le decimos al sistema que esta pestana es un
+  //      reproductor con pista, artista y caratula. Asi aparece en la
+  //      pantalla de bloqueo y el sistema deja de tratarla como un sonido
+  //      suelto que puede cortar en cualquier momento.
+  //   2. Vigilante: cada segundo comprueba que sigue sin silencio, a su
+  //      volumen y sonando. Si el sistema lo bajo, lo devuelve a su sitio.
+  //      Solo actua si la musica ya habia arrancado y no fue el visitante
+  //      quien pulso pausa.
+
+  function anunciarPista() {
+    if (!('mediaSession' in navigator)) return;
+    const t = playlist[current];
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: t.title, artist: t.artist, album: 'PROJECT X',
+        artwork: [{ src: t.cover, sizes: '512x512', type: 'image/jpeg' }]
+      });
+      navigator.mediaSession.playbackState = 'playing';
+      navigator.mediaSession.setActionHandler('play',  () => { pausadoPorUsuario = false; audio.play().then(marcarSonando).catch(() => {}); });
+      navigator.mediaSession.setActionHandler('pause', () => { pausadoPorUsuario = true; audio.pause(); marcarParado(); });
+      navigator.mediaSession.setActionHandler('previoustrack', () => loadTrack(current - 1, true));
+      navigator.mediaSession.setActionHandler('nexttrack',     () => loadTrack(current + 1, true));
+    } catch (e) { /* navegador sin Media Session */ }
+  }
+
+  audio.addEventListener('pause', function () {
+    if (pausadoPorUsuario) return;
+    marcarParado();
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+  });
+
+  setInterval(function () {
+    if (!desbloqueado || pausadoPorUsuario || document.hidden) return;
+    if (audio.muted) audio.muted = false;
+    if (audio.volume < VOLUMEN - 0.01) audio.volume = VOLUMEN;
+    if (audio.paused) audio.play().then(marcarSonando).catch(function () {});
+  }, 1000);
+
+  // Al volver a la pestana (venir de WhatsApp, de una llamada...) retomamos.
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden || !desbloqueado || pausadoPorUsuario) return;
+    audio.muted = false;
+    audio.volume = VOLUMEN;
+    if (audio.paused) audio.play().then(marcarSonando).catch(function () {});
   });
 
   // ===== ARRASTRE TIPO BURBUJA =====

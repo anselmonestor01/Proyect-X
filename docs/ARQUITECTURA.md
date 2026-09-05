@@ -169,6 +169,36 @@ rueda, toque táctil, scroll táctil, al arrastrar el reproductor y al pulsar
 cualquiera de sus botones. El único caso en que no suena es si el visitante
 no interactúa en absoluto.
 
+### Por qué el volumen «se bajaba solo» en móvil
+
+La página nunca modifica `volume` después de fijarlo a `0.7`: quien lo baja es
+el teléfono. Android e iOS retiran el *foco de audio* a la pestaña cuando entra
+una notificación, un mensaje o una llamada, o cuando otra app suena: la música
+se agacha (*ducking*) o se pausa, y al acabar la interrupción **no se restaura
+sola**. Los vídeos no tienen nada que ver: ninguno de los siete MP4 lleva pista
+de audio.
+
+Tres defensas en `js/music-player.js` y `js/visual-effects.js`:
+
+1. **Media Session.** Se publican título, artista y carátula, y los mandos de
+   play/pausa/anterior/siguiente. El sistema pasa a tratar la pestaña como un
+   reproductor de verdad —sale en la pantalla de bloqueo— en vez de como un
+   sonido suelto que puede cortar sin más.
+2. **Vigilante (1 s).** Si el volumen bajó, si quedó silenciado o si algo lo
+   pausó, lo devuelve a su sitio. Solo actúa si la música ya había arrancado
+   y **no** fue el visitante quien pulsó pausa (`pausadoPorUsuario`), y se
+   queda quieto con la pestaña oculta. Sin esa bandera, el botón de pausa
+   dejaría de funcionar: la canción volvería sola al segundo.
+3. **Un vídeo a la vez en móvil.** `MAX` pasa de 3 a 1 por debajo de 768 px.
+   Tres decodificaciones H.264 simultáneas ahogan el hilo de audio del
+   teléfono y la música se entrecorta.
+
+Al volver a la pestaña (`visibilitychange`) también se restaura el sonido.
+
+**Ojo con iOS:** Safari ignora la propiedad `volume` por completo; allí el
+volumen es solo el de los botones físicos. El vigilante sigue sirviendo para
+el silencio y las pausas.
+
 ### Adornos y móvil
 
 Los adornos (`.deco`) viven en los **márgenes laterales** de las secciones
