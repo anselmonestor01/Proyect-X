@@ -2953,3 +2953,46 @@ nav a:hover, nav a.active { color: var(--rojo); }
   .deco-count-agresivo { width: 88px; bottom: 3%; right: 4%; }
   .deco-mapa-demonio   { width: 96px; bottom: 4%; right: 4%; }
 }
+
+/* ---- Contador en movil: rejilla fija de 4, nunca se parte ---- */
+/* Con flex, "SEGUNDOS" no cabia y saltaba a una segunda linea, dejando
+   los dos puntos sueltos. En rejilla las 4 casillas caben siempre. */
+@media (max-width: 560px) {
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    align-items: stretch;
+    max-width: 100%;
+  }
+  .countdown-separator { display: none; }
+  .countdown-item {
+    min-width: 0;
+    padding: 0.55rem 0.15rem;
+  }
+  .countdown-value { font-size: 1.85rem; letter-spacing: 0; }
+  .countdown-unit  { font-size: 0.52rem; letter-spacing: 0.5px; margin-top: 0.35rem; }
+  .countdown-label { font-size: 0.66rem; letter-spacing: 3px; }
+}
+
+/* ---- Adornos en movil: legibilidad por encima de decoracion ---- */
+/* En movil el contenido ocupa el ancho completo: no quedan margenes
+   laterales libres, asi que estos adornos se montaban sobre titulares y
+   sobre el boton de la comunidad. En pantallas pequeñas se ocultan.
+   (Comprobado con una prueba de solapamiento; ver docs/ARQUITECTURA.md) */
+@media (max-width: 560px) {
+  .deco-noche-enano,
+  .deco-count-enano,
+  .deco-count-agresivo,
+  .deco-comunidad,
+  .deco-comu-enano { display: none; }
+
+  /* La X de fondo se suaviza para no restar contraste a los numeros */
+  .deco-countdown-x { opacity: 0.14; }
+}
+
+/* El reproductor flota fijo abajo a la izquierda y se comia el final del
+   pie en movil. Se reserva espacio para que nada quede debajo. */
+@media (max-width: 768px) {
+  footer { padding-bottom: 6.5rem; }
+}

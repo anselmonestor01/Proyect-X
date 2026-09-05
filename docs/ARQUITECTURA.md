@@ -169,6 +169,30 @@ rueda, toque táctil, scroll táctil, al arrastrar el reproductor y al pulsar
 cualquiera de sus botones. El único caso en que no suena es si el visitante
 no interactúa en absoluto.
 
+### Adornos y móvil
+
+Los adornos (`.deco`) viven en los **márgenes laterales** de las secciones
+centradas. En escritorio hay sitio de sobra; en **móvil no existe ese margen**
+—el contenido ocupa todo el ancho— así que varios se montaban sobre titulares
+y sobre el botón de la comunidad.
+
+Por eso, por debajo de 560 px se ocultan los que chocaban y solo quedan los
+que tienen espacio real: el diablito de *features*, el enano endemoniado del
+mapa y la X de fondo del contador. **La legibilidad manda sobre la
+decoración.**
+
+Antes de añadir un adorno nuevo, pasa la prueba de solapamiento: recorre la
+página en 390 px y 360 px comparando el rectángulo de cada `.deco` con el de
+cada nodo de texto. Si tapa más del ~12 % de un texto, hay que moverlo,
+encogerlo u ocultarlo en móvil.
+
+El contador usa **rejilla de 4 columnas por debajo de 560 px**. Con `flex`,
+«SEGUNDOS» no cabía y saltaba a una segunda línea dejando los dos puntos
+sueltos. En rejilla las cuatro casillas caben siempre, incluso a 320 px.
+
+El pie lleva `padding-bottom: 6.5rem` en móvil: el reproductor flota fijo
+abajo y se comía el campo de correo.
+
 ### `visual-effects.js`
 Efectos decorativos, todos con degradación elegante (si no encuentran su
 elemento, salen sin hacer nada):
