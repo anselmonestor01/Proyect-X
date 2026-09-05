@@ -2808,7 +2808,7 @@ body { cursor: auto !important; }
 
 /* ---- Colocacion por seccion ---- */
 /* Features: diablito asomando arriba a la derecha */
-.deco-features { top: 6px; right: 3%; width: 110px; --giro: 12deg; }
+.deco-features { top: 24px; right: 3%; width: 96px; --giro: 12deg; }
 
 /* Noche: el enano abajo a la izquierda, X grande de fondo a la derecha */
 .deco-noche-enano { top: 4%; left: 2%; width: 230px; --giro: -7deg; }
@@ -2817,7 +2817,6 @@ body { cursor: auto !important; }
 /* Enanos repartidos: van en los margenes laterales de las secciones
    centradas, que es donde de verdad no hay ni texto ni fotos. */
 .deco-count-enano  { bottom: 6%; left: 4%;  width: 210px; --giro: 6deg;  --voltea: -1; animation-delay: -2s; }
-.deco-mapa-enano   { bottom: 8%; right: 3%; width: 200px; --giro: -8deg; animation-delay: -4s; }
 .deco-comu-enano   { bottom: 6%; left: 4%;  width: 195px; --giro: 7deg;  --voltea: -1; animation-delay: -1s; }
 
 /* Countdown: X enorme detras del contador */
@@ -2833,16 +2832,15 @@ body { cursor: auto !important; }
   .deco-noche-x, .deco-entrada { display: none; }
   .deco-countdown-x { width: 360px; }
   .deco-noche-enano { width: 150px; }
-  .deco-count-enano, .deco-mapa-enano, .deco-comu-enano { width: 140px; }
+  .deco-count-enano, .deco-comu-enano { width: 140px; }
 }
 @media (max-width: 768px) {
-  .deco-features   { width: 68px; top: 4px; right: 2%; }
+  .deco-features   { width: 56px; top: 16px; right: 3%; }
   /* El giro ensancha la caja unos px, por eso el margen es 4% y no 1%:
      con 1% los enanos asomaban recortados por el borde de la pantalla. */
   .deco-noche-enano{ width: 96px; top: 2%; left: 4%; }
   .deco-comunidad  { width: 74px; top: 8%; }
   .deco-count-enano{ width: 92px;  bottom: 3%; left: 4%; }
-  .deco-mapa-enano { width: 92px;  bottom: 4%; right: 4%; }
   .deco-comu-enano { width: 92px;  bottom: 3%; left: 4%; }
   .deco-countdown-x{ width: 260px; opacity: 0.22; }
 }
@@ -2936,4 +2934,22 @@ nav a:hover, nav a.active { color: var(--rojo); }
 .party-orbs span:nth-child(4) { background: #6b0014; }
 .party-rail.izq, .party-rail.der {
   background: linear-gradient(180deg, transparent, var(--rojo), rgba(255,255,255,0.85), var(--rojo), transparent);
+}
+
+/* ---- Elementos nuevos: enano agresivo, endemoniado y cervezas ---- */
+/* Van en margenes laterales de secciones altas, nunca sobre texto. */
+.deco-count-agresivo { bottom: 5%;  right: 4%; width: 210px; --giro: 5deg;  animation-delay: -5s; }
+.deco-mapa-demonio   { bottom: 6%;  right: 3%; width: 240px; --giro: -6deg; animation-delay: -2.5s; }
+.deco-comu-cervezas  { bottom: 5%;  right: 5%; width: 175px; --giro: 8deg;  animation-delay: -6s; }
+.deco-mapa-cerveza   { bottom: 10%; left: 3%;  width: 160px; --giro: -9deg; animation-delay: -3.5s; }
+
+@media (max-width: 1024px) {
+  .deco-mapa-demonio { width: 155px; }
+  .deco-count-agresivo, .deco-comu-cervezas, .deco-mapa-cerveza { width: 130px; }
+}
+@media (max-width: 768px) {
+  /* En movil solo sobreviven los que caben sin estorbar */
+  .deco-comu-cervezas, .deco-mapa-cerveza { display: none; }
+  .deco-count-agresivo { width: 88px; bottom: 3%; right: 4%; }
+  .deco-mapa-demonio   { width: 96px; bottom: 4%; right: 4%; }
 }

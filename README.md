@@ -114,9 +114,25 @@ navegadores antiguos. Si reemplazas alguno, aplícale el mismo tratamiento
 (instrucciones en `docs/ARQUITECTURA.md`) o volverá a tardar en cargar.
 
 **Imágenes de marca.** El hero usa `assets/img/hero-proyectox.jpg`, el póster
-oficial. Los adornos (`diablillo.png`, `enano.png`, `x-neon.jpg`) se colocan
-con la clase `.deco` y son puramente decorativos: `aria-hidden`,
-`pointer-events: none` y `loading="lazy"`.
+oficial. Los adornos se colocan con la clase `.deco` y son puramente
+decorativos: `aria-hidden`, `pointer-events: none` y `loading="lazy"`.
+
+| Adorno | Dónde aparece |
+|---|---|
+| `enano.png` (brindando) | Noche, contador, comunidad |
+| `enano-agresivo.png` | Contador, a la derecha |
+| `enano-endemoniado.png` | Mapa |
+| `diablillo.png` | Features, entrada, comunidad |
+| `cervezas.png` / `cerveza.png` | Comunidad y mapa |
+| `x-neon.jpg` | Fondo del contador y de Noche |
+
+Al colocar un adorno nuevo, ponlo en el **margen lateral de una sección
+centrada**: las secciones llevan `overflow: hidden` y recortan lo que se sale,
+y encima del contenido queda tapado. `features` es demasiado baja para figuras
+grandes.
+
+**Sin usar:** `diablillo-morado.png` está en el repo pero no se coloca en la
+página: el morado rompe la paleta de rojo y blanco.
 
 `x-neon.jpg` es neón rojo sobre negro **sin transparencia**: se integra con
 `mix-blend-mode: screen`, que hace desaparecer el fondo negro. Si lo cambias
