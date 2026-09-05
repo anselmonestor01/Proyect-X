@@ -189,15 +189,51 @@ Tres defensas en `js/music-player.js` y `js/visual-effects.js`:
    y **no** fue el visitante quien pulsó pausa (`pausadoPorUsuario`), y se
    queda quieto con la pestaña oculta. Sin esa bandera, el botón de pausa
    dejaría de funcionar: la canción volvería sola al segundo.
-3. **Un vídeo a la vez en móvil.** `MAX` pasa de 3 a 1 por debajo de 768 px.
-   Tres decodificaciones H.264 simultáneas ahogan el hilo de audio del
-   teléfono y la música se entrecorta.
+3. ~~Un vídeo a la vez en móvil.~~ **Descartado a petición: ahora los nueve
+   vídeos se reproducen a la vez** (ver más abajo). Si en algún teléfono
+   antiguo la música se entrecorta, la causa es ésta y la solución sería
+   volver a limitar los vídeos simultáneos.
 
 Al volver a la pestaña (`visibilitychange`) también se restaura el sonido.
 
 **Ojo con iOS:** Safari ignora la propiedad `volume` por completo; allí el
 volumen es solo el de los botones físicos. El vigilante sigue sirviendo para
 el silencio y las pausas.
+
+### Vídeos: todos a la vez
+
+Los nueve vídeos arrancan a la vez en cuanto la página carga y **no se pausan
+al salir de pantalla**. No hay límite de vídeos simultáneos (antes eran tres).
+Detalles que lo hacen funcionar:
+
+- `muted` + `playsinline` son **obligatorios**: son la única excepción a la
+  política de autoplay. Un vídeo con sonido no arranca solo en ningún sitio.
+- El `preload="none"` del HTML se sube a `auto` al arrancar, o el navegador no
+  descargaría nada hasta que el vídeo entrase en pantalla.
+- Hay reintentos en `loadeddata`, en `pause` y al primer gesto: algunos
+  navegadores rechazan el primer `play()` si aún no hay datos suficientes.
+- Ninguno lleva pista de audio, así que no compiten con la música.
+
+El coste es rendimiento: nueve decodificaciones H.264 simultáneas cargan la
+CPU de un móvil. Es una decisión deliberada.
+
+### La música y el arranque automático
+
+Solo hay **una canción** (`right-round-flo-rida.mp3`) y va en bucle
+(`audio.loop` se activa solo cuando la lista tiene un único tema).
+
+**Sonar sin que el visitante toque nada es imposible**, y no es un fallo de la
+página: Chrome, Safari, Firefox y Edge prohíben reproducir audio con sonido
+antes de una interacción. La excepción de «silenciado sí» vale para `<video>`,
+no para `<audio>`. Lo que sí funciona es sonar con el **primer gesto**, sea
+cual sea: comprobado con 9 gestos distintos en escritorio y móvil, todos
+arrancan la canción (clic, rueda, tecla, tap, scroll táctil, arrastrar el
+reproductor...). El único que no puede funcionar es **mover el ratón**: no
+cuenta como interacción para ningún navegador.
+
+En escritorio el `<audio>` se pone en `preload="auto"` para que al primer
+gesto suene al instante en vez de empezar entonces la descarga; en móvil no,
+para no gastar datos.
 
 ### Adornos y móvil
 

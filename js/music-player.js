@@ -8,7 +8,6 @@
   // Para agregar más canciones, solo añade otro objeto a esta lista
   // (sube el mp3 a assets/audio/)
   const playlist = [
-    { title: 'Project X', artist: 'Yeah Yeah Yeahs', src: 'assets/audio/projectx.mp3', cover: 'assets/audio/projectx-cover.jpg' },
     { title: 'Right Round', artist: 'Flo Rida feat. Ke$ha', src: 'assets/audio/right-round-flo-rida.mp3', cover: 'assets/audio/projectx-cover.jpg' }
   ];
 
@@ -23,6 +22,12 @@
   const artistEl = document.getElementById('musicArtist');
   const playlistEl = document.getElementById('musicPlaylist');
   if (!btn || !audio) return;
+
+  // En escritorio dejamos que la cancion se vaya descargando mientras
+  // esperamos el primer gesto: asi suena al instante en vez de tardar medio
+  // segundo en empezar a bajarla. En movil no, para no gastar datos de nadie
+  // (el mp3 pesa varios MB) y porque alli el gesto llega enseguida.
+  if (window.matchMedia('(min-width: 769px)').matches) audio.preload = 'auto';
 
   // Volumen de fondo. A 0.32 resultaba practicamente inaudible en movil.
   const VOLUMEN = 0.7;
@@ -95,7 +100,9 @@
     }
   }
 
-  audio.addEventListener('ended', () => loadTrack(current + 1, true));
+  // Con una sola cancion se repite en bucle; con varias, encadena.
+  audio.loop = playlist.length === 1;
+  audio.addEventListener('ended', () => { if (!audio.loop) loadTrack(current + 1, true); });
 
   btn.addEventListener('click', togglePlay);
   prevBtn.addEventListener('click', (e) => { e.stopPropagation(); loadTrack(current - 1, !audio.paused); });
@@ -140,8 +147,13 @@
     }
   }, 400);
 
+  // 'mousemove' NO desbloquea el audio en ningun navegador (mover el raton
+  // no cuenta como interaccion), pero se escucha igual: si el navegador ya
+  // tiene permiso concedido para el sitio, el primer movimiento lo arranca
+  // sin esperar al clic. Va limitado para no llamar a play() sin parar.
   const GESTOS = ['click', 'touchend', 'pointerup', 'pointerdown',
-                  'touchstart', 'keydown', 'scroll', 'wheel'];
+                  'touchstart', 'keydown', 'keyup', 'mousedown', 'mouseup',
+                  'scroll', 'wheel', 'mousemove'];
 
   function quitarOyentes() {
     GESTOS.forEach(function (g) {
@@ -151,9 +163,18 @@
   }
 
   let intentando = false;
+  let ultimoIntento = 0;
   function activarSonido(e) {
     // El boton de play se gestiona solo.
     if (e && e.target && e.target.closest && e.target.closest('#musicBtn')) return;
+
+    // Un movimiento de raton no desbloquea nada: como maximo se prueba una
+    // vez cada medio segundo para no encadenar promesas rechazadas.
+    if (e && e.type === 'mousemove') {
+      const ahora = Date.now();
+      if (ahora - ultimoIntento < 500) return;
+      ultimoIntento = ahora;
+    }
 
     // Caso normal: ya suena en silencio -> basta con devolverle el volumen.
     if (!audio.paused) {

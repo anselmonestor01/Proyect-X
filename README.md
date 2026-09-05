@@ -49,7 +49,7 @@ python3 -m http.server 8000
 │   ├── img/                Fotos de galería y fondos de sección (20 archivos).
 │   ├── video/              Clips de la sección NOCHE (7 archivos).
 │   ├── poster/             Primer fotograma de cada vídeo (7 archivos).
-│   └── audio/              Canciones del reproductor + carátula (4 archivos).
+│   └── audio/              Canción del reproductor + carátula (3 archivos).
 │
 └── docs/
     └── ARQUITECTURA.md     Cómo funciona cada parte y cómo modificarla.

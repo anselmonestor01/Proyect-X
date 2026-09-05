@@ -291,30 +291,32 @@
   });
 })();
 
-// Limit concurrent videos (performance)
+// Todos los videos se reproducen a la vez, sin limite.
+// Antes se limitaban a tres (uno en movil) por rendimiento; ahora arrancan
+// todos en cuanto pueden y no se pausan al salir de pantalla. No llevan
+// pista de audio, asi que no interfieren con la musica.
 (function() {
   const videos = Array.from(document.querySelectorAll('video[data-autoplay]'));
-  let playing = new Set();
-  // En movil, tres videos decodificando a la vez ahogan el hilo de audio y la
-  // musica se entrecorta. Ahi va de uno en uno.
-  const MAX = window.matchMedia('(max-width: 768px)').matches ? 1 : 3;
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const v = entry.target;
-      if (entry.isIntersecting) {
-        if (playing.size >= MAX) {
-          const first = playing.values().next().value;
-          if (first && first !== v) { first.pause(); playing.delete(first); }
-        }
-        v.muted = true;
-        v.play().then(() => playing.add(v)).catch(()=>{});
-      } else {
-        v.pause();
-        playing.delete(v);
-      }
-    });
-  }, { rootMargin: '40px', threshold: 0.2 });
-  videos.forEach(v => io.observe(v));
+
+  function arrancar(v) {
+    v.muted = true;              // requisito para autoplay en todos los navegadores
+    v.playsInline = true;
+    if (v.preload === 'none') v.preload = 'auto';
+    const intento = v.play();
+    if (intento && intento.catch) intento.catch(() => {});
+  }
+
+  videos.forEach(arrancar);
+
+  // Si el navegador rechaza alguno (politica de autoplay o aun sin datos),
+  // se reintenta al primer gesto y cuando el video ya tiene contenido.
+  videos.forEach(v => {
+    v.addEventListener('loadeddata', () => { if (v.paused) arrancar(v); });
+    v.addEventListener('pause', () => { if (!document.hidden) arrancar(v); });
+  });
+  ['click', 'touchend', 'keydown', 'scroll'].forEach(g =>
+    window.addEventListener(g, () => videos.forEach(v => { if (v.paused) arrancar(v); }),
+                            { passive: true }));
 })();
 
   
