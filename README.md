@@ -6,7 +6,7 @@ Página web del evento **PROJECT X**.
 - **Lugar:** Finca La Julia — Vía Guarinocito, La Dorada, Caldas
 - **Preventa:** $40.000 COP hasta el 20 de septiembre
 - **Cover normal:** $50.000 COP desde el 21 de septiembre (el cambio es automático)
-- **Transporte:** incluido para personas de La Dorada
+- **Transporte:** incluido de La Dorada a La Julia
 - **Compra:** el botón «COMPRAR ENTRADA» abre WhatsApp directamente (`https://wa.me/573145140075`)
 - **Confirmación:** botón «CONFIRMAR POR WHATSAPP» con nombre completo y cédula
 - **Comunidad:** [grupo oficial de WhatsApp](https://chat.whatsapp.com/LpS7e7bCkpaD53yu0gvmPk)
